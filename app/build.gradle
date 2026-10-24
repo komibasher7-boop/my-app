@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "Com.bash"
+    namespace = "Com.minhag.rb"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "Com.bash"
+        applicationId = "Com.minhag.rb"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

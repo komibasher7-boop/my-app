@@ -1,1252 +1,528 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Nexus Fit Coach</title>
-<meta name="description" content="Nexus Fit Coach - personal fitness training companion with workout plans, exercise library and progress tracking.">
-<meta name="theme-color" content="#0f172a">
-<style>
-/* ============ Nexus Fit Coach — Glassmorphism Fitness App ============ */
-:root{
-  --bg1:#0f172a; --bg2:#1e1b4b; --bg3:#0c4a6e;
-  --glass:rgba(255,255,255,.10);
-  --glass-brd:rgba(255,255,255,.22);
-  --card:rgba(255,255,255,.12);
-  --text:#f1f5f9; --muted:#cbd5e1;
-  --accent:#38bdf8; --accent2:#a78bfa; --accent3:#34d399;
-  --warn:#fbbf24; --danger:#f87171;
-  --nav-bg:rgba(15,23,42,.55);
-  --shadow:0 8px 32px rgba(0,0,0,.35);
-  --r:20px;
-}
-body.light{
-  --bg1:#e0f2fe; --bg2:#ede9fe; --bg3:#dcfce7;
-  --glass:rgba(255,255,255,.55);
-  --glass-brd:rgba(255,255,255,.8);
-  --card:rgba(255,255,255,.65);
-  --text:#0f172a; --muted:#475569;
-  --accent:#0284c7; --accent2:#7c3aed; --accent3:#059669;
-  --nav-bg:rgba(255,255,255,.6);
-  --shadow:0 8px 32px rgba(2,132,199,.18);
-}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{
-  font-family:"Segoe UI",Tahoma,"Noto Kufi Arabic","Noto Sans Arabic",Arial,sans-serif;
-  color:var(--text); min-height:100vh; overflow-x:hidden;
-  background:linear-gradient(135deg,var(--bg1),var(--bg2) 45%,var(--bg3));
-  background-attachment:fixed;
-  padding-bottom:calc(96px + env(safe-area-inset-bottom));
-}
-/* animated gradient blobs */
-.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.35;z-index:-1;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
-.b1{width:340px;height:340px;background:#38bdf8;top:-80px;right:-80px}
-.b2{width:300px;height:300px;background:#a78bfa;bottom:10%;left:-100px;animation-delay:-6s}
-.b3{width:260px;height:260px;background:#34d399;top:45%;right:30%;animation-delay:-12s;opacity:.22}
-@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,-30px) scale(1.15)}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>منهاج النبوة - الأربعون النووية الكاملة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800;900&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.5);
+            --accent: #f59e0b;
+            --bg-deep: #030712;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
 
-/* ============ header ============ */
-header{
-  position:sticky;top:0;z-index:50;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 18px;
-  background:var(--nav-bg);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--glass-brd);
-}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem}
-.logo .mark{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:var(--shadow)}
-.logo .mark svg{width:26px;height:26px}
-.hdr-actions{display:flex;gap:10px;align-items:center}
-.gem-pill{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;
-  background:var(--glass);border:1px solid var(--glass-brd);font-weight:700;font-size:.95rem;min-height:44px}
-.icon-btn{width:44px;height:44px;border-radius:14px;border:1px solid var(--glass-brd);
-  background:var(--glass);color:var(--text);font-size:1.25rem;cursor:pointer;
-  display:grid;place-items:center;backdrop-filter:blur(10px)}
-.icon-btn:active{transform:scale(.94)}
+        * {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            scrollbar-width: none;
+        }
+        *::-webkit-scrollbar { display: none; }
 
-/* ============ screens ============ */
-main{max-width:640px;margin:0 auto;padding:16px 16px 8px}
-.screen{display:none;animation:fadeUp .35s ease}
-.screen.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.glass{
-  background:var(--glass);border:1px solid var(--glass-brd);border-radius:var(--r);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  box-shadow:var(--shadow);padding:18px;margin-bottom:16px;
-}
-.sec-title{font-size:1.05rem;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.sec-title::before{content:"";width:5px;height:22px;border-radius:4px;background:linear-gradient(var(--accent),var(--accent2))}
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-deep);
+            color: #f8fafc;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
 
-/* ============ hero / home ============ */
-.hero{position:relative;overflow:hidden}
-.hero h2{font-size:1.5rem;font-weight:800;margin-bottom:4px}
-.hero p{color:var(--muted);font-size:.95rem}
-.level-row{display:flex;align-items:center;gap:12px;margin-top:14px}
-.level-badge{padding:8px 16px;border-radius:999px;font-weight:800;font-size:.9rem;white-space:nowrap;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-.xp-track{flex:1;height:12px;border-radius:8px;background:rgba(127,127,127,.25);overflow:hidden}
-.xp-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--accent3),var(--accent));transition:width .6s ease}
-.xp-num{font-size:.8rem;color:var(--muted);white-space:nowrap}
+        /* 8K Glassmorphism & 3D Effects */
+        .glass-master {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.02);
+        }
 
-.rings{display:flex;justify-content:space-around;text-align:center;gap:8px}
-.ring-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}
-.ring{transform:rotate(-90deg)}
-.ring .bgc{stroke:rgba(127,127,127,.25)}
-.ring .fgc{stroke-linecap:round;transition:stroke-dashoffset .8s ease}
-.ring-label{font-size:.8rem;color:var(--muted)}
-.ring-val{font-weight:800;font-size:1rem}
+        .card-3d {
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+        }
+        .card-3d:active {
+            transform: scale(0.96) translateY(5px);
+        }
 
-.streak-row{display:flex;align-items:center;justify-content:space-between}
-.streak-num{font-size:2.4rem;font-weight:800;background:linear-gradient(135deg,#fb923c,#f472b6);
-  -webkit-background-clip:text;background-clip:text;color:transparent}
-.streak-sub{color:var(--muted);font-size:.85rem}
+        /* Animated Background Orbs */
+        .orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.2;
+            pointer-events: none;
+            animation: orbMove 30s infinite alternate linear;
+        }
+        @keyframes orbMove {
+            0% { transform: translate(-20%, -20%) rotate(0deg); }
+            100% { transform: translate(40%, 30%) rotate(360deg); }
+        }
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:52px;padding:14px 22px;border:none;border-radius:16px;cursor:pointer;
-  font-family:inherit;font-size:1.05rem;font-weight:800;color:#fff;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:var(--shadow);width:100%}
-.btn:active{transform:scale(.97)}
-.btn.ghost{background:var(--glass);border:1px solid var(--glass-brd);color:var(--text);box-shadow:none}
-.btn.warn{background:linear-gradient(135deg,#f59e0b,#ef4444)}
-.btn.sm{min-height:44px;padding:10px 16px;font-size:.95rem}
-.btn-row{display:flex;gap:10px}
-.btn-row .btn{flex:1}
+        /* Typography Styles */
+        .font-hadith { font-family: 'Amiri', serif; line-height: 2.2; }
+        .font-kufi { font-family: 'Reem Kufi', sans-serif; }
 
-.quest{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;margin-bottom:10px;
-  background:rgba(127,127,127,.12);border:1px solid var(--glass-brd)}
-.quest.done{opacity:.65;border-color:var(--accent3)}
-.quest .q-check{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex-shrink:0;
-  background:rgba(127,127,127,.2);font-size:1.3rem}
-.quest.done .q-check{background:var(--accent3);color:#fff}
-.quest .q-body{flex:1}
-.quest .q-body b{display:block;font-size:.95rem}
-.quest .q-body span{font-size:.8rem;color:var(--muted)}
-.quest .q-xp{font-weight:800;color:var(--warn);font-size:.9rem;white-space:nowrap}
+        /* Floating Nav Custom Styling */
+        .nav-active {
+            background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
+            color: white !important;
+            box-shadow: 0 10px 20px var(--primary-glow);
+        }
 
-.tip{border-right:4px solid var(--accent3)}
-.tip p{font-size:.95rem;line-height:1.8}
-.tip .tip-new{margin-top:10px}
+        /* Progress Ring Animation */
+        #progressRing {
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-/* water */
-.water-row{display:flex;align-items:center;gap:14px}
-.water-info{flex:1}
-.water-info b{font-size:1.4rem}
-.water-info span{color:var(--muted);font-size:.85rem;display:block}
-.water-track{height:12px;border-radius:8px;background:rgba(127,127,127,.25);overflow:hidden;margin-top:8px}
-.water-fill{height:100%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);border-radius:8px;transition:width .5s}
+        /* Light Mode Overrides */
+        body.light-mode {
+            background-color: #f0f4f8;
+            color: #1e293b;
+            --glass: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(0, 0, 0, 0.05);
+        }
+        .light-mode .glass-master {
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        .light-mode .orb { opacity: 0.1; }
 
-/* ============ bottom nav ============ */
-nav.tabs{
-  position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));right:50%;transform:translateX(50%);
-  width:min(620px,calc(100% - 24px));z-index:60;
-  display:flex;justify-content:space-around;padding:10px 6px;border-radius:26px;
-  background:var(--nav-bg);border:1px solid var(--glass-brd);
-  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:var(--shadow);
-}
-.tab{flex:1;background:none;border:none;color:var(--muted);cursor:pointer;font-family:inherit;
-  display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.72rem;font-weight:700;
-  padding:8px 4px;border-radius:18px;min-height:56px}
-.tab svg{width:24px;height:24px}
-.tab.active{color:var(--text);background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(167,139,250,.25))}
-.tab.active svg{stroke:var(--accent)}
-.tab:active{transform:scale(.93)}
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
 
-/* ============ exercise library ============ */
-.search{width:100%;min-height:52px;padding:14px 18px;border-radius:16px;border:1px solid var(--glass-brd);
-  background:var(--glass);color:var(--text);font-family:inherit;font-size:1rem;outline:none;margin-bottom:12px}
-.search::placeholder{color:var(--muted)}
-.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex-shrink:0;min-height:44px;padding:10px 18px;border-radius:999px;border:1px solid var(--glass-brd);
-  background:var(--glass);color:var(--text);font-family:inherit;font-weight:700;font-size:.9rem;cursor:pointer}
-.chip.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
-.ex-card{display:flex;gap:14px;align-items:center;padding:14px;margin-bottom:12px}
-.ex-icon{width:84px;height:84px;flex-shrink:0;border-radius:18px;display:grid;place-items:center;
-  background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(167,139,250,.25));border:1px solid var(--glass-brd)}
-.ex-icon svg{width:64px;height:64px}
-.ex-body{flex:1;min-width:0}
-.ex-body h3{font-size:1rem;margin-bottom:4px}
-.ex-meta{font-size:.8rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px}
-.muscle-tag{padding:3px 10px;border-radius:999px;background:rgba(52,211,153,.2);color:var(--accent3);font-weight:700;font-size:.75rem}
-.stars{color:var(--warn);letter-spacing:2px;font-size:.8rem}
-.fav-btn{background:none;border:none;font-size:1.4rem;cursor:pointer;min-width:44px;min-height:44px;opacity:.4}
-.fav-btn.on{opacity:1;filter:drop-shadow(0 0 6px gold)}
-.ex-empty{text-align:center;color:var(--muted);padding:30px}
-
-/* ============ workout plans & session ============ */
-.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.plan-card{padding:20px 14px;border-radius:var(--r);border:1px solid var(--glass-brd);cursor:pointer;
-  background:var(--glass);backdrop-filter:blur(18px);color:var(--text);font-family:inherit;text-align:center;
-  min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-.plan-card:active{transform:scale(.96)}
-.plan-card svg{width:44px;height:44px}
-.plan-card b{font-size:1rem}
-.plan-card span{font-size:.78rem;color:var(--muted)}
-.plan-card.full{grid-column:1/-1;flex-direction:row;justify-content:flex-start;text-align:right;padding:18px}
-.session-stage{text-align:center}
-.sess-phase{font-size:1rem;font-weight:800;color:var(--accent2);margin-bottom:4px}
-.sess-ex{font-size:1.5rem;font-weight:800;margin:6px 0}
-.sess-icon{width:130px;height:130px;margin:8px auto;border-radius:28px;display:grid;place-items:center;
-  background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(167,139,250,.25));border:1px solid var(--glass-brd)}
-.sess-icon svg{width:104px;height:104px}
-.sess-set{color:var(--muted);margin-bottom:10px;font-size:.95rem}
-.timer-big{font-size:4.2rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:2px;
-  background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
-.sess-progress{height:14px;border-radius:10px;background:rgba(127,127,127,.25);overflow:hidden;margin:16px 0}
-.sess-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s}
-.sess-controls{display:flex;gap:10px;margin-top:14px}
-.sess-controls .btn{flex:1}
-.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
-.sum-box{padding:16px;border-radius:16px;background:rgba(127,127,127,.12);border:1px solid var(--glass-brd);text-align:center}
-.sum-box b{font-size:1.6rem;display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;background-clip:text;color:transparent}
-.sum-box span{font-size:.8rem;color:var(--muted)}
-
-/* ============ stats ============ */
-.stat-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.tile{padding:16px;border-radius:var(--r);text-align:center}
-.tile b{font-size:1.7rem;display:block}
-.tile span{font-size:.8rem;color:var(--muted)}
-.chart-wrap{overflow-x:auto}
-.chart-wrap svg{display:block;min-width:100%}
-.pr-row{display:flex;justify-content:space-between;align-items:center;padding:10px 4px;
-  border-bottom:1px solid var(--glass-brd);font-size:.92rem}
-.pr-row:last-child{border-bottom:none}
-.pr-row b{color:var(--warn)}
-.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.ach{padding:14px;border-radius:16px;text-align:center;background:rgba(127,127,127,.12);
-  border:1px solid var(--glass-brd);opacity:.45}
-.ach.got{opacity:1;border-color:var(--warn);background:rgba(251,191,36,.12)}
-.ach .a-ico{font-size:1.8rem}
-.ach b{display:block;font-size:.85rem;margin:6px 0 2px}
-.ach span{font-size:.72rem;color:var(--muted)}
-
-/* ============ settings ============ */
-.set-row{display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:14px 4px;border-bottom:1px solid var(--glass-brd)}
-.set-row:last-child{border-bottom:none}
-.set-row .s-label b{display:block;font-size:.98rem}
-.set-row .s-label span{font-size:.8rem;color:var(--muted)}
-.switch{position:relative;width:60px;height:34px;flex-shrink:0;cursor:pointer}
-.switch input{opacity:0;width:0;height:0}
-.switch .sl{position:absolute;inset:0;border-radius:999px;background:rgba(127,127,127,.35);transition:.3s}
-.switch .sl::before{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:#fff;
-  top:4px;right:4px;transition:.3s;box-shadow:0 2px 6px rgba(0,0,0,.3)}
-.switch input:checked + .sl{background:linear-gradient(135deg,var(--accent),var(--accent2))}
-.switch input:checked + .sl::before{transform:translateX(-26px)}
-.field{margin-bottom:12px}
-.field label{display:block;font-size:.9rem;font-weight:700;margin-bottom:6px}
-.field input{width:100%;min-height:52px;padding:12px 16px;border-radius:14px;border:1px solid var(--glass-brd);
-  background:var(--glass);color:var(--text);font-family:inherit;font-size:1rem;outline:none}
-.bmi-res{padding:14px;border-radius:14px;background:rgba(52,211,153,.12);border:1px solid var(--accent3);
-  text-align:center;margin-top:10px;display:none}
-.bmi-res b{font-size:1.8rem;display:block}
-.bmi-res span{color:var(--muted);font-size:.9rem}
-.badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-.badge{padding:8px 16px;border-radius:999px;font-size:.82rem;font-weight:700;
-  background:rgba(52,211,153,.15);border:1px solid var(--accent3);color:var(--accent3)}
-.danger-zone{border-color:var(--danger) !important}
-.set-link{width:100%;display:flex;align-items:center;justify-content:space-between;min-height:52px;
-  background:none;border:none;border-bottom:1px solid var(--glass-brd);color:var(--text);
-  font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;padding:14px 4px;text-align:right}
-.set-link .arrow{color:var(--muted)}
-
-/* ============ overlays (privacy / about) ============ */
-.overlay{position:fixed;inset:0;z-index:100;display:none;background:rgba(0,0,0,.5);
-  backdrop-filter:blur(6px);padding:20px;overflow-y:auto}
-.overlay.open{display:block;animation:fadeUp .3s ease}
-.overlay .sheet{max-width:640px;margin:20px auto;background:var(--glass);border:1px solid var(--glass-brd);
-  border-radius:24px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  box-shadow:var(--shadow);padding:24px}
-body.light .overlay .sheet{background:#f8fafc}
-.overlay h2{margin-bottom:14px;font-size:1.3rem}
-.overlay p,.overlay li{font-size:.95rem;line-height:2;color:var(--text)}
-.overlay ul{padding-right:20px;margin:10px 0}
-
-footer.app-foot{text-align:center;color:var(--muted);font-size:.82rem;padding:18px 8px 8px;line-height:1.9}
-footer.app-foot .sig{color:var(--accent2);font-weight:700}
-
-@media (max-width:380px){
-  .timer-big{font-size:3.4rem}
-  .plan-grid{grid-template-columns:1fr}
-  .stat-tiles{grid-template-columns:1fr 1fr}
-}
-</style>
+        .modal-enter { animation: modalIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9) translateY(40px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+    </style>
 </head>
-<body>
-<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<body class="selection:bg-emerald-500 selection:text-white">
 
-<header>
-  <div class="logo">
-    <div class="mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round">
-        <path d="M6.5 6.5v11M17.5 6.5v11M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/>
-      </svg>
+    <!-- Deep Background Layer -->
+    <div class="orb bg-emerald-500 top-[-10%] right-[-10%]"></div>
+    <div class="orb bg-indigo-600 bottom-[-10%] left-[-10%] animation-delay-5000"></div>
+    <div class="orb bg-amber-500 top-[30%] left-[20%] opacity-10"></div>
+
+    <!-- Top Header / Stats Section -->
+    <header class="pt-12 pb-24 px-6 relative z-10 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-block px-4 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black tracking-widest uppercase mb-6 animate-pulse">
+                صدقة جارية لروح المرحوم الدقيشامي آدم بشير
+            </div>
+            <h1 class="text-6xl sm:text-8xl font-black font-kufi mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white via-slate-200 to-emerald-400 drop-shadow-2xl">
+                منهاج النبوة
+            </h1>
+            <p class="text-slate-400 text-lg sm:text-xl font-medium max-w-lg mx-auto opacity-80">
+                الاربعون النووية بإخراج عصري فني يليق بمقام السنة النبوية
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <main class="max-w-6xl mx-auto px-6 -mt-16 pb-48 relative z-20">
+        
+        <!-- Dashboard Top Widgets -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12">
+            <!-- Progress Widget -->
+            <div class="lg:col-span-4 glass-master rounded-[40px] p-8 flex flex-col items-center justify-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="relative w-44 h-44 mb-6">
+                    <svg class="w-full h-full transform -rotate-90">
+                        <circle cx="88" cy="88" r="80" stroke="rgba(255,255,255,0.05)" stroke-width="12" fill="transparent" />
+                        <circle id="progressRing" cx="88" cy="88" r="80" stroke="url(#emeraldGrad)" stroke-width="12" fill="transparent" 
+                                stroke-dasharray="502.6" stroke-dashoffset="502.6" stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#10b981" />
+                                <stop offset="100%" stop-color="#3b82f6" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span id="statPercent" class="text-5xl font-black text-white">0%</span>
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-500">تمت القراءة</span>
+                    </div>
+                </div>
+                <h3 class="font-bold text-slate-300">إنجاز الختمة</h3>
+            </div>
+
+            <!-- Search & Filter Widget -->
+            <div class="lg:col-span-8 glass-master rounded-[40px] p-8 sm:p-10 flex flex-col justify-center">
+                <div class="relative mb-8">
+                    <input type="text" id="mainSearch" placeholder="ابحث في المتن أو العنوان..." 
+                           class="w-full bg-white/5 border border-white/10 rounded-3xl py-6 pr-14 pl-6 text-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all placeholder:text-slate-600 font-medium">
+                    <svg class="absolute right-5 top-1/2 -translate-y-1/2 w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button id="filterAll" class="flex-1 min-w-[120px] py-4 rounded-2xl bg-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-900/20 active:scale-95 transition-all">الكل</button>
+                    <button id="filterFav" class="flex-1 min-w-[120px] py-4 rounded-2xl bg-white/5 text-slate-300 font-bold text-sm hover:bg-rose-500/10 hover:text-rose-400 active:scale-95 transition-all">المفضلة</button>
+                    <button id="filterRead" class="flex-1 min-w-[120px] py-4 rounded-2xl bg-white/5 text-slate-300 font-bold text-sm hover:bg-sky-500/10 hover:text-sky-400 active:scale-95 transition-all">المقروءة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hadith Cards Grid -->
+        <div id="hadithGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <!-- Dynamically Injected -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden flex flex-col items-center justify-center py-32 text-slate-600">
+            <svg class="w-24 h-24 mb-6 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            <p class="text-2xl font-bold">لا توجد نتائج مطابقة</p>
+            <p class="text-sm">حاول البحث بكلمة أخرى من نص الحديث</p>
+        </div>
+    </main>
+
+    <!-- Floating Navigation -->
+    <nav class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-lg h-20 glass-master rounded-full z-[100] flex items-center justify-around px-4 border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <button id="navHome" class="flex flex-col items-center justify-center w-14 h-14 rounded-full text-slate-400 transition-all nav-active">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        </button>
+        <button id="navRandom" class="flex flex-col items-center justify-center w-14 h-14 rounded-full text-slate-400 hover:bg-white/10 transition-all">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+        </button>
+        <button id="navTheme" class="flex flex-col items-center justify-center w-14 h-14 rounded-full text-slate-400 hover:bg-white/10 transition-all">
+            <svg id="themeIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+        <button id="navSettings" class="flex flex-col items-center justify-center w-14 h-14 rounded-full text-slate-400 hover:bg-white/10 transition-all">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+        </button>
+    </nav>
+
+    <!-- Reader Modal -->
+    <div id="readerModal" class="fixed inset-0 z-[200] hidden bg-black/80 backdrop-blur-2xl flex items-center justify-center p-4">
+        <div class="glass-master w-full max-w-4xl h-[90vh] rounded-[50px] flex flex-col relative overflow-hidden modal-enter">
+            <div class="p-8 flex items-center justify-between border-b border-white/5 bg-white/2">
+                <div class="flex items-center gap-4">
+                    <div id="modalId" class="w-12 h-12 rounded-2xl bg-emerald-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-emerald-500/30">1</div>
+                    <h2 id="modalTitle" class="text-2xl sm:text-3xl font-black font-kufi text-emerald-400"></h2>
+                </div>
+                <button id="closeReader" class="w-12 h-12 rounded-2xl bg-white/5 hover:bg-rose-500/20 text-white transition-all flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="modalContent" class="flex-1 overflow-y-auto p-8 sm:p-12 text-center font-hadith text-3xl sm:text-4xl leading-relaxed text-slate-100"></div>
+            <div class="p-8 bg-black/40 border-t border-white/5 flex flex-wrap gap-4 items-center justify-center">
+                <div class="flex bg-white/5 rounded-2xl p-1">
+                    <button id="fontDown" class="px-6 py-3 hover:bg-white/10 rounded-xl transition-all font-black">-A</button>
+                    <button id="fontUp" class="px-6 py-3 hover:bg-white/10 rounded-xl transition-all font-black">+A</button>
+                </div>
+                <button id="btnToggleRead" class="flex-1 min-w-[200px] py-4 rounded-2xl bg-emerald-600 text-white font-black text-lg shadow-xl active:scale-95 transition-all">تحديد كمقروء</button>
+                <button id="btnShare" class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                </button>
+            </div>
+        </div>
     </div>
-    <span>Nexus Fit Coach</span>
-  </div>
-  <div class="hdr-actions">
-    <div class="gem-pill" id="gemPill" title="الجواهر">💎 <span id="gemCount">0</span></div>
-    <button class="icon-btn" id="hdrThemeBtn" aria-label="تبديل المظهر">🌙</button>
-  </div>
-</header>
 
-<main>
-<!-- ================= HOME ================= -->
-<section class="screen" id="screen-home">
-  <div class="glass hero">
-    <h2 id="greetUser">مرحباً بك</h2>
-    <p>جاهز لتمرين اليوم؟ كل قطرة عرق تقرّبك من هدفك.</p>
-    <div class="level-row">
-      <div class="level-badge" id="levelBadge">مبتدئ</div>
-      <div class="xp-track"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
-      <div class="xp-num" id="xpNum">0 XP</div>
+    <!-- Daily Random Modal -->
+    <div id="dailyModal" class="fixed inset-0 z-[300] hidden bg-slate-950/95 flex items-center justify-center p-6 backdrop-blur-3xl">
+        <div class="w-full max-w-2xl text-center reveal-item">
+            <div class="w-24 h-24 bg-emerald-500 rounded-full mx-auto mb-10 flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.5)] animate-bounce">
+                <span class="text-4xl">✨</span>
+            </div>
+            <h4 class="text-emerald-400 font-black tracking-widest text-sm uppercase mb-4">نفحة إيمانية اليوم</h4>
+            <h2 id="dailyTitle" class="text-4xl font-black font-kufi text-white mb-8"></h2>
+            <div id="dailyText" class="font-hadith text-2xl text-slate-300 mb-12 max-h-[40vh] overflow-y-auto px-4"></div>
+            <button id="closeDaily" class="px-12 py-5 rounded-full bg-gradient-to-r from-emerald-600 to-sky-600 text-white font-black text-xl shadow-2xl hover:scale-105 active:scale-95 transition-all">
+                آمنت بالله ورسوله
+            </button>
+        </div>
     </div>
-  </div>
 
-  <div class="glass">
-    <div class="sec-title">إحصائيات اليوم</div>
-    <div class="rings">
-      <div class="ring-wrap">
-        <svg class="ring" width="92" height="92" viewBox="0 0 92 92">
-          <circle class="bgc" cx="46" cy="46" r="38" fill="none" stroke-width="9"/>
-          <circle class="fgc" id="ringW" cx="46" cy="46" r="38" fill="none" stroke="#38bdf8" stroke-width="9"
-            stroke-dasharray="238.7" stroke-dashoffset="238.7"/>
-        </svg>
-        <div class="ring-val" id="ringWVal">0/1</div>
-        <div class="ring-label">تمارين</div>
-      </div>
-      <div class="ring-wrap">
-        <svg class="ring" width="92" height="92" viewBox="0 0 92 92">
-          <circle class="bgc" cx="46" cy="46" r="38" fill="none" stroke-width="9"/>
-          <circle class="fgc" id="ringM" cx="46" cy="46" r="38" fill="none" stroke="#a78bfa" stroke-width="9"
-            stroke-dasharray="238.7" stroke-dashoffset="238.7"/>
-        </svg>
-        <div class="ring-val" id="ringMVal">0/30</div>
-        <div class="ring-label">دقيقة</div>
-      </div>
-      <div class="ring-wrap">
-        <svg class="ring" width="92" height="92" viewBox="0 0 92 92">
-          <circle class="bgc" cx="46" cy="46" r="38" fill="none" stroke-width="9"/>
-          <circle class="fgc" id="ringH" cx="46" cy="46" r="38" fill="none" stroke="#34d399" stroke-width="9"
-            stroke-dasharray="238.7" stroke-dashoffset="238.7"/>
-        </svg>
-        <div class="ring-val" id="ringHVal">0 لتر</div>
-        <div class="ring-label">ماء</div>
-      </div>
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 z-[200] hidden bg-black/60 backdrop-blur-xl flex items-center justify-center p-6">
+        <div class="glass-master w-full max-w-md rounded-[50px] p-10 modal-enter">
+            <h2 class="text-3xl font-black font-kufi text-center mb-10 text-emerald-400">الإعدادات والتخصيص</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-6 bg-white/5 rounded-3xl border border-white/5">
+                    <span class="font-bold text-lg">الوضع الليلي الذكي</span>
+                    <button id="themeToggleBtn" class="w-14 h-8 bg-emerald-600/30 rounded-full relative p-1 transition-all">
+                        <div id="themeDot" class="w-6 h-6 bg-emerald-500 rounded-full shadow-lg transition-all transform translate-x-6"></div>
+                    </button>
+                </div>
+                <button id="btnPrivacy" class="w-full p-6 bg-white/5 rounded-3xl border border-white/5 flex items-center justify-between font-bold text-lg group">
+                    <span>سياسة الخصوصية</span>
+                    <span class="text-emerald-500 group-hover:translate-x-[-10px] transition-transform">←</span>
+                </button>
+                <button id="btnReset" class="w-full p-6 bg-rose-500/10 rounded-3xl border border-rose-500/20 text-rose-400 font-bold text-lg flex items-center justify-between group">
+                    <span>إعادة تصفير الإحصائيات</span>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+                <button id="closeSettings" class="w-full py-4 text-slate-500 font-bold mt-4">إغلاق النافذة</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="glass">
-    <div class="streak-row">
-      <div><div class="streak-num" id="streakNum">0</div><div class="streak-sub">يوم متتالٍ من التمرين</div></div>
-      <div style="font-size:2.6rem">🔥</div>
-    </div>
-  </div>
+    <!-- Footer -->
+    <footer class="pb-40 pt-20 text-center opacity-40">
+        <p class="text-xs tracking-[0.3em] uppercase mb-2">منهاج النبوة - الإصدار الملكي الشامل</p>
+        <div class="font-bold text-sm">تم تصميمه بواسطة Rahamtallh <script>document.write(new Date().getFullYear());</script></div>
+    </footer>
 
-  <div class="glass">
-    <div class="water-row">
-      <div style="font-size:2.4rem">💧</div>
-      <div class="water-info">
-        <b id="waterMl">0 مل</b>
-        <span>الهدف اليومي: 2000 مل</span>
-        <div class="water-track"><div class="water-fill" id="waterFill" style="width:0%"></div></div>
-      </div>
-      <button class="btn sm" id="btnWater250" style="width:auto">+250 مل</button>
-    </div>
-  </div>
+    <script>
+        // Full Data Array
+        const hadiths = [
+            { id: 1, title: "إنما الأعمال بالنيات", text: "عن أمير المؤمنين أبي حفص عمر بن الخطاب رضي الله عنه قال: سمعت رسول الله صلى الله عليه وسلم يقول: (إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى، فمن كانت هجرته إلى الله ورسوله فهجرته إلى الله ورسوله، ومن كانت هجرته لدنيا يصيبها أو امرأة ينكحها فهجرته إلى ما هاجر إليه). رواه البخاري ومسلم." },
+            { id: 2, title: "مراتب الدين", text: "عن عمر رضي الله عنه أيضا قال: بينما نحن جلوس عند رسول الله صلى الله عليه وسلم ذات يوم، إذ طلع علينا رجل شديد بياض الثياب، شديد سواد الشعر، لا يرى عليه أثر السفر، ولا يعرفه منا أحد، حتى جلس إلى النبي صلى الله عليه وسلم، فأسند ركبتيه إلى ركبتيه، ووضع كفيه على فخذيه، وقال: يا محمد، أخبرني عن الإسلام. فقال رسول الله صلى الله عليه وسلم: (الإسلام أن تشهد أن لا إله إلا الله وأن محمدا رسول الله، وتقيم الصلاة، وتؤتي الزكاة، وتصوم رمضان، وتحج البيت إن استطعت إليه سبيلا). قال: صدقت. فعجبنا له يسأله ويصدقه! قال: فأخبرني عن الإيمان. قال: (أن تؤمن بالله وملائكته وكتبه ورسله واليوم الآخر، وتؤمن بالقدر خيره وشره). قال: صدقت. قال: فأخبرني عن الإحسان. قال: (أن تعبد الله كأنك تراه، فإن لم تكن تراه فإنه يراك). قال: فأخبرني عن الساعة. قال: (ما المسؤول عنها بأعلم من السائل). قال: فأخبرني عن أماراتها. قال: (أن تلد الأمة ربتها، وأن ترى الحفاة العراة العالة رعاء الشاء يتطاولون في البنيان). ثم انطلق، فلبثت مليا، ثم قال: (يا عمر، أتدري من السائل؟). قلت: الله ورسوله أعلم. قال: (فإنه جبريل أتاكم يعلمكم دينكم). رواه مسلم." },
+            { id: 3, title: "أركان الإسلام", text: "عن أبي عبد الرحمن عبد الله بن عمر بن الخطاب رضي الله عنهما قال: سمعت رسول الله صلى الله عليه وسلم يقول: (بني الإسلام على خمس: شهادة أن لا إله إلا الله وأن محمدا رسول الله، وإقام الصلاة، وإيتاء الزكاة، وحج البيت، وصوم رمضان). رواه البخاري ومسلم." },
+            { id: 4, title: "مراحل الخلق", text: "عن أبي عبد الرحمن عبد الله بن مسعود رضي الله عنه قال: حدثنا رسول الله صلى الله عليه وسلم وهو الصادق المصدوق: (إن أحدكم يجمع خلقه في بطن أمه أربعين يوما نطفة، ثم يكون علقة مثل ذلك، ثم يكون مضغة مثل ذلك، ثم يرسل إليه الملك فينفخ فيه الروح، ويؤمر بأربع كلمات: بكتب رزقه وأجله وعمله وشقي أو سعيد. فوالله الذي لا إله غيره إن أحدكم ليعمل بعمل أهل الجنة حتى ما يكون بينه وبينها إلا ذراع فيسبق عليه الكتاب فيعمل بعمل أهل النار فيدخلها، وإن أحدكم ليعمل بعمل أهل النار حتى ما يكون بينه وبينها إلا ذراع فيسبق عليه الكتاب فيعمل بعمل أهل الجنة فيدخلها). رواه البخاري ومسلم." },
+            { id: 5, title: "النهي عن الابتداع", text: "عن أم المؤمنين أم عبد الله عائشة رضي الله عنها قالت: قال رسول الله صلى الله عليه وسلم: (من أحدث في أمرنا هذا ما ليس منه فهو رد). رواه البخاري ومسلم. وفي رواية لمسلم: (من عمل عملا ليس عليه أمرنا فهو رد)." },
+            { id: 6, title: "اتقاء الشبهات", text: "عن أبي عبد الله النعمان بن بشير رضي الله عنهما قال: سمعت رسول الله صلى الله عليه وسلم يقول: (إن الحلال بين وإن الحرام بين، وبينهما أمور مشتبهات لا يعلمهن كثير من الناس، فمن اتقى الشبهات فقد استبرأ لدينه وعرضه، ومن وقع في الشبهات وقع في الحرام، كالراعي يرعى حول الحمى يوشك أن يرتع فيه، ألا وإن لكل ملك حمى، ألا وإن حمى الله محارمه، ألا وإن في الجسد مضغة إذا صلحت صلح الجسد كله، وإذا فسدت فسد الجسد كله، ألا وهي القلب). رواه البخاري ومسلم." },
+            { id: 7, title: "الدين النصيحة", text: "عن أبي رقية تميم بن أوس الداري رضي الله عنه أن النبي صلى الله عليه وسلم قال: (الدين النصيحة). قلنا: لمن؟ قال: (لله ولكتابه ولرسوله ولأئمة المسلمين وعامتهم). رواه مسلم." },
+            { id: 8, title: "حرمة دم المسلم", text: "عن ابن عمر رضي الله عنهما أن رسول الله صلى الله عليه وسلم قال: (أمرت أن أقاتل الناس حتى يشهدوا أن لا إله إلا الله وأن محمدا رسول الله، ويقيموا الصلاة، ويؤتوا الزكاة، فإذا فعلوا ذلك عصموا مني دماءهم وأموالهم إلا بحق الإسلام، وحسابهم على الله تعالى). رواه البخاري ومسلم." },
+            { id: 9, title: "التكليف بما يستطاع", text: "عن أبي هريرة عبد الرحمن بن صخر رضي الله عنه قال: سمعت رسول الله صلى الله عليه وسلم يقول: (ما نهيتكم عنه فاجتنبوه، وما أمرتكم به فأتوا منه ما استطعتم، فإنما أهلك الذين من قبلكم كثرة مسائلهم واختلافهم على أنبيائهم). رواه البخاري ومسلم." },
+            { id: 10, title: "طيب المأكل", text: "عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: (إن الله تعالى طيب لا يقبل إلا طيبا، وإن الله أمر المؤمنين بما أمر به المرسلين فقال تعالى: {يا أيها الرسل كلوا من الطيبات واعملوا صالحا}، وقال تعالى: {يا أيها الذين آمنوا كلوا من طيبات ما رزقناكم}. ثم ذكر الرجل يطيل السفر أشعث أغبر، يمد يديه إلى السماء: يا رب يا رب، ومطعمه حرام، ومشربه حرام، وملبسه حرام، وغذي بالحرام، فأنى يستجاب لذلك؟). رواه مسلم." },
+            { id: 11, title: "اترك ما يريبك", text: "عن الحسن بن علي رضي الله عنهما قال: حفظت من رسول الله صلى الله عليه وسلم: (دع ما يريبك إلى ما لا يريبك). رواه الترمذي والنسائي." },
+            { id: 12, title: "ترك ما لا يعني", text: "عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: (من حسن إسلام المرء تركه ما لا يعنيه). رواه الترمذي." },
+            { id: 13, title: "محبة الخير للغير", text: "عن أنس بن مالك رضي الله عنه عن النبي صلى الله عليه وسلم قال: (لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه). رواه البخاري ومسلم." },
+            { id: 14, title: "حرمة دم المسلم وحالاته", text: "عن ابن مسعود رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: (لا يحل دم امرئ مسلم يشهد أن لا إله إلا الله وأني رسول الله إلا بإحدى ثلاث: الثيب الزاني، والنفس بالنفس، والتارك لدينه المفارق للجماعة). رواه البخاري ومسلم." },
+            { id: 15, title: "إكرام الضيف والجار", text: "عن أبي هريرة رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: (من كان يؤمن بالله واليوم الآخر فليقل خيرا أو ليصمت، ومن كان يؤمن بالله واليوم الآخر فليكرم جاره، ومن كان يؤمن بالله واليوم الآخر فليكرم ضيفه). رواه البخاري ومسلم." },
+            { id: 16, title: "النهي عن الغضب", text: "عن أبي هريرة رضي الله عنه أن رجلا قال للنبي صلى الله عليه وسلم: أوصني. قال: (لا تغضب). فردد مرارا، قال: (لا تغضب). رواه البخاري." },
+            { id: 17, title: "وجوب الإحسان", text: "عن أبي يعلى شداد بن أوس رضي الله عنه عن رسول الله صلى الله عليه وسلم قال: (إن الله كتب الإحسان على كل شيء، فإذا قتلتم فأحسنوا القتلة، وإذا ذبحتم فأحسنوا الذبحة، وليحد أحدكم شفرته، وليرح ذبيحته). رواه مسلم." },
+            { id: 18, title: "الخلق الحسن", text: "عن أبي ذر جندب بن جنادة وأبي عبد الرحمن معاذ بن جبل رضي الله عنهما عن رسول الله صلى الله عليه وسلم قال: (اتق الله حيثما كنت، وأتبع السيئة الحسنة تمحها، وخالق الناس بخلق حسن). رواه الترمذي." },
+            { id: 19, title: "الاستعانة بالله", text: "عن أبي العباس عبد الله بن عباس رضي الله عنهما قال: كنت خلف النبي صلى الله عليه وسلم يوما، فقال: (يا غلام، إني أعلمك كلمات: احفظ الله يحفظك، احفظ الله تجده تجاهك، إذا سألت فاسأل الله، وإذا استعنت فاستعن بالله، واعلم أن الأمة لو اجتمعت على أن ينفعوك بشيء لم ينفعوك إلا بشيء قد كتبه الله لك...). رواه الترمذي." },
+            { id: 20, title: "خلق الحياء", text: "عن أبي مسعود عقبة بن عمرو الأنصاري البدري رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: (إن مما أدرك الناس من كلام النبوة الأولى: إذا لم تستح فاصنع ما شئت). رواه البخاري." },
+            { id: 21, title: "الاستقامة", text: "عن أبي عمرو، وقيل أبي عمرة سفيان بن عبد الله رضي الله عنه قال: قلت: يا رسول الله، قل لي في الإسلام قولا لا أسأل عنه أحدا غيرك. قال: (قل آمنت بالله ثم استقم). رواه مسلم." },
+            { id: 22, title: "طريق الجنة", text: "عن أبي عبد الله جابر بن عبد الله الأنصاري رضي الله عنهما أن رجلا سأل رسول الله صلى الله عليه وسلم فقال: أرأيت إذا صليت المكتوبات، وصمت رمضان، وأحللت الحلال، وحرمت الحرام، ولم أزد على ذلك شيئا، أأدخل الجنة؟ قال: (نعم). رواه مسلم." },
+            { id: 23, title: "جوامع الخير", text: "عن أبي مالك الحارث بن عاصم الأشعري رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: (الطهور شطر الإيمان، والحمد لله تملأ الميزان، وسبحان الله والحمد لله تملآن ما بين السماء والأرض، والصلاة نور، والصدقة برهان، والصبر ضياء، والقرآن حجة لك أو عليك، كل الناس يغدو فبائع نفسه فمعتقها أو موبقها). رواه مسلم." },
+            { id: 24, title: "تحريم الظلم", text: "عن أبي ذر الغفاري رضي الله عنه عن النبي صلى الله عليه وسلم فيما يرويه عن ربه عز وجل أنه قال: (يا عبادي، إني حرمت الظلم على نفسي وجعلته بينكم محرما فلا تظالموا...). رواه مسلم." },
+            { id: 25, title: "فضل الذكر والصدقة", text: "عن أبي ذر رضي الله عنه أن ناسا قالوا: يا رسول الله، ذهب أهل الدثور بالأجور، يصلون كما نصلي، ويصومون كما نصوم، ويتصدقون بفضول أموالهم. فقال: (أوليس قد جعل الله لكم ما تصدقون؟ إن بكل تسبيحة صدقة، وكل تكبيرة صدقة، وكل تحميدة صدقة...). رواه مسلم." },
+            { id: 26, title: "كثرة طرق الخير", text: "عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: (كل سلامى من الناس عليه صدقة كل يوم تطلع فيه الشمس: تعدل بين اثنين صدقة، وتعين الرجل في دابته فتحمله عليها أو ترفع له عليها متاعه صدقة، والكلمة الطيبة صدقة، وبكل خطوة تمشيها إلى الصلاة صدقة، وتميط الأذى عن الطريق صدقة). رواه البخاري ومسلم." },
+            { id: 27, title: "تعريف البر والإثم", text: "عن النواس بن سمعان رضي الله عنه عن النبي صلى الله عليه وسلم قال: (البر حسن الخلق، والإثم ما حاك في صدرك وكرهت أن يطلع عليه الناس). رواه مسلم." },
+            { id: 28, title: "لزوم السنة", text: "عن أبي نجيح العرباض بن سارية رضي الله عنه قال: وعظنا رسول الله صلى الله عليه وسلم موعظة وجلت منها القلوب، وذرفت منها العيون، فقلنا: يا رسول الله، كأنها موعظة مودع فأوصنا. قال: (أوصيكم بتقوى الله، والسمع والطاعة وإن تأمر عليكم عبد، فإنه من يعش منكم فسيرى اختلافا كثيرا، فعليكم بسنتي وسنة الخلفاء الراشدين المهديين...). رواه أبو داود والترمذي." },
+            { id: 29, title: "أبواب الخير والطاعات", text: "عن معاذ بن جبل رضي الله عنه قال: قلت: يا رسول الله، أخبرني بعمل يدخلني الجنة ويباعدني عن النار. قال: (لقد سألت عن عظيم، وإنه ليسير على من يسره الله تعالى عليه: تعبد الله لا تشرك به شيئا، وتقيم الصلاة، وتؤتي الزكاة، وتصوم رمضان، وتحج البيت...). رواه الترمذي." },
+            { id: 30, title: "حدود الله تعالى", text: "عن أبي ثعلبة الخشني جرثوم بن ناشر رضي الله عنه عن رسول الله صلى الله عليه وسلم قال: (إن الله تعالى فرض فرائض فلا تضيعوها، وحد حدودا فلا تعتدوها، وحرم أشياء فلا تنتهكوها، وسكت عن أشياء رحمة لكم غير نسيان فلا تبحثوا عنها). حديث حسن رواه الدارقطني وغيره." },
+            { id: 31, title: "حقيقة الزهد", text: "عن أبي العباس سهل بن سعد الساعدي رضي الله عنه قال: جاء رجل إلى النبي صلى الله عليه وسلم فقال: يا رسول الله، دلني على عمل إذا عملته أحبني الله وأحبني الناس. فقال: (ازهد في الدنيا يحبك الله، وازهد فيما عند الناس يحبك الناس). حديث حسن رواه ابن ماجه وغيره." },
+            { id: 32, title: "لا ضرر ولا ضرار", text: "عن أبي سعيد سعد بن مالك بن سنان الخدري رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: (لا ضرر ولا ضرار). حديث حسن رواه ابن ماجه والدارقطني وغيرهما." },
+            { id: 33, title: "البينة على المدعي", text: "عن ابن عباس رضي الله عنهما أن رسول الله صلى الله عليه وسلم قال: (لو يعطى الناس بدعواهم لادعى رجال أموال قوم ودماءهم، لكن البينة على المدعي واليمين على من أنكر). حديث حسن رواه البيهقي وغيره." },
+            { id: 34, title: "تغيير المنكر بالمراتب", text: "عن أبي سعيد الخدري رضي الله عنه قال: سمعت رسول الله صلى الله عليه وسلم يقول: (من رأى منكم منكرا فليغيره بيده، فإن لم يستطع فبلسانه، فإن لم يستطع فبقلبه، وذلك أضعف الإيمان). رواه مسلم." },
+            { id: 35, title: "أخوة الإسلام وحقوقه", text: "عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: (لا تحاسدوا، ولا تناجشوا، ولا تباغضوا، ولا تدابروا، ولا يبع بعضكم على بيع بعض، وكونوا عباد الله إخوانا، المسلم أخو المسلم، لا يظلمه، ولا يخذله، ولا يكذبه، ولا يحقره، التقوى هاهنا -ويشير إلى صدره ثلاث مرات-...). رواه مسلم." },
+            { id: 36, title: "فضل التفريج والقضاء", text: "عن أبي هريرة رضي الله عنه عن النبي صلى الله عليه وسلم قال: (من نفس عن مؤمن كربة من كرب الدنيا نفس الله عنه كربة من كرب يوم القيامة، ومن يسر على معسر يسر الله عليه في الدنيا والآخرة، ومن ستر مسلما ستره الله في الدنيا والآخرة، والله في عون العبد ما كان العبد في عون أخيه...). رواه مسلم." },
+            { id: 37, title: "فضل الله ورحمته", text: "عن ابن عباس رضي الله عنهما عن رسول الله صلى الله عليه وسلم فيما يرويه عن ربه تبارك وتعالى قال: (إن الله كتب الحسنات والسيئات ثم بين ذلك، فمن هم بحسنة فلم يعملها كتبها الله عنده حسنة كاملة، وإن هم بها فعملها كتبها الله عنده عشر حسنات إلى سبعمائة ضعف إلى أضعاف كثيرة...). رواه البخاري ومسلم." },
+            { id: 38, title: "التقرب إلى الله تعالى", text: "عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: (إن الله تعالى قال: من عادى لي وليا فقد آذنته بالحرب، وما تقرب إلي عبدي بشيء أحب إلي مما افترضته عليه، ولا يزال عبدي يتقرب إلي بالنوافل حتى أحبه، فإذا أحببته كنت سمعه الذي يسمع به، وبصره الذي يبصر به...). رواه البخاري." },
+            { id: 39, title: "التجاوز عن الخطأ", text: "عن ابن عباس رضي الله عنهما أن رسول الله صلى الله عليه وسلم قال: (إن الله تجاوز لي عن أمتي الخطأ والنسيان وما استكرهوا عليه). حديث حسن رواه ابن ماجه والبيهقي وغيرهما." },
+            { id: 40, title: "الغربة في الدنيا", text: "عن ابن عمر رضي الله عنهما قال: أخذ رسول الله صلى الله عليه وسلم بمنكبي فقال: (كن في الدنيا كأنك غريب أو عابر سبيل). وكان ابن عمر رضي الله عنهما يقول: إذا أمسيت فلا تنتظر الصباح، وإذا أصبحت فلا تنتظر المساء، وخذ من صحتك لمرضك، ومن حياتك لموتك. رواه البخاري." },
+            { id: 41, title: "اتباع الهوى للسنة", text: "عن أبي محمد عبد الله بن عمرو بن العاص رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم: (لا يؤمن أحدكم حتى يكون هواه تبعا لما جئت به). حديث حسن صحيح." },
+            { id: 42, title: "سعة مغفرة الله", text: "عن أنس رضي الله عنه قال: سمعت رسول الله صلى الله عليه وسلم يقول: (قال الله تعالى: يا ابن آدم، إنك ما دعوتني ورجوتني غفرت لك على ما كان منك ولا أبالي، يا ابن آدم، لو بلغت ذنوبك عنان السماء ثم استغفرتني غفرت لك ولا أبالي، يا ابن آدم، إنك لو أتيتني بقراب الأرض خطايا ثم لقيتني لا تشرك بي شيئا لأتيتك بقرابها مغفرة). رواه الترمذي." }
+        ];
 
-  <div class="glass">
-    <div class="sec-title">مهام اليوم</div>
-    <div id="questList"></div>
-  </div>
+        // App State
+        let favorites = JSON.parse(localStorage.getItem('hn_favs')) || [];
+        let readList = JSON.parse(localStorage.getItem('hn_read')) || [];
+        let isDarkMode = localStorage.getItem('hn_theme') !== 'light';
+        let currentFont = parseInt(localStorage.getItem('hn_font')) || 32;
+        let activeHadithId = null;
 
-  <div class="glass tip">
-    <div class="sec-title">نصيحة تحفيزية</div>
-    <p id="tipText"></p>
-    <button class="btn ghost sm tip-new" id="btnTip">نصيحة جديدة</button>
-  </div>
+        // Init Functions
+        window.onload = () => {
+            applyTheme();
+            renderHadiths();
+            updateStats();
+            setupEvents();
+            setTimeout(showDaily, 1500);
+        };
 
-  <button class="btn" id="btnQuickStart">🚀 ابدأ تمرين اليوم</button>
-</section>
+        function updateStats() {
+            const progress = (readList.length / hadiths.length) * 100;
+            const ring = document.getElementById('progressRing');
+            const percentText = document.getElementById('statPercent');
+            
+            const circumference = 502.6;
+            const offset = circumference - (progress / 100) * circumference;
+            ring.style.strokeDashoffset = offset;
+            percentText.innerText = Math.round(progress) + '%';
+        }
 
-<!-- ================= EXERCISES ================= -->
-<section class="screen" id="screen-exercises">
-  <div class="glass">
-    <div class="sec-title">مكتبة التمارين</div>
-    <input class="search" id="searchInput" type="search" placeholder="ابحث عن تمرين...">
-    <div class="chips" id="chipRow"></div>
-    <div id="exList"></div>
-  </div>
-</section>
+        function renderHadiths(filter = '', mode = 'all') {
+            const grid = document.getElementById('hadithGrid');
+            const empty = document.getElementById('emptyState');
+            grid.innerHTML = '';
+            
+            const filtered = hadiths.filter(h => {
+                const matchSearch = h.title.includes(filter) || h.text.includes(filter);
+                const matchMode = mode === 'all' || (mode === 'fav' && favorites.includes(h.id)) || (mode === 'read' && readList.includes(h.id));
+                return matchSearch && matchMode;
+            });
 
-<!-- ================= WORKOUT ================= -->
-<section class="screen" id="screen-workout">
-  <div id="planView">
-    <div class="glass">
-      <div class="sec-title">اختر خطة التمرين</div>
-      <div class="plan-grid" id="planGrid"></div>
-    </div>
-    <div class="glass tip">
-      <div class="sec-title">كيف يعمل التمرين؟</div>
-      <p>اختر خطة، ثم اتبع المؤقت لكل مجموعة. ستحصل على صوت تنبيه عند بداية كل مجموعة ونهاية كل راحة، مع إمكانية تخطي الراحة متى شئت.</p>
-    </div>
-  </div>
+            if(filtered.length === 0) {
+                empty.classList.remove('hidden');
+                return;
+            }
+            empty.classList.add('hidden');
 
-  <div id="sessionView" style="display:none">
-    <div class="glass session-stage">
-      <div class="sess-phase" id="sessionPhase">استعد</div>
-      <div class="sess-ex" id="sessionExercise">—</div>
-      <div class="sess-icon" id="sessionIcon"></div>
-      <div class="sess-set" id="sessionSet">المجموعة 1 من 3</div>
-      <div class="timer-big" id="sessionTimer">00:40</div>
-      <div class="sess-progress"><div class="sess-fill" id="sessionFill" style="width:0%"></div></div>
-      <div class="sess-controls">
-        <button class="btn ghost" id="btnPause">⏸ إيقاف مؤقت</button>
-        <button class="btn ghost" id="btnSkipRest" style="display:none">⏭ تخطي الراحة</button>
-        <button class="btn" id="btnDoneSet">✔ أنهيت المجموعة</button>
-      </div>
-      <div class="sess-controls" style="margin-top:10px">
-        <button class="btn ghost" id="btnEndSession">إنهاء التمرين</button>
-      </div>
-    </div>
-  </div>
+            filtered.forEach(h => {
+                const isFav = favorites.includes(h.id);
+                const isRead = readList.includes(h.id);
+                const card = document.createElement('div');
+                card.className = `card-3d glass-master p-8 rounded-[40px] cursor-pointer group relative ${isRead ? 'opacity-60' : ''}`;
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-emerald-500 font-bold group-hover:bg-emerald-500 group-hover:text-white transition-all shadow-inner">
+                            ${h.id}
+                        </div>
+                        <button onclick="toggleFav(event, ${h.id})" class="p-3 rounded-xl transition-all ${isFav ? 'text-rose-500 bg-rose-500/10' : 'text-slate-600 hover:text-rose-400'}">
+                            <svg class="w-6 h-6 ${isFav ? 'fill-current' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </button>
+                    </div>
+                    <h3 class="text-2xl font-black font-kufi text-emerald-400 mb-4 group-hover:translate-x-[-5px] transition-transform">${h.title}</h3>
+                    <p class="font-hadith text-lg text-slate-400 line-clamp-3 mb-6">${h.text}</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-[10px] font-bold text-slate-600 uppercase tracking-widest">${isRead ? 'تمت القراءة' : 'لم يقرأ بعد'}</span>
+                        <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-emerald-500/50 transition-colors">
+                            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        </div>
+                    </div>
+                `;
+                card.onclick = () => openReader(h.id);
+                grid.appendChild(card);
+            });
+        }
 
-  <div id="summaryView" style="display:none">
-    <div class="glass">
-      <div class="sec-title">🎉 أحسنت! اكتمل التمرين</div>
-      <div class="summary-grid">
-        <div class="sum-box"><b id="sumMinutes">0</b><span>دقيقة</span></div>
-        <div class="sum-box"><b id="sumCalories">0</b><span>سعرة حرارية</span></div>
-        <div class="sum-box"><b id="sumXp">0</b><span>نقطة خبرة</span></div>
-        <div class="sum-box"><b id="sumGems">0</b><span>💎 جواهر</span></div>
-      </div>
-      <div class="btn-row">
-        <button class="btn" id="btnSaveWorkout">حفظ والعودة للرئيسية</button>
-      </div>
-    </div>
-  </div>
-</section>
+        function openReader(id) {
+            activeHadithId = id;
+            const h = hadiths.find(x => x.id === id);
+            document.getElementById('modalId').innerText = h.id;
+            document.getElementById('modalTitle').innerText = h.title;
+            document.getElementById('modalContent').innerText = h.text;
+            document.getElementById('modalContent').style.fontSize = currentFont + 'px';
+            
+            const btn = document.getElementById('btnToggleRead');
+            if(readList.includes(id)) {
+                btn.innerText = 'تحديد كغير مقروء';
+                btn.className = "flex-1 min-w-[200px] py-4 rounded-2xl bg-slate-800 text-slate-400 font-black text-lg transition-all";
+            } else {
+                btn.innerText = 'تمت القراءة بحمد الله';
+                btn.className = "flex-1 min-w-[200px] py-4 rounded-2xl bg-emerald-600 text-white font-black text-lg shadow-xl transition-all";
+            }
 
-<!-- ================= STATS ================= -->
-<section class="screen" id="screen-stats">
-  <div class="glass">
-    <div class="sec-title">ملخص الأداء</div>
-    <div class="stat-tiles">
-      <div class="glass tile"><b id="statWorkouts">0</b><span>إجمالي التمارين</span></div>
-      <div class="glass tile"><b id="statMinutes">0</b><span>إجمالي الدقائق</span></div>
-      <div class="glass tile"><b id="statStreak">0</b><span>أطول سلسلة (أيام)</span></div>
-      <div class="glass tile"><b id="statGems">0</b><span>💎 الجواهر</span></div>
-    </div>
-  </div>
-  <div class="glass">
-    <div class="sec-title">آخر 14 يوماً (الدقائق)</div>
-    <div class="chart-wrap" id="chart14"></div>
-  </div>
-  <div class="glass">
-    <div class="sec-title">نقاط الخبرة الأسبوعية</div>
-    <div class="chart-wrap" id="chartWeekXp"></div>
-  </div>
-  <div class="glass">
-    <div class="sec-title">🏆 الإنجازات</div>
-    <div class="ach-grid" id="achGrid"></div>
-  </div>
-  <div class="glass">
-    <div class="sec-title">الأرقام القياسية الشخصية</div>
-    <div id="prList"></div>
-  </div>
-</section>
+            document.getElementById('readerModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
 
-<!-- ================= SETTINGS ================= -->
-<section class="screen" id="screen-settings">
-  <div class="glass">
-    <div class="sec-title">الإعدادات</div>
-    <div class="set-row">
-      <div class="s-label"><b>المظهر الداكن</b><span>تبديل بين الوضع الداكن والفاتح</span></div>
-      <label class="switch"><input type="checkbox" id="themeToggle" checked><span class="sl"></span></label>
-    </div>
-    <div class="set-row">
-      <div class="s-label"><b>المؤثرات الصوتية</b><span>أصوات التنبيه أثناء التمرين</span></div>
-      <label class="switch"><input type="checkbox" id="soundToggle" checked><span class="sl"></span></label>
-    </div>
-    <div class="set-row">
-      <div class="s-label"><b>وحدة القياس</b><span>النظام المتري (كغ / سم)</span></div>
-      <div class="badge">متري</div>
-    </div>
-  </div>
+        function toggleFav(e, id) {
+            e.stopPropagation();
+            if(favorites.includes(id)) favorites = favorites.filter(v => v !== id);
+            else favorites.push(id);
+            localStorage.setItem('hn_favs', JSON.stringify(favorites));
+            renderHadiths(document.getElementById('mainSearch').value);
+        }
 
-  <div class="glass">
-    <div class="sec-title">حاسبة مؤشر كتلة الجسم</div>
-    <div class="field"><label for="heightInput">الطول (سم)</label><input type="number" id="heightInput" inputmode="numeric" placeholder="مثال: 175"></div>
-    <div class="field"><label for="weightInput">الوزن (كغ)</label><input type="number" id="weightInput" inputmode="decimal" placeholder="مثال: 70"></div>
-    <button class="btn" id="btnBmi">احسب المؤشر</button>
-    <div class="bmi-res" id="bmiResult"><b id="bmiValue">0</b><span id="bmiCat"></span></div>
-  </div>
+        function showDaily() {
+            const h = hadiths[Math.floor(Math.random() * hadiths.length)];
+            document.getElementById('dailyTitle').innerText = h.title;
+            document.getElementById('dailyText').innerText = h.text;
+            document.getElementById('dailyModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
 
-  <div class="glass">
-    <div class="sec-title">التطبيق</div>
-    <button class="set-link" id="btnPrivacy">سياسة الخصوصية <span class="arrow">‹</span></button>
-    <button class="set-link" id="btnAbout">عن التطبيق <span class="arrow">‹</span></button>
-    <div style="margin-top:14px">
-      <div class="badge-row">
-        <div class="badge">التقييم: General / 3+</div>
-        <div class="badge">التصنيف: Productivity / Education</div>
-      </div>
-    </div>
-  </div>
+        function applyTheme() {
+            const dot = document.getElementById('themeDot');
+            if(isDarkMode) {
+                document.body.classList.remove('light-mode');
+                dot.style.transform = 'translateX(24px)';
+                document.getElementById('themeIcon').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+            } else {
+                document.body.classList.add('light-mode');
+                dot.style.transform = 'translateX(0)';
+                document.getElementById('themeIcon').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 8H3m3.343-5.657l-.707-.707m12.728 12.728l-.707-.707M6.343 17.657l-.707.707M17.657 6.343l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+            }
+            localStorage.setItem('hn_theme', isDarkMode ? 'dark' : 'light');
+        }
 
-  <div class="glass danger-zone">
-    <div class="sec-title">منطقة الخطر</div>
-    <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px">حذف جميع بياناتك المحفوظة على هذا الجهاز نهائياً.</p>
-    <button class="btn warn" id="btnReset">🗑 حذف كل البيانات</button>
-  </div>
-</section>
-</main>
+        function setupEvents() {
+            // Reader Controls
+            document.getElementById('closeReader').onclick = () => {
+                document.getElementById('readerModal').classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+            document.getElementById('fontUp').onclick = () => {
+                if(currentFont < 60) {
+                    currentFont += 4;
+                    document.getElementById('modalContent').style.fontSize = currentFont + 'px';
+                    localStorage.setItem('hn_font', currentFont);
+                }
+            };
+            document.getElementById('fontDown').onclick = () => {
+                if(currentFont > 20) {
+                    currentFont -= 4;
+                    document.getElementById('modalContent').style.fontSize = currentFont + 'px';
+                    localStorage.setItem('hn_font', currentFont);
+                }
+            };
+            document.getElementById('btnToggleRead').onclick = () => {
+                if(readList.includes(activeHadithId)) readList = readList.filter(v => v !== activeHadithId);
+                else readList.push(activeHadithId);
+                localStorage.setItem('hn_read', JSON.stringify(readList));
+                updateStats();
+                renderHadiths(document.getElementById('mainSearch').value);
+                document.getElementById('closeReader').onclick();
+            };
+            document.getElementById('btnShare').onclick = () => {
+                const h = hadiths.find(x => x.id === activeHadithId);
+                const text = `*${h.title}*\n\n${h.text}\n\nتطبيق منهاج النبوة - الاربعون النووية`;
+                if(navigator.share) {
+                    navigator.share({ title: h.title, text: text });
+                } else {
+                    navigator.clipboard.writeText(text).then(() => alert('تم نسخ الحديث بنجاح'));
+                }
+            };
 
-<!-- overlays -->
-<div class="overlay" id="overlayPrivacy">
-  <div class="sheet">
-    <h2>سياسة الخصوصية</h2>
-    <p>تطبيق <b>Nexus Fit Coach</b> يحترم خصوصيتك بشكل كامل:</p>
-    <ul>
-      <li>جميع بياناتك (التمارين، الإحصائيات، القياسات) تُحفظ محلياً على جهازك فقط باستخدام التخزين المحلي للمتصفح.</li>
-      <li>لا يتم إرسال أي بيانات إلى أي خادم، ولا يوجد أي تتبع أو تحليلات خارجية.</li>
-      <li>لا نطلب أي أذونات للوصول إلى جهات الاتصال أو الموقع أو الكاميرا.</li>
-      <li>يمكنك حذف جميع بياناتك في أي وقت من صفحة الإعدادات عبر زر «حذف كل البيانات».</li>
-      <li>التطبيق يعمل بالكامل دون اتصال بالإنترنت.</li>
-    </ul>
-    <p>باستخدامك للتطبيق فأنت توافق على هذه السياسة. لأي استفسار يمكنك التواصل عبر صفحة «عن التطبيق».</p>
-    <button class="btn" id="btnClosePrivacy" style="margin-top:16px">إغلاق</button>
-  </div>
-</div>
+            // Main Nav & Actions
+            document.getElementById('mainSearch').oninput = (e) => renderHadiths(e.target.value);
+            document.getElementById('filterAll').onclick = () => renderHadiths('', 'all');
+            document.getElementById('filterFav').onclick = () => renderHadiths('', 'fav');
+            document.getElementById('filterRead').onclick = () => renderHadiths('', 'read');
 
-<div class="overlay" id="overlayAbout">
-  <div class="sheet">
-    <h2>عن التطبيق</h2>
-    <p><b>Nexus Fit Coach</b> — مدرب اللياقة الذكي: خطط تمارين، مكتبة تمارين متحركة، مؤقت جلسات حي، تتبع للتقدم والإنجازات، كل ذلك بتصميم زجاجي أنيق يعمل دون إنترنت.</p>
-    <div class="badge-row">
-      <div class="badge">التقييم: General / 3+</div>
-      <div class="badge">التصنيف: Productivity / Education</div>
-      <div class="badge">الإصدار: 1.0</div>
-    </div>
-    <p class="sig" style="margin-top:18px;text-align:center;font-weight:800;color:var(--accent2)">تم تصميم بواسطه Rahamtallh</p>
-    <button class="btn" id="btnCloseAbout" style="margin-top:16px">إغلاق</button>
-  </div>
-</div>
+            document.getElementById('navRandom').onclick = showDaily;
+            document.getElementById('closeDaily').onclick = () => {
+                document.getElementById('dailyModal').classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
 
-<footer class="app-foot">
-  Nexus Fit Coach — رفيقك اليومي نحو لياقة أفضل<br>
-  <span class="sig">تم تصميم بواسطه Rahamtallh</span>
-</footer>
+            document.getElementById('navTheme').onclick = () => {
+                isDarkMode = !isDarkMode;
+                applyTheme();
+            };
 
-<nav class="tabs" id="bottomNav">
-  <button class="tab active" data-screen="home" id="nav-home">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
-    الرئيسية
-  </button>
-  <button class="tab" data-screen="exercises" id="nav-exercises">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/></svg>
-    التمارين
-  </button>
-  <button class="tab" data-screen="workout" id="nav-workout">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z" fill="currentColor"/></svg>
-    التمرين
-  </button>
-  <button class="tab" data-screen="stats" id="nav-stats">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>
-    الإحصائيات
-  </button>
-  <button class="tab" data-screen="settings" id="nav-settings">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.07-.4.1-.8.1-1.2z"/></svg>
-    الإعدادات
-  </button>
-</nav>
+            document.getElementById('navSettings').onclick = () => document.getElementById('settingsModal').classList.remove('hidden');
+            document.getElementById('closeSettings').onclick = () => document.getElementById('settingsModal').classList.add('hidden');
+            document.getElementById('themeToggleBtn').onclick = () => { isDarkMode = !isDarkMode; applyTheme(); };
+            
+            document.getElementById('btnReset').onclick = () => {
+                if(confirm('هل أنت متأكد من تصفير جميع البيانات؟')) {
+                    localStorage.clear();
+                    location.reload();
+                }
+            };
 
-<script>
-"use strict";
-/* ================================================================
-   Nexus Fit Coach — application logic (offline, vanilla JS)
-   ================================================================ */
+            document.getElementById('btnPrivacy').onclick = () => {
+                alert("سياسة الخصوصية:\nنحن لا نجمع أي بيانات شخصية. كل تفاعلاتك تُحفظ محلياً على جهازك فقط لضمان خصوصيتك الكاملة.");
+            };
 
-/* ---------- animated SVG demo icons per muscle group (SMIL) ---------- */
-var FIG = "fill=\"currentColor\"";
-var ICONS = {
-  chest:
-    '<svg viewBox="0 0 64 64">' +
-    '<circle cx="20" cy="30" r="6" ' + FIG + '/>' +
-    '<g><animateTransform attributeName="transform" type="translate" values="0 0; 14 0; 0 0" dur="1.8s" repeatCount="indefinite"/>' +
-    '<rect x="28" y="25" width="22" height="9" rx="4.5" ' + FIG + '/>' +
-    '<rect x="28" y="34" width="14" height="7" rx="3.5" ' + FIG + '/>' +
-    '<rect x="44" y="34" width="6" height="18" rx="3" ' + FIG + '/>' +
-    '</g><rect x="6" y="50" width="52" height="4" rx="2" fill="rgba(127,127,127,.4)"/></svg>',
-  back:
-    '<svg viewBox="0 0 64 64">' +
-    '<rect x="14" y="8" width="36" height="5" rx="2.5" fill="rgba(127,127,127,.5)"/>' +
-    '<g><animateTransform attributeName="transform" type="translate" values="0 8; 0 -4; 0 8" dur="2s" repeatCount="indefinite"/>' +
-    '<circle cx="32" cy="22" r="6" ' + FIG + '/>' +
-    '<rect x="27" y="30" width="10" height="14" rx="5" ' + FIG + '/>' +
-    '<rect x="22" y="16" width="5" height="14" rx="2.5" ' + FIG + '/>' +
-    '<rect x="37" y="16" width="5" height="14" rx="2.5" ' + FIG + '/>' +
-    '</g></svg>',
-  legs:
-    '<svg viewBox="0 0 64 64">' +
-    '<g><animateTransform attributeName="transform" type="translate" values="0 0; 0 9; 0 0" dur="1.8s" repeatCount="indefinite"/>' +
-    '<circle cx="32" cy="12" r="6" ' + FIG + '/>' +
-    '<rect x="27" y="20" width="10" height="14" rx="5" ' + FIG + '/>' +
-    '<rect x="24" y="34" width="6" height="16" rx="3" ' + FIG + '/>' +
-    '<rect x="34" y="34" width="6" height="16" rx="3" ' + FIG + '/>' +
-    '</g><rect x="12" y="54" width="40" height="4" rx="2" fill="rgba(127,127,127,.4)"/></svg>',
-  shoulders:
-    '<svg viewBox="0 0 64 64">' +
-    '<circle cx="32" cy="36" r="6" ' + FIG + '/>' +
-    '<rect x="27" y="42" width="10" height="12" rx="5" ' + FIG + '/>' +
-    '<g><animateTransform attributeName="transform" type="rotate" values="-25 32 36; 25 32 36; -25 32 36" dur="2.2s" repeatCount="indefinite"/>' +
-    '<rect x="8" y="30" width="18" height="7" rx="3.5" ' + FIG + '/>' +
-    '<rect x="38" y="30" width="18" height="7" rx="3.5" ' + FIG + '/>' +
-    '<circle cx="10" cy="33" r="5" ' + FIG + '/>' +
-    '<circle cx="54" cy="33" r="5" ' + FIG + '/>' +
-    '</g></svg>',
-  arms:
-    '<svg viewBox="0 0 64 64">' +
-    '<circle cx="20" cy="14" r="6" ' + FIG + '/>' +
-    '<rect x="15" y="22" width="10" height="20" rx="5" ' + FIG + '/>' +
-    '<g><animateTransform attributeName="transform" type="rotate" values="0 30 34; -55 30 34; 0 30 34" dur="1.8s" repeatCount="indefinite"/>' +
-    '<rect x="25" y="30" width="16" height="8" rx="4" ' + FIG + '/>' +
-    '<circle cx="44" cy="34" r="6" ' + FIG + '/>' +
-    '</g></svg>',
-  abs:
-    '<svg viewBox="0 0 64 64">' +
-    '<g><animateTransform attributeName="transform" type="scale" values="1 1; 1.06 .94; 1 1" dur="1.6s" repeatCount="indefinite" additive="sum"/>' +
-    '<circle cx="32" cy="14" r="6" ' + FIG + '/>' +
-    '<rect x="24" y="22" width="16" height="20" rx="7" ' + FIG + '/>' +
-    '<rect x="27" y="30" width="10" height="3" rx="1.5" fill="rgba(0,0,0,.25)"/>' +
-    '<rect x="27" y="36" width="10" height="3" rx="1.5" fill="rgba(0,0,0,.25)"/>' +
-    '</g><rect x="14" y="48" width="36" height="4" rx="2" fill="rgba(127,127,127,.4)"/></svg>',
-  cardio:
-    '<svg viewBox="0 0 64 64">' +
-    '<g><animateTransform attributeName="transform" type="translate" values="0 3; 0 -4; 0 3" dur="0.9s" repeatCount="indefinite"/>' +
-    '<circle cx="32" cy="10" r="6" ' + FIG + '/>' +
-    '<rect x="27" y="18" width="10" height="14" rx="5" ' + FIG + '/>' +
-    '<g><animateTransform attributeName="transform" type="rotate" values="-30 32 22; 30 32 22; -30 32 22" dur="0.9s" repeatCount="indefinite"/>' +
-    '<rect x="14" y="18" width="12" height="6" rx="3" ' + FIG + '/>' +
-    '<rect x="38" y="18" width="12" height="6" rx="3" ' + FIG + '/>' +
-    '</g>' +
-    '<g><animateTransform attributeName="transform" type="rotate" values="25 32 32; -25 32 32; 25 32 32" dur="0.9s" repeatCount="indefinite"/>' +
-    '<rect x="25" y="32" width="6" height="18" rx="3" ' + FIG + '/>' +
-    '<rect x="33" y="32" width="6" height="18" rx="3" ' + FIG + '/>' +
-    '</g></g></svg>'
-};
-
-/* ---------- exercise database: 24 real exercises ---------- */
-/* fields: id, name, muscle, sets, reps, rest(seconds), work(seconds), diff(1-3), cal(per set) */
-var EXERCISES = [
-  {id:"pushup",   name:"تمرين الضغط",        muscle:"صدر",   sets:3, reps:15, rest:60, work:45, diff:2, cal:22},
-  {id:"incline",  name:"الضغط المائل",        muscle:"صدر",   sets:3, reps:12, rest:60, work:40, diff:1, cal:16},
-  {id:"dip",      name:"الغطس للصدر",         muscle:"صدر",   sets:3, reps:10, rest:75, work:40, diff:3, cal:20},
-  {id:"pullup",   name:"تمرين العقلة",        muscle:"ظهر",   sets:3, reps:8,  rest:90, work:40, diff:3, cal:24},
-  {id:"row",      name:"التجديف بالدمبل",     muscle:"ظهر",   sets:3, reps:12, rest:60, work:45, diff:2, cal:18},
-  {id:"superman", name:"سوبر مان",            muscle:"ظهر",   sets:3, reps:15, rest:45, work:40, diff:1, cal:12},
-  {id:"squat",    name:"القرفصاء",            muscle:"أرجل",  sets:4, reps:15, rest:60, work:50, diff:2, cal:26},
-  {id:"lunges",   name:"الطعنات",             muscle:"أرجل",  sets:3, reps:12, rest:60, work:50, diff:2, cal:22},
-  {id:"calfraise",name:"رفع الساقين",         muscle:"أرجل",  sets:3, reps:20, rest:45, work:40, diff:1, cal:10},
-  {id:"wallsit",  name:"الجلوس على الحائط",   muscle:"أرجل",  sets:3, reps:45, rest:60, work:45, diff:1, cal:14, unit:"ثانية"},
-  {id:"shpress",  name:"الضغط فوق الرأس",     muscle:"أكتاف", sets:3, reps:12, rest:60, work:45, diff:2, cal:18},
-  {id:"lateral",  name:"الرفع الجانبي",       muscle:"أكتاف", sets:3, reps:15, rest:45, work:40, diff:1, cal:12},
-  {id:"frontraise",name:"الرفع الأمامي",      muscle:"أكتاف", sets:3, reps:12, rest:45, work:40, diff:1, cal:12},
-  {id:"curl",     name:"ثني الذراع",          muscle:"ذراعان",sets:3, reps:12, rest:45, work:40, diff:2, cal:12},
-  {id:"tridip",   name:"غطس الترايسبس",       muscle:"ذراعان",sets:3, reps:12, rest:60, work:40, diff:2, cal:16},
-  {id:"hammer",   name:"ثني المطرقة",         muscle:"ذراعان",sets:3, reps:12, rest:45, work:40, diff:2, cal:12},
-  {id:"crunch",   name:"تمرين المعدة",        muscle:"بطن",   sets:3, reps:20, rest:45, work:45, diff:1, cal:14},
-  {id:"plank",    name:"البلانك",             muscle:"بطن",   sets:3, reps:60, rest:60, work:60, diff:2, cal:16, unit:"ثانية"},
-  {id:"legraise", name:"رفع الأرجل",          muscle:"بطن",   sets:3, reps:15, rest:60, work:45, diff:2, cal:16},
-  {id:"jjacks",   name:"قفز جاك",             muscle:"كارديو",sets:3, reps:45, rest:45, work:45, diff:1, cal:20, unit:"ثانية"},
-  {id:"burpee",   name:"بيربي",               muscle:"كارديو",sets:3, reps:10, rest:75, work:50, diff:3, cal:30},
-  {id:"highknee", name:"رفع الركب",           muscle:"كارديو",sets:3, reps:45, rest:45, work:45, diff:2, cal:24, unit:"ثانية"},
-  {id:"mtclimb",  name:"تسلق الجبال",         muscle:"كارديو",sets:3, reps:40, rest:45, work:45, diff:2, cal:24, unit:"ثانية"},
-  {id:"shadowbox",name:"ملاكمة الظل",         muscle:"كارديو",sets:3, reps:60, rest:45, work:60, diff:1, cal:26, unit:"ثانية"}
-];
-var MUSCLES = ["الكل","صدر","ظهر","أرجل","أكتاف","ذراعان","بطن","كارديو"];
-var MUSCLE_ICON = {"صدر":"chest","ظهر":"back","أرجل":"legs","أكتاف":"shoulders","ذراعان":"arms","بطن":"abs","كارديو":"cardio"};
-
-var PLANS = [
-  {id:"full",  name:"الجسم الكامل", desc:"8 تمارين متوازنة", icon:"chest",     ex:["pushup","squat","pullup","plank","lunges","crunch","jjacks","shpress"]},
-  {id:"upper", name:"الجزء العلوي", desc:"صدر + ظهر + أكتاف + ذراعان", icon:"shoulders", ex:["pushup","pullup","shpress","curl","dip","row","lateral","tridip"]},
-  {id:"lower", name:"الجزء السفلي", desc:"أرجل + بطن", icon:"legs",      ex:["squat","lunges","wallsit","calfraise","crunch","plank","legraise"]},
-  {id:"hiit",  name:"هيت عالي الكثافة", desc:"كارديو مكثف", icon:"cardio",   ex:["burpee","jjacks","highknee","mtclimb","shadowbox","squat"]},
-  {id:"core",  name:"العضلات الأساسية", desc:"بطن + ظهر", icon:"abs",       ex:["plank","crunch","superman","legraise","row"]}
-];
-
-var TIPS = [
-  "الاستمرارية أهم من الشدة: تمرين قصير يومياً أفضل من تمرين طويل مرة أسبوعياً.",
-  "اشرب الماء قبل التمرين وأثناءه وبعده لتعويض السوائل المفقودة.",
-  "الإحماء لمدة 5 دقائق يقلل خطر الإصابة ويحسّن الأداء.",
-  "النوم الجيد جزء من التدريب: عضلاتك تنمو أثناء الراحة.",
-  "ركّز على التقنية الصحيحة قبل زيادة الأوزان أو التكرارات.",
-  "التنفس المنتظم أثناء التمرين يمنحك طاقة أكبر وقوة أفضل.",
-  "سجّل تقدمك: رؤية الأرقام تتحسن أقوى محفز للاستمرار.",
-  "لا تقارن بدايتك بذروة الآخرين، قارن نفسك بنفسك أمس.",
-  "وجبة غنية بالبروتين بعد التمرين تساعد على الاستشفاء العضلي.",
-  "خذ يوم راحة عند الشعور بالإجهاد الشديد — جسمك يشكرك.",
-  "ابدأ بتمارين وزن الجسم قبل الانتقال إلى الأوزان الحرة.",
-  "التمدد بعد التمرين يحافظ على مرونة العضلات ويخفف الشد."
-];
-
-var LEVELS = [
-  {xp:0,    name:"مبتدئ"},
-  {xp:300,  name:"نشيط"},
-  {xp:800,  name:"محترف"},
-  {xp:1500, name:"بطل"},
-  {xp:3000, name:"أسطورة"}
-];
-
-var ACHIEVEMENTS = [
-  {id:"first",  icon:"🎯", name:"أول تمرين",   desc:"أكمل أول جلسة تمرين",        check:function(s){return s.history.length>=1;}},
-  {id:"ten",    icon:"💪", name:"10 تمارين",   desc:"أكمل 10 جلسات تمرين",        check:function(s){return s.history.length>=10;}},
-  {id:"streak7",icon:"🔥", name:"سلسلة 7 أيام",desc:"تمرّن 7 أيام متتالية",       check:function(s){return calcStreak(s)>=7;}},
-  {id:"xp1000", icon:"⚡", name:"1000 نقطة",   desc:"اجمع 1000 نقطة خبرة",        check:function(s){return s.xp>=1000;}},
-  {id:"min500", icon:"⏱", name:"500 دقيقة",   desc:"تمرّن 500 دقيقة إجمالاً",    check:function(s){return totalMinutes(s)>=500;}},
-  {id:"water7", icon:"💧", name:"ترطيب مثالي", desc:"اشرب 2 لتر ماء في يوم واحد", check:function(s){return s.waterBest>=2000;}}
-];
-
-/* ---------- state ---------- */
-var LS = {
-  get:function(k,d){try{var v=localStorage.getItem("nfc_"+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
-  set:function(k,v){try{localStorage.setItem("nfc_"+k,JSON.stringify(v));}catch(e){}}
-};
-var S = {
-  xp:0, gems:0, history:[], favorites:[], prs:{},
-  water:{date:"",ml:0}, waterBest:0,
-  quests:{date:"",awarded:[]},
-  settings:{theme:"dark",sound:true},
-  height:0, weight:0
-};
-function loadState(){
-  S.xp        = LS.get("xp",0);
-  S.gems      = LS.get("gems",0);
-  S.history   = LS.get("history",[]);
-  S.favorites = LS.get("favorites",[]);
-  S.prs       = LS.get("prs",{});
-  S.water     = LS.get("water",{date:"",ml:0});
-  S.waterBest = LS.get("waterBest",0);
-  S.quests    = LS.get("quests",{date:"",awarded:[]});
-  S.settings  = LS.get("settings",{theme:"dark",sound:true});
-  S.height    = LS.get("height",0);
-  S.weight    = LS.get("weight",0);
-}
-function saveState(){
-  LS.set("xp",S.xp); LS.set("gems",S.gems); LS.set("history",S.history);
-  LS.set("favorites",S.favorites); LS.set("prs",S.prs);
-  LS.set("water",S.water); LS.set("waterBest",S.waterBest);
-  LS.set("quests",S.quests); LS.set("settings",S.settings);
-  LS.set("height",S.height); LS.set("weight",S.weight);
-}
-function dateKey(d){d=d||new Date();return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
-function exById(id){for(var i=0;i<EXERCISES.length;i++)if(EXERCISES[i].id===id)return EXERCISES[i];return null;}
-function fmtTime(sec){var m=Math.floor(sec/60),s=sec%60;return ("0"+m).slice(-2)+":"+("0"+s).slice(-2);}
-function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-
-/* ---------- audio beeps (Web Audio API) ---------- */
-var AC = null;
-function beep(freq,dur,when){
-  if(!S.settings.sound) return;
-  try{
-    if(!AC){ var Ctx = window.AudioContext||window.webkitAudioContext; AC = new Ctx(); }
-    if(AC.state==="suspended") AC.resume();
-    var t = AC.currentTime + (when||0);
-    var o = AC.createOscillator(), g = AC.createGain();
-    o.type="sine"; o.frequency.value=freq;
-    g.gain.setValueAtTime(0.0001,t);
-    g.gain.exponentialRampToValueAtTime(0.5,t+0.02);
-    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
-    o.connect(g); g.connect(AC.destination);
-    o.start(t); o.stop(t+dur+0.05);
-  }catch(e){}
-}
-function sndCountdown(){ beep(660,0.15,0); beep(660,0.15,0.25); beep(660,0.15,0.5); }
-function sndGo(){ beep(880,0.4,0); beep(1175,0.5,0.15); }
-function sndRestEnd(){ beep(880,0.25,0); beep(880,0.25,0.3); beep(1319,0.5,0.6); }
-function sndTick(){ beep(520,0.08,0); }
-
-/* ---------- navigation ---------- */
-var CUR_SCREEN = "home";
-function showScreen(name){
-  CUR_SCREEN = name;
-  var secs = document.querySelectorAll(".screen");
-  for(var i=0;i<secs.length;i++) secs[i].classList.remove("active");
-  document.getElementById("screen-"+name).classList.add("active");
-  var tabs = document.querySelectorAll(".tab");
-  for(var j=0;j<tabs.length;j++) tabs[j].classList.toggle("active", tabs[j].getAttribute("data-screen")===name);
-  window.scrollTo(0,0);
-  if(name==="home") renderHome();
-  if(name==="exercises") renderExercises();
-  if(name==="stats") renderStats();
-}
-function bindNav(){
-  var tabs = document.querySelectorAll(".tab");
-  for(var i=0;i<tabs.length;i++){
-    tabs[i].addEventListener("click",function(){ showScreen(this.getAttribute("data-screen")); });
-  }
-}
-
-/* ---------- gamification helpers ---------- */
-function levelOf(xp){
-  var L = LEVELS[0], next = null;
-  for(var i=0;i<LEVELS.length;i++){
-    if(xp>=LEVELS[i].xp){ L = LEVELS[i]; next = LEVELS[i+1]||null; }
-  }
-  return {cur:L,next:next};
-}
-function addXp(n){
-  var before = levelOf(S.xp).cur.name;
-  S.xp += n;
-  var after = levelOf(S.xp).cur.name;
-  saveState(); renderHeader(); renderHome();
-  if(before!==after) setTimeout(function(){ alert("🎉 مستوى جديد: "+after+"!"); },300);
-}
-function historyOn(dateStr){
-  var out=[];
-  for(var i=0;i<S.history.length;i++) if(S.history[i].date===dateStr) out.push(S.history[i]);
-  return out;
-}
-function minutesOn(dateStr){
-  var h=historyOn(dateStr), m=0;
-  for(var i=0;i<h.length;i++) m+=h[i].minutes;
-  return m;
-}
-function totalMinutes(s){ var m=0; for(var i=0;i<s.history.length;i++) m+=s.history[i].minutes; return m; }
-function calcStreak(s){
-  var streak=0, d=new Date();
-  if(historyOn(dateKey(d)).length===0) d.setDate(d.getDate()-1);
-  while(historyOn(dateKey(d)).length>0){ streak++; d.setDate(d.getDate()-1); }
-  return streak;
-}
-function longestStreak(s){
-  var days={}, max=0;
-  for(var i=0;i<s.history.length;i++) days[s.history[i].date]=true;
-  var keys=Object.keys(days).sort(), cur=0, prev=null;
-  for(var k=0;k<keys.length;k++){
-    var dt=new Date(keys[k]+"T12:00:00");
-    if(prev){ var diff=Math.round((dt-prev)/86400000); cur = (diff===1)?cur+1:1; }
-    else cur=1;
-    if(cur>max) max=cur; prev=dt;
-  }
-  return max;
-}
-
-/* ---------- header ---------- */
-function renderHeader(){
-  document.getElementById("gemCount").textContent = S.gems;
-  document.getElementById("hdrThemeBtn").textContent = (S.settings.theme==="dark")?"🌙":"☀️";
-}
-
-/* ---------- home ---------- */
-var RING_C = 238.7;
-function setRing(id,valId,frac,text){
-  var el=document.getElementById(id);
-  el.style.strokeDashoffset = String(RING_C*(1-Math.min(1,Math.max(0,frac))));
-  document.getElementById(valId).textContent = text;
-}
-function renderHome(){
-  var h=new Date().getHours();
-  var g = h<12?"صباح الخير":(h<18?"مساء الخير":"مساء النور");
-  document.getElementById("greetUser").textContent = g+" 💪";
-  var lv = levelOf(S.xp);
-  document.getElementById("levelBadge").textContent = lv.cur.name;
-  var pct = lv.next ? Math.round((S.xp-lv.cur.xp)/(lv.next.xp-lv.cur.xp)*100) : 100;
-  document.getElementById("xpFill").style.width = pct+"%";
-  document.getElementById("xpNum").textContent = S.xp+" XP";
-  document.getElementById("streakNum").textContent = calcStreak(S);
-
-  var tk = dateKey();
-  var wToday = historyOn(tk).length;
-  var mToday = minutesOn(tk);
-  if(S.water.date!==tk){ S.water={date:tk,ml:0}; saveState(); }
-  setRing("ringW","ringWVal", wToday/1, wToday+"/1");
-  setRing("ringM","ringMVal", mToday/30, mToday+"/30");
-  setRing("ringH","ringHVal", S.water.ml/2000, (S.water.ml/1000).toFixed(1)+" لتر");
-
-  document.getElementById("waterMl").textContent = S.water.ml+" مل";
-  document.getElementById("waterFill").style.width = Math.min(100,S.water.ml/2000*100)+"%";
-
-  renderQuests();
-  var dayIdx = Math.floor(Date.now()/86400000);
-  document.getElementById("tipText").textContent = "💡 "+TIPS[dayIdx%TIPS.length];
-}
-function questDefs(){
-  var tk=dateKey();
-  return [
-    {id:"q1", name:"أكمل جلسة تمرين واحدة", sub:"أي خطة تختارها تحتسب", xp:20, done:historyOn(tk).length>=1},
-    {id:"q2", name:"اشرب 1 لتر من الماء",  sub:"4 أكواب عبر زر الماء",   xp:15, done:S.water.ml>=1000},
-    {id:"q3", name:"تمرّن 30 دقيقة",        sub:"مجموع دقائق اليوم",      xp:25, done:minutesOn(tk)>=30}
-  ];
-}
-function renderQuests(){
-  var tk=dateKey();
-  if(S.quests.date!==tk){ S.quests={date:tk,awarded:[]}; saveState(); }
-  var qs=questDefs(), html="";
-  for(var i=0;i<qs.length;i++){
-    var q=qs[i], awarded=S.quests.awarded.indexOf(q.id)>=0;
-    if(q.done && !awarded){ S.quests.awarded.push(q.id); S.xp+=q.xp; saveState(); renderHeader();
-      setTimeout((function(n){return function(){ alert("⭐ مهمة مكتملة! +"+n+" XP"); };})(q.xp),400); }
-    html += '<div class="quest'+(q.done?" done":"")+'">'+
-      '<div class="q-check">'+(q.done?"✔":"○")+'</div>'+
-      '<div class="q-body"><b>'+esc(q.name)+'</b><span>'+esc(q.sub)+'</span></div>'+
-      '<div class="q-xp">+'+q.xp+' XP</div></div>';
-  }
-  document.getElementById("questList").innerHTML = html;
-}
-function addWater(){
-  var tk=dateKey();
-  if(S.water.date!==tk) S.water={date:tk,ml:0};
-  S.water.ml+=250;
-  if(S.water.ml>S.waterBest) S.waterBest=S.water.ml;
-  saveState(); renderHome(); renderHeader();
-  beep(740,0.12,0);
-}
-
-/* ---------- exercise library ---------- */
-var exFilter = {muscle:"الكل", q:""};
-function stars(n){ var s=""; for(var i=0;i<3;i++) s += i<n?"★":"☆"; return s; }
-function renderExercises(){
-  var cr=document.getElementById("chipRow"), html="";
-  for(var m=0;m<MUSCLES.length;m++){
-    html += '<button class="chip'+(exFilter.muscle===MUSCLES[m]?" active":"")+'" data-m="'+esc(MUSCLES[m])+'">'+esc(MUSCLES[m])+"</button>";
-  }
-  cr.innerHTML=html;
-  var chips=cr.querySelectorAll(".chip");
-  for(var c=0;c<chips.length;c++){
-    chips[c].addEventListener("click",function(){ exFilter.muscle=this.getAttribute("data-m"); renderExercises(); });
-  }
-  var list=document.getElementById("exList"), out="";
-  var q=exFilter.q.trim();
-  var shown=0;
-  for(var i=0;i<EXERCISES.length;i++){
-    var e=EXERCISES[i];
-    if(exFilter.muscle!=="الكل" && e.muscle!==exFilter.muscle) continue;
-    if(q && e.name.indexOf(q)<0) continue;
-    shown++;
-    var fav=S.favorites.indexOf(e.id)>=0;
-    var unit=e.unit||"تكرار";
-    out += '<div class="glass ex-card">'+
-      '<div class="ex-icon" style="color:var(--accent)">'+ICONS[MUSCLE_ICON[e.muscle]]+'</div>'+
-      '<div class="ex-body"><h3>'+esc(e.name)+'</h3>'+
-      '<div class="ex-meta"><span class="muscle-tag">'+esc(e.muscle)+'</span>'+
-      '<span>'+e.sets+" × "+e.reps+" "+unit+'</span>'+
-      '<span>راحة '+e.rest+' ث</span>'+
-      '<span class="stars">'+stars(e.diff)+'</span></div></div>'+
-      '<button class="fav-btn'+(fav?" on":"")+'" data-id="'+e.id+'" aria-label="مفضل">⭐</button>'+
-      "</div>";
-  }
-  if(shown===0) out='<div class="ex-empty">لا توجد تمارين مطابقة لبحثك.</div>';
-  list.innerHTML=out;
-  var fbs=list.querySelectorAll(".fav-btn");
-  for(var f=0;f<fbs.length;f++){
-    fbs[f].addEventListener("click",function(){
-      var id=this.getAttribute("data-id"), ix=S.favorites.indexOf(id);
-      if(ix>=0) S.favorites.splice(ix,1); else S.favorites.push(id);
-      saveState(); renderExercises(); beep(900,0.1,0);
-    });
-  }
-}
-
-/* ---------- workout plans ---------- */
-function renderPlans(){
-  var g=document.getElementById("planGrid"), html="";
-  for(var i=0;i<PLANS.length;i++){
-    var p=PLANS[i];
-    var cls = p.id==="full" ? "plan-card full" : "plan-card";
-    html += '<button class="'+cls+'" data-plan="'+p.id+'">'+
-      '<span style="color:var(--accent)">'+ICONS[p.icon].replace("<svg",'<svg width="44" height="44"')+"</span>"+
-      "<div><b>"+esc(p.name)+"</b><br><span>"+esc(p.desc)+" • "+p.ex.length+" تمارين</span></div></button>";
-  }
-  g.innerHTML=html;
-  var cards=g.querySelectorAll(".plan-card");
-  for(var c=0;c<cards.length;c++){
-    cards[c].addEventListener("click",function(){ startPlan(this.getAttribute("data-plan")); });
-  }
-}
-
-/* ---------- live session engine ---------- */
-var SES = null;
-function startPlan(planId){
-  var plan=null;
-  for(var i=0;i<PLANS.length;i++) if(PLANS[i].id===planId) plan=PLANS[i];
-  if(!plan) return;
-  var seq=[];
-  for(var j=0;j<plan.ex.length;j++){
-    var e=exById(plan.ex[j]);
-    if(e) seq.push(e);
-  }
-  if(seq.length===0) return;
-  SES = {
-    plan:plan, seq:seq, exIdx:0, setIdx:0,
-    phase:"work", remaining:seq[0].work, running:false, paused:false,
-    timerId:null, startEpoch:Date.now(), doneSets:0,
-    totalSets:0, totalCal:0, finished:false
-  };
-  var t=0; for(var k=0;k<seq.length;k++) t+=seq[k].sets;
-  SES.totalSets=t;
-  document.getElementById("planView").style.display="none";
-  document.getElementById("summaryView").style.display="none";
-  document.getElementById("sessionView").style.display="block";
-  renderSession(); startTick();
-  sndGo();
-}
-function curEx(){ return SES.seq[SES.exIdx]; }
-function renderSession(){
-  if(!SES) return;
-  var e=curEx();
-  document.getElementById("sessionExercise").textContent=e.name;
-  document.getElementById("sessionIcon").innerHTML=ICONS[MUSCLE_ICON[e.muscle]];
-  document.getElementById("sessionIcon").style.color = SES.phase==="rest" ? "var(--accent3)" : "var(--accent)";
-  document.getElementById("sessionPhase").textContent =
-    SES.phase==="work" ? "💪 اعمل — "+e.sets+" × "+e.reps+" "+(e.unit||"تكرار") : "😮‍💨 راحة — تنفس بعمق";
-  document.getElementById("sessionSet").textContent =
-    "التمرين "+(SES.exIdx+1)+" من "+SES.seq.length+" • المجموعة "+(SES.setIdx+1)+" من "+e.sets;
-  document.getElementById("sessionTimer").textContent=fmtTime(SES.remaining);
-  document.getElementById("sessionFill").style.width=Math.round(SES.doneSets/SES.totalSets*100)+"%";
-  document.getElementById("btnSkipRest").style.display = SES.phase==="rest" ? "" : "none";
-  document.getElementById("btnDoneSet").style.display = SES.phase==="work" ? "" : "none";
-  document.getElementById("btnPause").textContent = SES.paused ? "▶ استئناف" : "⏸ إيقاف مؤقت";
-}
-function startTick(){
-  stopTick();
-  SES.running=true; SES.paused=false;
-  SES.timerId=setInterval(onTick,1000);
-  renderSession();
-}
-function stopTick(){ if(SES&&SES.timerId){clearInterval(SES.timerId);SES.timerId=null;} SES.running=false; }
-function onTick(){
-  if(!SES||SES.paused||SES.finished) return;
-  SES.remaining--;
-  if(SES.remaining<=3&&SES.remaining>0) sndTick();
-  if(SES.remaining<=0){ advancePhase(); return; }
-  document.getElementById("sessionTimer").textContent=fmtTime(SES.remaining);
-}
-function advancePhase(){
-  var e=curEx();
-  if(SES.phase==="work"){
-    SES.doneSets++; SES.totalCal+=e.cal;
-    if(!S.prs[e.id]||e.reps>S.prs[e.id]) S.prs[e.id]=e.reps;
-    saveState();
-    if(SES.setIdx<e.sets-1){
-      SES.phase="rest"; SES.remaining=e.rest; sndCountdown();
-    }else{
-      if(SES.exIdx<SES.seq.length-1){
-        SES.exIdx++; SES.setIdx=0;
-        SES.phase="rest"; SES.remaining=30; sndCountdown();
-      }else{ finishSession(); return; }
-    }
-  }else{
-    SES.phase="work"; SES.remaining=curEx().work; sndGo();
-  }
-  renderSession();
-}
-function togglePause(){
-  if(!SES||SES.finished) return;
-  SES.paused=!SES.paused; renderSession();
-}
-function skipRest(){ if(SES&&SES.phase==="rest"&&!SES.finished){ SES.phase="work"; SES.remaining=curEx().work; sndGo(); renderSession(); } }
-function doneSetEarly(){ if(SES&&SES.phase==="work"&&!SES.finished){ SES.remaining=0; advancePhase(); } }
-function endSessionEarly(){
-  if(!SES||SES.finished) return;
-  if(SES.doneSets===0){ cancelSession(); return; }
-  if(confirm("إنهاء التمرين الآن وحفظ ما تم إنجازه؟")) finishSession();
-}
-function cancelSession(){
-  stopTick(); SES=null;
-  document.getElementById("sessionView").style.display="none";
-  document.getElementById("summaryView").style.display="none";
-  document.getElementById("planView").style.display="block";
-}
-function finishSession(){
-  stopTick(); SES.finished=true;
-  var minutes=Math.max(1,Math.round((Date.now()-SES.startEpoch)/60000));
-  var xpGain=20+SES.doneSets*5;
-  var gemsGain=2;
-  SES.result={minutes:minutes,cal:SES.totalCal,xp:xpGain,gems:gemsGain,exCount:SES.seq.length};
-  document.getElementById("sumMinutes").textContent=minutes;
-  document.getElementById("sumCalories").textContent=SES.totalCal;
-  document.getElementById("sumXp").textContent="+"+xpGain;
-  document.getElementById("sumGems").textContent="+"+gemsGain;
-  document.getElementById("sessionView").style.display="none";
-  document.getElementById("summaryView").style.display="block";
-  sndRestEnd();
-  window.scrollTo(0,0);
-}
-function saveWorkout(){
-  if(!SES||!SES.result) return;
-  var r=SES.result;
-  S.history.push({date:dateKey(),minutes:r.minutes,cal:r.cal,xp:r.xp,plan:SES.plan.name,ex:r.exCount});
-  S.gems+=r.gems;
-  saveState();
-  addXp(r.xp);
-  SES=null;
-  document.getElementById("summaryView").style.display="none";
-  document.getElementById("planView").style.display="block";
-  showScreen("home");
-}
-
-/* ---------- stats ---------- */
-var DAY_AR=["أحد","اثنين","ثلاثاء","أربعاء","خميس","جمعة","سبت"];
-function last14(){
-  var out=[];
-  for(var i=13;i>=0;i--){
-    var d=new Date(); d.setDate(d.getDate()-i);
-    var k=dateKey(d);
-    out.push({label:DAY_AR[d.getDay()],minutes:minutesOn(k),workouts:historyOn(k).length,xp:0});
-    for(var h=0;h<S.history.length;h++) if(S.history[h].date===k) out[out.length-1].xp+=S.history[h].xp;
-  }
-  return out;
-}
-function barChart(data,maxV,color){
-  var W=560,H=200,pad=30,bw=(W-pad*2)/data.length;
-  var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%">';
-  for(var g=0;g<=4;g++){
-    var y=pad+(H-pad*2)*g/4;
-    s+='<line x1="'+pad+'" y1="'+y+'" x2="'+(W-pad)+'" y2="'+y+'" stroke="rgba(127,127,127,.25)" stroke-width="1"/>';
-  }
-  for(var i=0;i<data.length;i++){
-    var v=data[i].minutes, bh=maxV>0?(H-pad*2)*(v/maxV):0;
-    var x=pad+i*bw+bw*0.2, w=bw*0.6, y=H-pad-bh;
-    s+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+bh.toFixed(1)+
-       '" rx="5" fill="'+(v>0?color:"rgba(127,127,127,.2)")+'"/>';
-    if(i%2===0) s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(H-8)+'" font-size="10" text-anchor="middle" fill="var(--muted)">'+data[i].label+'</text>';
-    if(v>0) s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(y-6).toFixed(1)+'" font-size="10" text-anchor="middle" fill="var(--text)" font-weight="bold">'+v+'</text>';
-  }
-  return s+"</svg>";
-}
-function weekXpChart(){
-  var days=[];
-  for(var i=6;i>=0;i--){ var d=new Date(); d.setDate(d.getDate()-i); days.push(d); }
-  var W=560,H=170,pad=30,bw=(W-pad*2)/7;
-  var vals=days.map(function(d){var k=dateKey(d),x=0;for(var h=0;h<S.history.length;h++)if(S.history[h].date===k)x+=S.history[h].xp;return {label:DAY_AR[d.getDay()],xp:x};});
-  var maxV=1; for(var v=0;v<vals.length;v++) if(vals[v].xp>maxV) maxV=vals[v].xp;
-  var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%">';
-  for(var i=0;i<7;i++){
-    var bh=(H-pad*2)*(vals[i].xp/maxV), x=pad+i*bw+bw*0.2, w=bw*0.6, y=H-pad-bh;
-    s+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+bh.toFixed(1)+
-       '" rx="5" fill="url(#xpg)"/>';
-    s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(H-8)+'" font-size="10" text-anchor="middle" fill="var(--muted)">'+vals[i].label+'</text>';
-    if(vals[i].xp>0) s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(y-6).toFixed(1)+'" font-size="10" text-anchor="middle" fill="var(--text)" font-weight="bold">'+vals[i].xp+'</text>';
-  }
-  s+='<defs><linearGradient id="xpg" x1="0" y1="0" x2="0" y2="1">'+
-     '<stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs></svg>';
-  return s;
-}
-function renderStats(){
-  document.getElementById("statWorkouts").textContent=S.history.length;
-  document.getElementById("statMinutes").textContent=totalMinutes(S);
-  document.getElementById("statStreak").textContent=longestStreak(S);
-  document.getElementById("statGems").textContent=S.gems;
-  var d14=last14(), maxV=1;
-  for(var i=0;i<d14.length;i++) if(d14[i].minutes>maxV) maxV=d14[i].minutes;
-  document.getElementById("chart14").innerHTML=barChart(d14,maxV,"#38bdf8");
-  document.getElementById("chartWeekXp").innerHTML=weekXpChart();
-  var ag=document.getElementById("achGrid"), html="";
-  for(var a=0;a<ACHIEVEMENTS.length;a++){
-    var ac=ACHIEVEMENTS[a], got=false;
-    try{ got=!!ac.check(S); }catch(e){ got=false; }
-    html+='<div class="ach'+(got?" got":"")+'"><div class="a-ico">'+ac.icon+'</div><b>'+esc(ac.name)+'</b><span>'+esc(ac.desc)+'</span></div>';
-  }
-  ag.innerHTML=html;
-  var pl=document.getElementById("prList"), keys=Object.keys(S.prs), ph="";
-  if(keys.length===0) ph='<div class="ex-empty">لا توجد أرقام قياسية بعد — أكمل تمريناً لتسجيلها.</div>';
-  for(var k=0;k<keys.length;k++){
-    var e=exById(keys[k]); if(!e) continue;
-    ph+='<div class="pr-row"><span>'+esc(e.name)+'</span><b>'+S.prs[keys[k]]+" "+(e.unit||"تكرار")+'</b></div>';
-  }
-  pl.innerHTML=ph;
-}
-
-/* ---------- settings ---------- */
-function applyTheme(){
-  document.body.classList.toggle("light", S.settings.theme==="light");
-  document.getElementById("themeToggle").checked = S.settings.theme==="dark";
-  document.getElementById("hdrThemeBtn").textContent = S.settings.theme==="dark"?"🌙":"☀️";
-  document.querySelector('meta[name="theme-color"]').setAttribute("content", S.settings.theme==="dark"?"#0f172a":"#e0f2fe");
-}
-function toggleTheme(){
-  S.settings.theme = S.settings.theme==="dark"?"light":"dark";
-  saveState(); applyTheme();
-}
-function calcBmi(){
-  var h=parseFloat(document.getElementById("heightInput").value);
-  var w=parseFloat(document.getElementById("weightInput").value);
-  var box=document.getElementById("bmiResult");
-  if(!h||!w||h<50||h>250||w<20||w>400){ alert("يرجى إدخال طول ووزن صحيحين."); box.style.display="none"; return; }
-  S.height=h; S.weight=w; saveState();
-  var bmi=w/Math.pow(h/100,2);
-  var cat = bmi<18.5?"نحافة":(bmi<25?"وزن طبيعي":(bmi<30?"زيادة في الوزن":"سمنة"));
-  document.getElementById("bmiValue").textContent=bmi.toFixed(1);
-  document.getElementById("bmiCat").textContent="التصنيف: "+cat;
-  box.style.display="block";
-  beep(880,0.15,0);
-}
-function resetAll(){
-  if(!confirm("هل أنت متأكد؟ سيتم حذف جميع بياناتك نهائياً ولا يمكن التراجع.")) return;
-  if(!confirm("تأكيد أخير: حذف كل شيء والبدء من جديد؟")) return;
-  var keep={theme:S.settings.theme,sound:S.settings.sound};
-  var keys=["nfc_xp","nfc_gems","nfc_history","nfc_favorites","nfc_prs","nfc_water","nfc_waterBest","nfc_quests","nfc_height","nfc_weight"];
-  for(var i=0;i<keys.length;i++){ try{localStorage.removeItem(keys[i]);}catch(e){} }
-  loadState(); S.settings.theme=keep.theme; S.settings.sound=keep.sound; saveState();
-  document.getElementById("heightInput").value=""; document.getElementById("weightInput").value="";
-  document.getElementById("bmiResult").style.display="none";
-  applyTheme(); renderHeader(); renderHome();
-  alert("تم حذف جميع البيانات بنجاح.");
-}
-
-/* ---------- overlays ---------- */
-function openOverlay(id){ document.getElementById(id).classList.add("open"); }
-function closeOverlay(id){ document.getElementById(id).classList.remove("open"); }
-
-/* ---------- init ---------- */
-function init(){
-  loadState();
-  applyTheme();
-  renderHeader();
-  bindNav();
-  renderPlans();
-  renderHome();
-
-  document.getElementById("hdrThemeBtn").addEventListener("click",toggleTheme);
-  document.getElementById("btnWater250").addEventListener("click",addWater);
-  document.getElementById("btnTip").addEventListener("click",function(){
-    var t=TIPS[Math.floor(Math.random()*TIPS.length)];
-    document.getElementById("tipText").textContent="💡 "+t;
-  });
-  document.getElementById("btnQuickStart").addEventListener("click",function(){ showScreen("workout"); });
-  document.getElementById("searchInput").addEventListener("input",function(){ exFilter.q=this.value; renderExercises(); });
-
-  document.getElementById("btnPause").addEventListener("click",togglePause);
-  document.getElementById("btnSkipRest").addEventListener("click",skipRest);
-  document.getElementById("btnDoneSet").addEventListener("click",doneSetEarly);
-  document.getElementById("btnEndSession").addEventListener("click",endSessionEarly);
-  document.getElementById("btnSaveWorkout").addEventListener("click",saveWorkout);
-
-  document.getElementById("themeToggle").addEventListener("change",toggleTheme);
-  document.getElementById("soundToggle").addEventListener("change",function(){
-    S.settings.sound=this.checked; saveState();
-  });
-  document.getElementById("soundToggle").checked=S.settings.sound;
-  if(S.height) document.getElementById("heightInput").value=S.height;
-  if(S.weight) document.getElementById("weightInput").value=S.weight;
-  document.getElementById("btnBmi").addEventListener("click",calcBmi);
-  document.getElementById("btnReset").addEventListener("click",resetAll);
-  document.getElementById("btnPrivacy").addEventListener("click",function(){openOverlay("overlayPrivacy");});
-  document.getElementById("btnAbout").addEventListener("click",function(){openOverlay("overlayAbout");});
-  document.getElementById("btnClosePrivacy").addEventListener("click",function(){closeOverlay("overlayPrivacy");});
-  document.getElementById("btnCloseAbout").addEventListener("click",function(){closeOverlay("overlayAbout");});
-  var ovs=document.querySelectorAll(".overlay");
-  for(var i=0;i<ovs.length;i++){
-    ovs[i].addEventListener("click",function(e){ if(e.target===this) this.classList.remove("open"); });
-  }
-  showScreen("home");
-}
-if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init);
-else init();
-</script>
+            document.getElementById('navHome').onclick = () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                renderHadiths('', 'all');
+            };
+        }
+    </script>
 </body>
 </html>
