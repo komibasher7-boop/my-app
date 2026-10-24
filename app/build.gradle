@@ -1,0 +1,47 @@
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+}
+
+android {
+    namespace = "Minhag.basher"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "Minhag.basher"
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file(findProperty("KEYSTORE_FILE") as String? ?: "keystore.jks")
+            storePassword = findProperty("KEYSTORE_PASSWORD") as String? ?: "android"
+            keyAlias = findProperty("KEY_ALIAS") as String? ?: "upload"
+            keyPassword = findProperty("KEY_PASSWORD") as String? ?: "android"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+dependencies {
+    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+}

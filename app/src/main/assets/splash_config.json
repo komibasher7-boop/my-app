@@ -1,0 +1,11 @@
+{
+  "splashBackground": "#0B1020",
+  "splashLoader": "spinner",
+  "splashIconSize": 120,
+  "splashIconRadius": 24,
+  "splashIndicatorSize": 36,
+  "splashGap": 16,
+  "fullscreen": true,
+  "pullToRefresh": true,
+  "pageIndicator": true
+}
