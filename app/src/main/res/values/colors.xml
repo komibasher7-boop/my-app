@@ -3,5 +3,5 @@
     <color name="brand_start">#5B8CFF</color>
     <color name="brand_end">#5B8CFF</color>
     <color name="surface">#0B1020</color>
-    <color name="splash_bg">#0B1020</color>
+    <color name="splash_bg">#ffffff</color>
 </resources>

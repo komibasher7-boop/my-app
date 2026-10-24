@@ -1,480 +1,1252 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موسوعة أثير الروايات V4 | الأرشيف العملاق (98 رواية)</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6366f1',
-                        secondary: '#a855f7',
-                        accent: '#ec4899',
-                        darkBg: '#020617',
-                        cardBg: 'rgba(15, 23, 42, 0.6)',
-                        sepia: '#f4ecd8'
-                    },
-                    borderRadius: {
-                        '3xl': '1.5rem',
-                        '4xl': '2rem',
-                        '5xl': '3rem',
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Nexus Fit Coach</title>
+<meta name="description" content="Nexus Fit Coach - personal fitness training companion with workout plans, exercise library and progress tracking.">
+<meta name="theme-color" content="#0f172a">
+<style>
+/* ============ Nexus Fit Coach — Glassmorphism Fitness App ============ */
+:root{
+  --bg1:#0f172a; --bg2:#1e1b4b; --bg3:#0c4a6e;
+  --glass:rgba(255,255,255,.10);
+  --glass-brd:rgba(255,255,255,.22);
+  --card:rgba(255,255,255,.12);
+  --text:#f1f5f9; --muted:#cbd5e1;
+  --accent:#38bdf8; --accent2:#a78bfa; --accent3:#34d399;
+  --warn:#fbbf24; --danger:#f87171;
+  --nav-bg:rgba(15,23,42,.55);
+  --shadow:0 8px 32px rgba(0,0,0,.35);
+  --r:20px;
+}
+body.light{
+  --bg1:#e0f2fe; --bg2:#ede9fe; --bg3:#dcfce7;
+  --glass:rgba(255,255,255,.55);
+  --glass-brd:rgba(255,255,255,.8);
+  --card:rgba(255,255,255,.65);
+  --text:#0f172a; --muted:#475569;
+  --accent:#0284c7; --accent2:#7c3aed; --accent3:#059669;
+  --nav-bg:rgba(255,255,255,.6);
+  --shadow:0 8px 32px rgba(2,132,199,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Segoe UI",Tahoma,"Noto Kufi Arabic","Noto Sans Arabic",Arial,sans-serif;
+  color:var(--text); min-height:100vh; overflow-x:hidden;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2) 45%,var(--bg3));
+  background-attachment:fixed;
+  padding-bottom:calc(96px + env(safe-area-inset-bottom));
+}
+/* animated gradient blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.35;z-index:-1;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
+.b1{width:340px;height:340px;background:#38bdf8;top:-80px;right:-80px}
+.b2{width:300px;height:300px;background:#a78bfa;bottom:10%;left:-100px;animation-delay:-6s}
+.b3{width:260px;height:260px;background:#34d399;top:45%;right:30%;animation-delay:-12s;opacity:.22}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,-30px) scale(1.15)}}
 
-    <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background-attachment: fixed;
-            user-select: none;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-        .dark .glass-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .active-nav {
-            color: #6366f1;
-            transform: translateY(-5px);
-            filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.6));
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #818cf8, #c084fc, #f472b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .sepia-mode {
-            background-color: #f4ecd8 !important;
-            color: #5b4636 !important;
-        }
-        .sepia-mode .novel-content { color: #5b4636 !important; }
-        
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
-        
-        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-slide-up { animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
-        .novel-content {
-            transition: font-size 0.3s ease;
-            text-align: justify;
-            word-spacing: 2px;
-            line-height: 2;
-        }
-    </style>
+/* ============ header ============ */
+header{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;
+  background:var(--nav-bg);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--glass-brd);
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem}
+.logo .mark{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:var(--shadow)}
+.logo .mark svg{width:26px;height:26px}
+.hdr-actions{display:flex;gap:10px;align-items:center}
+.gem-pill{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;
+  background:var(--glass);border:1px solid var(--glass-brd);font-weight:700;font-size:.95rem;min-height:44px}
+.icon-btn{width:44px;height:44px;border-radius:14px;border:1px solid var(--glass-brd);
+  background:var(--glass);color:var(--text);font-size:1.25rem;cursor:pointer;
+  display:grid;place-items:center;backdrop-filter:blur(10px)}
+.icon-btn:active{transform:scale(.94)}
+
+/* ============ screens ============ */
+main{max-width:640px;margin:0 auto;padding:16px 16px 8px}
+.screen{display:none;animation:fadeUp .35s ease}
+.screen.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.glass{
+  background:var(--glass);border:1px solid var(--glass-brd);border-radius:var(--r);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:var(--shadow);padding:18px;margin-bottom:16px;
+}
+.sec-title{font-size:1.05rem;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:"";width:5px;height:22px;border-radius:4px;background:linear-gradient(var(--accent),var(--accent2))}
+
+/* ============ hero / home ============ */
+.hero{position:relative;overflow:hidden}
+.hero h2{font-size:1.5rem;font-weight:800;margin-bottom:4px}
+.hero p{color:var(--muted);font-size:.95rem}
+.level-row{display:flex;align-items:center;gap:12px;margin-top:14px}
+.level-badge{padding:8px 16px;border-radius:999px;font-weight:800;font-size:.9rem;white-space:nowrap;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.xp-track{flex:1;height:12px;border-radius:8px;background:rgba(127,127,127,.25);overflow:hidden}
+.xp-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--accent3),var(--accent));transition:width .6s ease}
+.xp-num{font-size:.8rem;color:var(--muted);white-space:nowrap}
+
+.rings{display:flex;justify-content:space-around;text-align:center;gap:8px}
+.ring-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}
+.ring{transform:rotate(-90deg)}
+.ring .bgc{stroke:rgba(127,127,127,.25)}
+.ring .fgc{stroke-linecap:round;transition:stroke-dashoffset .8s ease}
+.ring-label{font-size:.8rem;color:var(--muted)}
+.ring-val{font-weight:800;font-size:1rem}
+
+.streak-row{display:flex;align-items:center;justify-content:space-between}
+.streak-num{font-size:2.4rem;font-weight:800;background:linear-gradient(135deg,#fb923c,#f472b6);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.streak-sub{color:var(--muted);font-size:.85rem}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:52px;padding:14px 22px;border:none;border-radius:16px;cursor:pointer;
+  font-family:inherit;font-size:1.05rem;font-weight:800;color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:var(--shadow);width:100%}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--glass);border:1px solid var(--glass-brd);color:var(--text);box-shadow:none}
+.btn.warn{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.btn.sm{min-height:44px;padding:10px 16px;font-size:.95rem}
+.btn-row{display:flex;gap:10px}
+.btn-row .btn{flex:1}
+
+.quest{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;margin-bottom:10px;
+  background:rgba(127,127,127,.12);border:1px solid var(--glass-brd)}
+.quest.done{opacity:.65;border-color:var(--accent3)}
+.quest .q-check{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex-shrink:0;
+  background:rgba(127,127,127,.2);font-size:1.3rem}
+.quest.done .q-check{background:var(--accent3);color:#fff}
+.quest .q-body{flex:1}
+.quest .q-body b{display:block;font-size:.95rem}
+.quest .q-body span{font-size:.8rem;color:var(--muted)}
+.quest .q-xp{font-weight:800;color:var(--warn);font-size:.9rem;white-space:nowrap}
+
+.tip{border-right:4px solid var(--accent3)}
+.tip p{font-size:.95rem;line-height:1.8}
+.tip .tip-new{margin-top:10px}
+
+/* water */
+.water-row{display:flex;align-items:center;gap:14px}
+.water-info{flex:1}
+.water-info b{font-size:1.4rem}
+.water-info span{color:var(--muted);font-size:.85rem;display:block}
+.water-track{height:12px;border-radius:8px;background:rgba(127,127,127,.25);overflow:hidden;margin-top:8px}
+.water-fill{height:100%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);border-radius:8px;transition:width .5s}
+
+/* ============ bottom nav ============ */
+nav.tabs{
+  position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));right:50%;transform:translateX(50%);
+  width:min(620px,calc(100% - 24px));z-index:60;
+  display:flex;justify-content:space-around;padding:10px 6px;border-radius:26px;
+  background:var(--nav-bg);border:1px solid var(--glass-brd);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:var(--shadow);
+}
+.tab{flex:1;background:none;border:none;color:var(--muted);cursor:pointer;font-family:inherit;
+  display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.72rem;font-weight:700;
+  padding:8px 4px;border-radius:18px;min-height:56px}
+.tab svg{width:24px;height:24px}
+.tab.active{color:var(--text);background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(167,139,250,.25))}
+.tab.active svg{stroke:var(--accent)}
+.tab:active{transform:scale(.93)}
+
+/* ============ exercise library ============ */
+.search{width:100%;min-height:52px;padding:14px 18px;border-radius:16px;border:1px solid var(--glass-brd);
+  background:var(--glass);color:var(--text);font-family:inherit;font-size:1rem;outline:none;margin-bottom:12px}
+.search::placeholder{color:var(--muted)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;min-height:44px;padding:10px 18px;border-radius:999px;border:1px solid var(--glass-brd);
+  background:var(--glass);color:var(--text);font-family:inherit;font-weight:700;font-size:.9rem;cursor:pointer}
+.chip.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.ex-card{display:flex;gap:14px;align-items:center;padding:14px;margin-bottom:12px}
+.ex-icon{width:84px;height:84px;flex-shrink:0;border-radius:18px;display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(167,139,250,.25));border:1px solid var(--glass-brd)}
+.ex-icon svg{width:64px;height:64px}
+.ex-body{flex:1;min-width:0}
+.ex-body h3{font-size:1rem;margin-bottom:4px}
+.ex-meta{font-size:.8rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px}
+.muscle-tag{padding:3px 10px;border-radius:999px;background:rgba(52,211,153,.2);color:var(--accent3);font-weight:700;font-size:.75rem}
+.stars{color:var(--warn);letter-spacing:2px;font-size:.8rem}
+.fav-btn{background:none;border:none;font-size:1.4rem;cursor:pointer;min-width:44px;min-height:44px;opacity:.4}
+.fav-btn.on{opacity:1;filter:drop-shadow(0 0 6px gold)}
+.ex-empty{text-align:center;color:var(--muted);padding:30px}
+
+/* ============ workout plans & session ============ */
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan-card{padding:20px 14px;border-radius:var(--r);border:1px solid var(--glass-brd);cursor:pointer;
+  background:var(--glass);backdrop-filter:blur(18px);color:var(--text);font-family:inherit;text-align:center;
+  min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.plan-card:active{transform:scale(.96)}
+.plan-card svg{width:44px;height:44px}
+.plan-card b{font-size:1rem}
+.plan-card span{font-size:.78rem;color:var(--muted)}
+.plan-card.full{grid-column:1/-1;flex-direction:row;justify-content:flex-start;text-align:right;padding:18px}
+.session-stage{text-align:center}
+.sess-phase{font-size:1rem;font-weight:800;color:var(--accent2);margin-bottom:4px}
+.sess-ex{font-size:1.5rem;font-weight:800;margin:6px 0}
+.sess-icon{width:130px;height:130px;margin:8px auto;border-radius:28px;display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(167,139,250,.25));border:1px solid var(--glass-brd)}
+.sess-icon svg{width:104px;height:104px}
+.sess-set{color:var(--muted);margin-bottom:10px;font-size:.95rem}
+.timer-big{font-size:4.2rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sess-progress{height:14px;border-radius:10px;background:rgba(127,127,127,.25);overflow:hidden;margin:16px 0}
+.sess-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s}
+.sess-controls{display:flex;gap:10px;margin-top:14px}
+.sess-controls .btn{flex:1}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.sum-box{padding:16px;border-radius:16px;background:rgba(127,127,127,.12);border:1px solid var(--glass-brd);text-align:center}
+.sum-box b{font-size:1.6rem;display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.sum-box span{font-size:.8rem;color:var(--muted)}
+
+/* ============ stats ============ */
+.stat-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.tile{padding:16px;border-radius:var(--r);text-align:center}
+.tile b{font-size:1.7rem;display:block}
+.tile span{font-size:.8rem;color:var(--muted)}
+.chart-wrap{overflow-x:auto}
+.chart-wrap svg{display:block;min-width:100%}
+.pr-row{display:flex;justify-content:space-between;align-items:center;padding:10px 4px;
+  border-bottom:1px solid var(--glass-brd);font-size:.92rem}
+.pr-row:last-child{border-bottom:none}
+.pr-row b{color:var(--warn)}
+.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ach{padding:14px;border-radius:16px;text-align:center;background:rgba(127,127,127,.12);
+  border:1px solid var(--glass-brd);opacity:.45}
+.ach.got{opacity:1;border-color:var(--warn);background:rgba(251,191,36,.12)}
+.ach .a-ico{font-size:1.8rem}
+.ach b{display:block;font-size:.85rem;margin:6px 0 2px}
+.ach span{font-size:.72rem;color:var(--muted)}
+
+/* ============ settings ============ */
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 4px;border-bottom:1px solid var(--glass-brd)}
+.set-row:last-child{border-bottom:none}
+.set-row .s-label b{display:block;font-size:.98rem}
+.set-row .s-label span{font-size:.8rem;color:var(--muted)}
+.switch{position:relative;width:60px;height:34px;flex-shrink:0;cursor:pointer}
+.switch input{opacity:0;width:0;height:0}
+.switch .sl{position:absolute;inset:0;border-radius:999px;background:rgba(127,127,127,.35);transition:.3s}
+.switch .sl::before{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:#fff;
+  top:4px;right:4px;transition:.3s;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.switch input:checked + .sl{background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.switch input:checked + .sl::before{transform:translateX(-26px)}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:.9rem;font-weight:700;margin-bottom:6px}
+.field input{width:100%;min-height:52px;padding:12px 16px;border-radius:14px;border:1px solid var(--glass-brd);
+  background:var(--glass);color:var(--text);font-family:inherit;font-size:1rem;outline:none}
+.bmi-res{padding:14px;border-radius:14px;background:rgba(52,211,153,.12);border:1px solid var(--accent3);
+  text-align:center;margin-top:10px;display:none}
+.bmi-res b{font-size:1.8rem;display:block}
+.bmi-res span{color:var(--muted);font-size:.9rem}
+.badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.badge{padding:8px 16px;border-radius:999px;font-size:.82rem;font-weight:700;
+  background:rgba(52,211,153,.15);border:1px solid var(--accent3);color:var(--accent3)}
+.danger-zone{border-color:var(--danger) !important}
+.set-link{width:100%;display:flex;align-items:center;justify-content:space-between;min-height:52px;
+  background:none;border:none;border-bottom:1px solid var(--glass-brd);color:var(--text);
+  font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;padding:14px 4px;text-align:right}
+.set-link .arrow{color:var(--muted)}
+
+/* ============ overlays (privacy / about) ============ */
+.overlay{position:fixed;inset:0;z-index:100;display:none;background:rgba(0,0,0,.5);
+  backdrop-filter:blur(6px);padding:20px;overflow-y:auto}
+.overlay.open{display:block;animation:fadeUp .3s ease}
+.overlay .sheet{max-width:640px;margin:20px auto;background:var(--glass);border:1px solid var(--glass-brd);
+  border-radius:24px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  box-shadow:var(--shadow);padding:24px}
+body.light .overlay .sheet{background:#f8fafc}
+.overlay h2{margin-bottom:14px;font-size:1.3rem}
+.overlay p,.overlay li{font-size:.95rem;line-height:2;color:var(--text)}
+.overlay ul{padding-right:20px;margin:10px 0}
+
+footer.app-foot{text-align:center;color:var(--muted);font-size:.82rem;padding:18px 8px 8px;line-height:1.9}
+footer.app-foot .sig{color:var(--accent2);font-weight:700}
+
+@media (max-width:380px){
+  .timer-big{font-size:3.4rem}
+  .plan-grid{grid-template-columns:1fr}
+  .stat-tiles{grid-template-columns:1fr 1fr}
+}
+</style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-darkBg dark:text-gray-100 min-h-screen pb-24">
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 
-    <!-- Splash Screen -->
-    <div id="splash" class="fixed inset-0 z-[100] bg-white dark:bg-darkBg flex flex-col items-center justify-center transition-all duration-1000">
-        <div class="relative scale-150">
-            <div class="absolute inset-0 bg-primary blur-[120px] opacity-40 animate-pulse"></div>
-            <div class="w-32 h-32 bg-gradient-to-tr from-primary to-secondary rounded-5xl flex items-center justify-center animate-bounce shadow-2xl relative z-10">
-                <i class="fas fa-book-reader text-white text-5xl"></i>
-            </div>
-        </div>
-        <h1 class="mt-12 text-4xl font-black gradient-text tracking-[0.2em]">أثير الروايات V4</h1>
-        <p class="mt-4 text-gray-500 font-bold animate-pulse">جاري تحميل 98 رواية كاملة...</p>
+<header>
+  <div class="logo">
+    <div class="mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round">
+        <path d="M6.5 6.5v11M17.5 6.5v11M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/>
+      </svg>
     </div>
+    <span>Nexus Fit Coach</span>
+  </div>
+  <div class="hdr-actions">
+    <div class="gem-pill" id="gemPill" title="الجواهر">💎 <span id="gemCount">0</span></div>
+    <button class="icon-btn" id="hdrThemeBtn" aria-label="تبديل المظهر">🌙</button>
+  </div>
+</header>
 
-    <!-- Main Header -->
-    <header class="sticky top-0 z-40 w-full px-6 py-5 backdrop-blur-3xl bg-white/70 dark:bg-darkBg/80 flex justify-between items-center border-b border-gray-200 dark:border-white/5">
-        <div class="flex items-center gap-4">
-            <div class="p-3 bg-gradient-to-br from-primary to-secondary rounded-2xl text-white shadow-2xl rotate-3">
-                <i class="fas fa-feather-pointed text-xl"></i>
-            </div>
-            <div>
-                <span class="text-2xl font-black gradient-text block leading-none">أثير</span>
-                <span class="text-[10px] font-bold opacity-50 uppercase tracking-widest">Mega Archive 2026</span>
-            </div>
-        </div>
-        <div class="flex gap-3">
-            <button onclick="showView('search')" class="p-3.5 rounded-2xl glass-card hover:text-primary transition-all">
-                <i class="fas fa-search"></i>
-            </button>
-            <button onclick="toggleDarkMode()" class="p-3.5 rounded-2xl glass-card hover:bg-yellow-500/10 transition-all">
-                <i class="fas fa-moon dark:hidden"></i>
-                <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
-            </button>
-        </div>
-    </header>
-
-    <!-- Search Overlay -->
-    <div id="search-container" class="px-6 mt-6 hidden animate-slide-up">
-        <div class="relative max-w-4xl mx-auto">
-            <input type="text" id="global-search" oninput="searchLibrary(this.value)" placeholder="ابحث في 98 عمل أدبي..." 
-            class="w-full p-6 pr-16 rounded-[2.5rem] glass-card border-none focus:ring-4 focus:ring-primary/20 outline-none text-xl font-bold">
-            <i class="fas fa-search absolute right-7 top-1/2 -translate-y-1/2 text-primary text-2xl"></i>
-        </div>
+<main>
+<!-- ================= HOME ================= -->
+<section class="screen" id="screen-home">
+  <div class="glass hero">
+    <h2 id="greetUser">مرحباً بك</h2>
+    <p>جاهز لتمرين اليوم؟ كل قطرة عرق تقرّبك من هدفك.</p>
+    <div class="level-row">
+      <div class="level-badge" id="levelBadge">مبتدئ</div>
+      <div class="xp-track"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
+      <div class="xp-num" id="xpNum">0 XP</div>
     </div>
+  </div>
 
-    <main id="app-content" class="container mx-auto px-6 mt-8">
-        
-        <!-- Home View -->
-        <section id="view-home" class="view space-y-12 animate-slide-up">
-            <!-- Hero -->
-            <div class="relative overflow-hidden rounded-[3rem] p-12 bg-gradient-to-br from-slate-900 to-indigo-950 text-white shadow-3xl group">
-                <div class="relative z-10 max-w-3xl">
-                    <div class="flex flex-wrap items-center gap-3 mb-8">
-                        <span class="px-5 py-2 bg-primary/20 border border-primary/30 rounded-full text-[10px] font-black uppercase tracking-widest text-primary-300">موسوعة 2026</span>
-                        <span class="px-5 py-2 bg-accent/20 border border-accent/30 rounded-full text-[10px] font-black uppercase tracking-widest text-accent-300">98 رواية كاملة</span>
-                    </div>
-                    <h2 class="text-6xl font-black mb-8 leading-tight tracking-tighter">أكبر أرشيف أدبي <br>في <span class="gradient-text">جيبك الآن</span></h2>
-                    <p class="text-gray-400 mb-12 text-xl leading-relaxed font-light">تم تحديث المكتبة لتشمل 70 قصة جديدة من الأدب العالمي والعربي الكلاسيكي. اقرأ بحرية تامة دون الحاجة للاتصال بالإنترنت.</p>
-                    <div class="flex flex-wrap gap-5">
-                        <button onclick="showView('encyclopedia')" class="px-12 py-6 bg-primary text-white font-black rounded-3xl hover:shadow-2xl hover:shadow-primary/40 transition-all active:scale-95 text-lg">تصفح الـ 98 رواية</button>
-                    </div>
-                </div>
-                <i class="fas fa-book-open-reader absolute -bottom-20 -left-20 text-[350px] opacity-10 -rotate-12 group-hover:rotate-0 transition-transform duration-1000"></i>
-            </div>
+  <div class="glass">
+    <div class="sec-title">إحصائيات اليوم</div>
+    <div class="rings">
+      <div class="ring-wrap">
+        <svg class="ring" width="92" height="92" viewBox="0 0 92 92">
+          <circle class="bgc" cx="46" cy="46" r="38" fill="none" stroke-width="9"/>
+          <circle class="fgc" id="ringW" cx="46" cy="46" r="38" fill="none" stroke="#38bdf8" stroke-width="9"
+            stroke-dasharray="238.7" stroke-dashoffset="238.7"/>
+        </svg>
+        <div class="ring-val" id="ringWVal">0/1</div>
+        <div class="ring-label">تمارين</div>
+      </div>
+      <div class="ring-wrap">
+        <svg class="ring" width="92" height="92" viewBox="0 0 92 92">
+          <circle class="bgc" cx="46" cy="46" r="38" fill="none" stroke-width="9"/>
+          <circle class="fgc" id="ringM" cx="46" cy="46" r="38" fill="none" stroke="#a78bfa" stroke-width="9"
+            stroke-dasharray="238.7" stroke-dashoffset="238.7"/>
+        </svg>
+        <div class="ring-val" id="ringMVal">0/30</div>
+        <div class="ring-label">دقيقة</div>
+      </div>
+      <div class="ring-wrap">
+        <svg class="ring" width="92" height="92" viewBox="0 0 92 92">
+          <circle class="bgc" cx="46" cy="46" r="38" fill="none" stroke-width="9"/>
+          <circle class="fgc" id="ringH" cx="46" cy="46" r="38" fill="none" stroke="#34d399" stroke-width="9"
+            stroke-dasharray="238.7" stroke-dashoffset="238.7"/>
+        </svg>
+        <div class="ring-val" id="ringHVal">0 لتر</div>
+        <div class="ring-label">ماء</div>
+      </div>
+    </div>
+  </div>
 
-            <!-- Enhanced Stats Cards -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="glass-card p-8 rounded-[2.5rem] text-center border-b-4 border-primary">
-                    <h5 class="text-4xl font-black text-primary mb-2">98</h5>
-                    <p class="text-xs font-bold opacity-50 uppercase">عمل أدبي</p>
-                </div>
-                <div class="glass-card p-8 rounded-[2.5rem] text-center border-b-4 border-secondary">
-                    <h5 class="text-4xl font-black text-secondary mb-2">1.5M</h5>
-                    <p class="text-xs font-bold opacity-50 uppercase">كلمة نصوص</p>
-                </div>
-                <div class="glass-card p-8 rounded-[2.5rem] text-center border-b-4 border-accent">
-                    <h5 class="text-4xl font-black text-accent mb-2">100%</h5>
-                    <p class="text-xs font-bold opacity-50 uppercase">أوفلاين</p>
-                </div>
-                <div class="glass-card p-8 rounded-[2.5rem] text-center border-b-4 border-green-500">
-                    <h5 class="text-4xl font-black text-green-500 mb-2">V4</h5>
-                    <p class="text-xs font-bold opacity-50 uppercase">الإصدار العملاق</p>
-                </div>
-            </div>
+  <div class="glass">
+    <div class="streak-row">
+      <div><div class="streak-num" id="streakNum">0</div><div class="streak-sub">يوم متتالٍ من التمرين</div></div>
+      <div style="font-size:2.6rem">🔥</div>
+    </div>
+  </div>
 
-            <!-- Featured Section -->
-            <div>
-                <div class="flex justify-between items-end mb-10">
-                    <div>
-                        <h3 class="text-4xl font-black tracking-tighter">أهم الأعمال المضافة</h3>
-                        <p class="text-sm opacity-50 font-bold mt-2">مختارات من الـ 70 قصة الجديدة</p>
-                    </div>
-                    <button onclick="showView('encyclopedia')" class="text-primary font-bold bg-primary/10 px-6 py-3 rounded-2xl hover:bg-primary/20 transition-all">كل الروايات</button>
-                </div>
-                <div id="featured-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Dynamic Loading -->
-                </div>
-            </div>
-        </section>
+  <div class="glass">
+    <div class="water-row">
+      <div style="font-size:2.4rem">💧</div>
+      <div class="water-info">
+        <b id="waterMl">0 مل</b>
+        <span>الهدف اليومي: 2000 مل</span>
+        <div class="water-track"><div class="water-fill" id="waterFill" style="width:0%"></div></div>
+      </div>
+      <button class="btn sm" id="btnWater250" style="width:auto">+250 مل</button>
+    </div>
+  </div>
 
-        <!-- Encyclopedia View -->
-        <section id="view-encyclopedia" class="view hidden animate-slide-up">
-            <div class="sticky top-24 z-30 bg-white/50 dark:bg-darkBg/50 backdrop-blur-xl p-6 rounded-[2.5rem] mb-10 border border-white/10">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div>
-                        <h3 class="text-4xl font-black tracking-tighter">المكتبة الشاملة</h3>
-                        <p id="stats-label" class="text-sm font-bold text-primary opacity-80 mt-1">98 رواية جاهزة للقراءة</p>
-                    </div>
-                    <div class="flex gap-3 overflow-x-auto w-full md:w-auto pb-2 no-scrollbar">
-                        <button onclick="renderEncyclopedia('الكل')" class="px-8 py-4 bg-primary text-white rounded-2xl font-black whitespace-nowrap shadow-lg shadow-primary/30">الكل</button>
-                        <button onclick="renderEncyclopedia('كلاسيكيات')" class="px-8 py-4 glass-card rounded-2xl font-black whitespace-nowrap hover:bg-primary/10">كلاسيكيات</button>
-                        <button onclick="renderEncyclopedia('غموض')" class="px-8 py-4 glass-card rounded-2xl font-black whitespace-nowrap hover:bg-primary/10">غموض</button>
-                        <button onclick="renderEncyclopedia('مترجم')" class="px-8 py-4 glass-card rounded-2xl font-black whitespace-nowrap hover:bg-primary/10">مترجم</button>
-                        <button onclick="renderEncyclopedia('اجتماعي')" class="px-8 py-4 glass-card rounded-2xl font-black whitespace-nowrap hover:bg-primary/10">اجتماعي</button>
-                    </div>
-                </div>
-            </div>
-            <div id="full-encyclopedia-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
-                <!-- 98 Novels Render Here -->
-            </div>
-        </section>
+  <div class="glass">
+    <div class="sec-title">مهام اليوم</div>
+    <div id="questList"></div>
+  </div>
 
-        <!-- Reader View -->
-        <section id="view-reader" class="view hidden animate-slide-up pb-32">
-            <div class="max-w-5xl mx-auto">
-                <div class="flex justify-between items-center mb-10 sticky top-24 z-40 bg-white/20 dark:bg-black/20 backdrop-blur-2xl p-5 rounded-[2.5rem] border border-white/10 shadow-2xl">
-                    <button onclick="showView('encyclopedia')" class="p-5 glass-card rounded-2xl hover:bg-primary/20 transition-all text-primary">
-                        <i class="fas fa-chevron-right text-xl"></i>
-                    </button>
-                    <div class="flex items-center gap-6 px-6 glass-card rounded-2xl">
-                        <button onclick="adjustFontSize(-2)" class="p-4 hover:text-primary"><i class="fas fa-minus"></i></button>
-                        <span id="font-size-indicator" class="font-black text-2xl text-primary min-w-[40px] text-center">20</span>
-                        <button onclick="adjustFontSize(2)" class="p-4 hover:text-primary"><i class="fas fa-plus"></i></button>
-                    </div>
-                    <button onclick="toggleSepia()" class="p-5 glass-card rounded-2xl hover:text-orange-500 transition-all"><i class="fas fa-eye text-xl"></i></button>
-                </div>
-                
-                <div id="reader-canvas" class="glass-card p-12 md:p-24 rounded-[4rem] shadow-5xl min-h-[90vh] relative transition-all duration-700">
-                    <div class="mb-16 text-center">
-                        <span id="read-category" class="px-6 py-2 bg-primary/10 text-primary rounded-full text-xs font-black mb-6 inline-block uppercase tracking-widest">تصنيف</span>
-                        <h1 id="read-title" class="text-5xl md:text-7xl font-black mb-6 leading-tight tracking-tighter">عنوان الرواية</h1>
-                        <p id="read-author" class="text-2xl opacity-60 font-medium italic">بواسطة الكاتب</p>
-                    </div>
-                    <div id="read-content" class="novel-content space-y-10" style="font-size: 20px;">
-                        <!-- Large Content Here -->
-                    </div>
-                    
-                    <div class="mt-24 pt-12 border-t border-gray-500/10 flex justify-between items-center text-xs opacity-40 font-black tracking-widest">
-                        <span>أثير الروايات V4 - الأرشيف العملاق</span>
-                        <span id="read-count">0 كلم</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="glass tip">
+    <div class="sec-title">نصيحة تحفيزية</div>
+    <p id="tipText"></p>
+    <button class="btn ghost sm tip-new" id="btnTip">نصيحة جديدة</button>
+  </div>
 
-        <!-- Privacy View -->
-        <section id="view-settings" class="view hidden animate-slide-up space-y-10 pb-32">
-            <h3 class="text-5xl font-black tracking-tighter">الخصوصية والاتفاقية</h3>
-            <div class="glass-card p-12 rounded-[3.5rem] space-y-10">
-                <div class="flex items-center gap-6">
-                    <div class="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center text-primary text-3xl shadow-inner"><i class="fas fa-user-shield"></i></div>
-                    <div>
-                        <h4 class="text-2xl font-black">حماية الخصوصية 2026</h4>
-                        <p class="opacity-60 font-bold">تطبيق أثير الروايات يلتزم بالمعايير الدولية لحماية المستخدم.</p>
-                    </div>
-                </div>
-                <div class="p-8 bg-black/5 dark:bg-white/5 rounded-3xl border-r-8 border-primary leading-relaxed">
-                    <p class="mb-6 font-bold text-lg">نحن لا نجمع بياناتك:</p>
-                    <ul class="space-y-4 opacity-80 font-medium">
-                        <li><i class="fas fa-check-circle text-primary ml-2"></i> جميع الروايات مخزنة برمجياً داخل التطبيق (Offline).</li>
-                        <li><i class="fas fa-check-circle text-primary ml-2"></i> لا يتطلب التطبيق تسجيل دخول أو بريد إلكتروني.</li>
-                        <li><i class="fas fa-check-circle text-primary ml-2"></i> تقدم القراءة يُحفظ محلياً فقط على متصفحك أو جهازك.</li>
-                        <li><i class="fas fa-check-circle text-primary ml-2"></i> المحتوى مخصص للغرض التعليمي والأدبي فقط.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+  <button class="btn" id="btnQuickStart">🚀 ابدأ تمرين اليوم</button>
+</section>
 
-    </main>
+<!-- ================= EXERCISES ================= -->
+<section class="screen" id="screen-exercises">
+  <div class="glass">
+    <div class="sec-title">مكتبة التمارين</div>
+    <input class="search" id="searchInput" type="search" placeholder="ابحث عن تمرين...">
+    <div class="chips" id="chipRow"></div>
+    <div id="exList"></div>
+  </div>
+</section>
 
-    <!-- Bottom Navigation -->
-    <nav class="fixed bottom-0 left-0 right-0 z-50 glass-card px-10 py-6 rounded-t-[4rem] border-t border-white/10 shadow-[0_-30px_60px_rgba(0,0,0,0.6)]">
-        <div class="flex justify-around items-center max-w-xl mx-auto">
-            <button onclick="showView('home')" class="nav-item flex flex-col items-center gap-2 active-nav transition-all duration-300">
-                <i class="fas fa-house-chimney text-2xl"></i>
-                <span class="text-[10px] font-black uppercase tracking-widest">الرئيسية</span>
-            </button>
-            <button onclick="showView('encyclopedia')" class="nav-item flex flex-col items-center gap-2 text-gray-500 transition-all duration-300">
-                <i class="fas fa-swatches text-2xl"></i>
-                <span class="text-[10px] font-black uppercase tracking-widest">المكتبة</span>
-            </button>
-            <button onclick="showView('settings')" class="nav-item flex flex-col items-center gap-2 text-gray-500 transition-all duration-300">
-                <i class="fas fa-shield-halved text-2xl"></i>
-                <span class="text-[10px] font-black uppercase tracking-widest">الخصوصية</span>
-            </button>
-        </div>
-    </nav>
+<!-- ================= WORKOUT ================= -->
+<section class="screen" id="screen-workout">
+  <div id="planView">
+    <div class="glass">
+      <div class="sec-title">اختر خطة التمرين</div>
+      <div class="plan-grid" id="planGrid"></div>
+    </div>
+    <div class="glass tip">
+      <div class="sec-title">كيف يعمل التمرين؟</div>
+      <p>اختر خطة، ثم اتبع المؤقت لكل مجموعة. ستحصل على صوت تنبيه عند بداية كل مجموعة ونهاية كل راحة، مع إمكانية تخطي الراحة متى شئت.</p>
+    </div>
+  </div>
 
-    <script>
-        // Database expanded to 98 novels/stories
-        const novelsDatabase = [
-            // Original 28
-            { id: 1, cat: "كلاسيكيات", title: "بين القصرين", author: "نجيب محفوظ", img: "https://images.unsplash.com/photo-1543004218-ee141104338e?w=400", content: "الجزء الأول من ثلاثية نجيب محفوظ الشهيرة، تصور حياة الأسرة المصرية في حي الجمالية خلال ثورة 1919." },
-            { id: 2, cat: "غموض", title: "يوتوبيا", author: "أحمد خالد توفيق", img: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400", content: "رؤية مستقبلية مخيفة لمصر حيث تنفصل طبقة الأغنياء في مدينة معزولة عن الفقراء." },
-            { id: 3, cat: "خيال", title: "أرض زيكولا", author: "عمرو عبد الحميد", img: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400", content: "شاب يدخل أرضاً تتعامل بوحدات الذكاء بدلاً من المال، ومن ينفد ذكاؤه يُذبح." },
-            { id: 4, cat: "اجتماعي", title: "ذاكرة الجسد", author: "أحلام مستغانمي", img: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400", content: "قصة حب شاعرية تجمع بين رسام فقد ذراعه وابنة قائده العسكري السابق." },
-            { id: 5, cat: "كلاسيكيات", title: "موسم الهجرة إلى الشمال", author: "الطيب صالح", img: "https://images.unsplash.com/photo-1532012197367-684981183701?w=400", content: "صدام الحضارات بين الشرق والغرب من خلال رحلة مصطفى سعيد إلى لندن." },
-            { id: 6, cat: "غموض", title: "الفيل الأزرق", author: "أحمد مراد", img: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=400", content: "طبيب نفسي يغوص في عالم السحر والهلوسة بعد اكتشاف سر صديقه القديم." },
-            { id: 7, cat: "مترجم", title: "قواعد العشق الأربعون", author: "إليف شافاق", img: "https://images.unsplash.com/photo-1511108690759-009324a90311?w=400", content: "رحلة البحث عن الحب الإلهي من خلال لقاء شمس التبريزي وجلال الدين الرومي." },
-            { id: 8, cat: "خيال", title: "حوجن", author: "إبراهيم عباس", img: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400", content: "عالم الجن والإنس يتداخل في قصة حب مستحيلة ومثيرة." },
-            { id: 9, cat: "مترجم", title: "الخيميائي", author: "باولو كويلو", img: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400", content: "رحلة الراعي سانتياغو للبحث عن كنزه المدفون قرب الأهرامات المصرية." },
-            { id: 10, cat: "كلاسيكيات", title: "عزازيل", author: "يوسف زيدان", img: "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400", content: "تأملات الراهب هيبا في القرن الخامس الميلادي حول الصراع بين العقيدة والعقل." },
-            { id: 11, cat: "كلاسيكيات", title: "ثلاثية غرناطة", author: "رضوى عاشور", img: "https://images.unsplash.com/photo-1532012197367-684981183701?w=400", content: "ملحمة سقوط الأندلس من خلال حياة عائلة عربية في حي البيازين بغرناطة." },
-            { id: 12, cat: "غموض", title: "تراب الماس", author: "أحمد مراد", img: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400", content: "جريمة قتل غامضة تفتح أبواب الفساد والماضي الأليم لعائلة طه الزهار." },
-            { id: 13, cat: "مترجم", title: "1984", author: "جورج أورويل", img: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400", content: "الأخ الأكبر يراقبك.. رواية ديستوبية عن القمع الفكري والسياسي المطلق." },
-            { id: 14, cat: "اجتماعي", title: "ساق البامبو", author: "سعود السنعوسي", img: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=400", content: "عيسى يبحث عن هويته بين ملامحه الفلبينية وجذوره الكويتية في صراع طبقي." },
-            { id: 15, cat: "خيال", title: "أمواج أكما", author: "عمرو عبد الحميد", img: "https://images.unsplash.com/photo-1511108690759-009324a90311?w=400", content: "الجزء الثاني من قواعد جارتين، صراع البقاء في مدينة تحكمها قوانين قاسية." },
-            { id: 16, cat: "غموض", title: "ما وراء الطبيعة", author: "أحمد خالد توفيق", img: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400", content: "مغامرات رفعت إسماعيل مع الأشباح والأساطير التي لا يصدقها العلم." },
-            { id: 17, cat: "مترجم", title: "الجريمة والعقاب", author: "دوستويفسكي", img: "https://images.unsplash.com/photo-1543004218-ee141104338e?w=400", content: "تحليل نفسي عميق لجريمة قتل ارتكبها الطالب راسكولنيكوف بدوافع فلسفية." },
-            { id: 18, cat: "اجتماعي", title: "عمارة يعقوبيان", author: "علاء الأسواني", img: "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400", content: "تشريح للمجتمع المصري المعاصر من خلال سكان عمارة واحدة في وسط القاهرة." },
-            { id: 19, cat: "كلاسيكيات", title: "أولاد حارتنا", author: "نجيب محفوظ", img: "https://images.unsplash.com/photo-1532012197367-684981183701?w=400", content: "رواية رمزية تتبع صراع الأجيال والبحث عن العدالة في حارة مصرية قديمة." },
-            { id: 20, cat: "مترجم", title: "الخوف", author: "ستيفان زفايج", img: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400", content: "قصة قصيرة مكثفة حول مشاعر الذنب والابتزاز النفسي لامرأة خائنة." },
-            { id: 21, cat: "غموض", title: "صانع الظلام", author: "تامر إبراهيم", img: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400", content: "صحفي يكتشف سلسلة جرائم قديمة ترتبط بكيان شيطاني يسكن الظلام." },
-            { id: 22, cat: "خيال", title: "في ممر الفئران", author: "أحمد خالد توفيق", img: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=400", content: "عالم يغرق في الظلام التام لسنوات، حيث يصبح العمى هو النجاة الوحيدة." },
-            { id: 23, cat: "اجتماعي", title: "الطنطورية", author: "رضوى عاشور", img: "https://images.unsplash.com/photo-1511108690759-009324a90311?w=400", content: "سيرة متخيلة لامرأة فلسطينية وعائلتها المهجرة من قرية الطنطورة عام 1948." },
-            { id: 24, cat: "مترجم", title: "شيفرة دا فينشي", author: "دان براون", img: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400", content: "لغز تاريخي وفني يبدأ بجريمة في متحف اللوفر ويقود لسر ديني قديم." },
-            { id: 25, cat: "كلاسيكيات", title: "الخبز الحافي", author: "محمد شكري", img: "https://images.unsplash.com/photo-1543004218-ee141104338e?w=400", content: "سيرة ذاتية قاسية عن الفقر والتشرد في المغرب ومحاولة التعلم والتحرر." },
-            { id: 26, cat: "غموض", title: "لوكاندة بير الوطاويط", author: "أحمد مراد", img: "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400", content: "يوميات مصور موتى في القرن التاسع عشر يجد نفسه متورطاً في جرائم غامضة." },
-            { id: 27, cat: "مترجم", title: "ليالي تركستان", author: "نجيب الكيلاني", img: "https://images.unsplash.com/photo-1532012197367-684981183701?w=400", content: "رواية تاريخية تصور معاناة مسلمي تركستان الشرقية ضد الاحتلال الصيني." },
-            { id: 28, cat: "اجتماعي", title: "واحة الغروب", author: "بهاء طاهر", img: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400", content: "ضابط مصري يُرسل لواحة سيوة كعقاب، ليواجه تاريخ الواحة وصراعاتها." }
-        ];
+  <div id="sessionView" style="display:none">
+    <div class="glass session-stage">
+      <div class="sess-phase" id="sessionPhase">استعد</div>
+      <div class="sess-ex" id="sessionExercise">—</div>
+      <div class="sess-icon" id="sessionIcon"></div>
+      <div class="sess-set" id="sessionSet">المجموعة 1 من 3</div>
+      <div class="timer-big" id="sessionTimer">00:40</div>
+      <div class="sess-progress"><div class="sess-fill" id="sessionFill" style="width:0%"></div></div>
+      <div class="sess-controls">
+        <button class="btn ghost" id="btnPause">⏸ إيقاف مؤقت</button>
+        <button class="btn ghost" id="btnSkipRest" style="display:none">⏭ تخطي الراحة</button>
+        <button class="btn" id="btnDoneSet">✔ أنهيت المجموعة</button>
+      </div>
+      <div class="sess-controls" style="margin-top:10px">
+        <button class="btn ghost" id="btnEndSession">إنهاء التمرين</button>
+      </div>
+    </div>
+  </div>
 
-        // Adding 70 more novels to reach 98
-        const authors = ["طه حسين", "عباس العقاد", "جبران خليل جبران", "إدوار الخراط", "إبراهيم الكوني", "غسان كنفاني", "إميل حبيبي", "جمال الغيطاني", "صنع الله إبراهيم"];
-        const titlesPrefix = ["حكايات", "رحلة", "سر", "ليالي", "مدينة", "ظل", "قلعة", "طريق", "صمت", "وداع"];
-        const titlesSuffix = ["الجنوب", "الرمال", "النيل", "الماضي", "الأسرار", "المستحيل", "المنسي", "الشمس", "البحر", "الضباب"];
-        const categories = ["كلاسيكيات", "غموض", "مترجم", "خيال", "اجتماعي"];
+  <div id="summaryView" style="display:none">
+    <div class="glass">
+      <div class="sec-title">🎉 أحسنت! اكتمل التمرين</div>
+      <div class="summary-grid">
+        <div class="sum-box"><b id="sumMinutes">0</b><span>دقيقة</span></div>
+        <div class="sum-box"><b id="sumCalories">0</b><span>سعرة حرارية</span></div>
+        <div class="sum-box"><b id="sumXp">0</b><span>نقطة خبرة</span></div>
+        <div class="sum-box"><b id="sumGems">0</b><span>💎 جواهر</span></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="btnSaveWorkout">حفظ والعودة للرئيسية</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-        for(let i=29; i<=98; i++) {
-            const randomTitle = titlesPrefix[Math.floor(Math.random()*titlesPrefix.length)] + " " + titlesSuffix[Math.floor(Math.random()*titlesSuffix.length)];
-            const randomAuthor = authors[Math.floor(Math.random()*authors.length)];
-            const randomCat = categories[Math.floor(Math.random()*categories.length)];
-            
-            novelsDatabase.push({
-                id: i,
-                cat: randomCat,
-                title: randomTitle + " (رواية "+i+")",
-                author: randomAuthor,
-                img: `https://images.unsplash.com/photo-${1500000000000 + i}?w=400`,
-                content: `هذه الرواية الكاملة رقم ${i} في موسوعة أثير، تروي قصة ملحمية عن ${randomTitle} بأسلوب الكاتب الكبير ${randomAuthor}. تعتبر هذه النسخة كاملة ومحققة للعمل الأدبي الأصلي، وهي جزء من التحديث الضخم للمكتبة الشاملة لعام 2026. تدور الأحداث في سياق ${randomCat} يجمع بين الجودة الأدبية والتشويق المستمر.`
-            });
-        }
+<!-- ================= STATS ================= -->
+<section class="screen" id="screen-stats">
+  <div class="glass">
+    <div class="sec-title">ملخص الأداء</div>
+    <div class="stat-tiles">
+      <div class="glass tile"><b id="statWorkouts">0</b><span>إجمالي التمارين</span></div>
+      <div class="glass tile"><b id="statMinutes">0</b><span>إجمالي الدقائق</span></div>
+      <div class="glass tile"><b id="statStreak">0</b><span>أطول سلسلة (أيام)</span></div>
+      <div class="glass tile"><b id="statGems">0</b><span>💎 الجواهر</span></div>
+    </div>
+  </div>
+  <div class="glass">
+    <div class="sec-title">آخر 14 يوماً (الدقائق)</div>
+    <div class="chart-wrap" id="chart14"></div>
+  </div>
+  <div class="glass">
+    <div class="sec-title">نقاط الخبرة الأسبوعية</div>
+    <div class="chart-wrap" id="chartWeekXp"></div>
+  </div>
+  <div class="glass">
+    <div class="sec-title">🏆 الإنجازات</div>
+    <div class="ach-grid" id="achGrid"></div>
+  </div>
+  <div class="glass">
+    <div class="sec-title">الأرقام القياسية الشخصية</div>
+    <div id="prList"></div>
+  </div>
+</section>
 
-        let currentFontSize = 20;
+<!-- ================= SETTINGS ================= -->
+<section class="screen" id="screen-settings">
+  <div class="glass">
+    <div class="sec-title">الإعدادات</div>
+    <div class="set-row">
+      <div class="s-label"><b>المظهر الداكن</b><span>تبديل بين الوضع الداكن والفاتح</span></div>
+      <label class="switch"><input type="checkbox" id="themeToggle" checked><span class="sl"></span></label>
+    </div>
+    <div class="set-row">
+      <div class="s-label"><b>المؤثرات الصوتية</b><span>أصوات التنبيه أثناء التمرين</span></div>
+      <label class="switch"><input type="checkbox" id="soundToggle" checked><span class="sl"></span></label>
+    </div>
+    <div class="set-row">
+      <div class="s-label"><b>وحدة القياس</b><span>النظام المتري (كغ / سم)</span></div>
+      <div class="badge">متري</div>
+    </div>
+  </div>
 
-        // Controller Functions
-        function showView(viewId) {
-            document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
-            document.getElementById('view-' + viewId).classList.remove('hidden');
-            
-            if(viewId === 'search') {
-                document.getElementById('search-container').classList.remove('hidden');
-                document.getElementById('view-encyclopedia').classList.remove('hidden');
-                document.getElementById('global-search').focus();
-            } else {
-                document.getElementById('search-container').classList.add('hidden');
-            }
+  <div class="glass">
+    <div class="sec-title">حاسبة مؤشر كتلة الجسم</div>
+    <div class="field"><label for="heightInput">الطول (سم)</label><input type="number" id="heightInput" inputmode="numeric" placeholder="مثال: 175"></div>
+    <div class="field"><label for="weightInput">الوزن (كغ)</label><input type="number" id="weightInput" inputmode="decimal" placeholder="مثال: 70"></div>
+    <button class="btn" id="btnBmi">احسب المؤشر</button>
+    <div class="bmi-res" id="bmiResult"><b id="bmiValue">0</b><span id="bmiCat"></span></div>
+  </div>
 
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active-nav');
-                item.classList.add('text-gray-500');
-                if(item.getAttribute('onclick').includes(viewId)) {
-                    item.classList.add('active-nav');
-                    item.classList.remove('text-gray-500');
-                }
-            });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+  <div class="glass">
+    <div class="sec-title">التطبيق</div>
+    <button class="set-link" id="btnPrivacy">سياسة الخصوصية <span class="arrow">‹</span></button>
+    <button class="set-link" id="btnAbout">عن التطبيق <span class="arrow">‹</span></button>
+    <div style="margin-top:14px">
+      <div class="badge-row">
+        <div class="badge">التقييم: General / 3+</div>
+        <div class="badge">التصنيف: Productivity / Education</div>
+      </div>
+    </div>
+  </div>
 
-        function renderItems(list, containerId) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            list.forEach(novel => {
-                const card = document.createElement('div');
-                card.className = "glass-card p-5 rounded-[2.5rem] flex gap-6 cursor-pointer hover:scale-[1.02] transition-all animate-slide-up group relative overflow-hidden";
-                card.onclick = () => openReader(novel);
-                
-                card.innerHTML = `
-                    <div class="absolute top-4 left-4 z-10">
-                        <span class="px-3 py-1 bg-primary text-white text-[9px] font-black rounded-lg shadow-lg">كاملة</span>
-                    </div>
-                    <img src="${novel.img}" class="w-32 h-44 rounded-3xl object-cover shadow-2xl group-hover:rotate-1 transition-transform bg-slate-800">
-                    <div class="flex-1 py-2">
-                        <span class="text-primary text-[10px] font-black uppercase mb-2 block tracking-widest">${novel.cat}</span>
-                        <h4 class="text-xl font-black mb-2 group-hover:text-primary transition-colors leading-tight">${novel.title}</h4>
-                        <p class="text-xs opacity-60 font-bold mb-5">${novel.author}</p>
-                        <div class="flex items-center gap-4 mt-auto">
-                            <div class="flex -space-x-2">
-                                <div class="w-6 h-6 rounded-full bg-primary/20 border border-white/10 flex items-center justify-center text-[8px] font-black text-primary">A</div>
-                                <div class="w-6 h-6 rounded-full bg-secondary/20 border border-white/10 flex items-center justify-center text-[8px] font-black text-secondary">Z</div>
-                            </div>
-                            <span class="text-[9px] opacity-40 font-black uppercase">أثير بريميوم</span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
+  <div class="glass danger-zone">
+    <div class="sec-title">منطقة الخطر</div>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px">حذف جميع بياناتك المحفوظة على هذا الجهاز نهائياً.</p>
+    <button class="btn warn" id="btnReset">🗑 حذف كل البيانات</button>
+  </div>
+</section>
+</main>
 
-        function openReader(novel) {
-            document.getElementById('read-title').innerText = novel.title;
-            document.getElementById('read-author').innerText = novel.author;
-            document.getElementById('read-category').innerText = novel.cat;
-            
-            // Build pseudo-infinite text for the reader
-            const longText = `
-                <p class="mb-8">${novel.content}</p>
-                <p class="mb-8">لقد دخلت الآن إلى عمق النص الكامل. في موسوعة أثير V4، نضمن لك تجربة قراءة تفاعلية. ${novel.title} ليست مجرد كلمات، بل هي رحلة وجدانية صاغها ${novel.author}.</p>
-                <p class="mb-8 leading-loose">${"في هذا الجزء من الرواية، يتجلى الصراع الإنساني في أبهى صوره. تتداخل الخيوط الدرامية لتعبر عن مكنونات النفس البشرية، حيث يلتقي الماضي بالحاضر في مشهد أدبي بديع يسرق الأنفاس.".repeat(25)}</p>
-                <p class="mb-8 p-10 bg-primary/5 rounded-3xl border-r-4 border-primary italic">"الأدب هو النافذة الوحيدة التي نطل منها على حيوات لم نعشها، ومشاعر لم نختبرها بعد."</p>
-                <p class="mb-8 leading-loose">${"تستمر الأحداث في التصاعد، حيث يواجه الأبطال تحديات تعيد تشكيل هويتهم. ينسج الكاتب ببراعة خيوط الحب، الفقد، والأمل، ليصنع نسيجاً روائياً لا ينسى.".repeat(30)}</p>
-            `;
-            
-            document.getElementById('read-content').innerHTML = longText;
-            document.getElementById('read-count').innerText = (longText.split(' ').length) + " كلمة";
-            
-            showView('reader');
-            localStorage.setItem('atheer_last_read', novel.id);
-        }
+<!-- overlays -->
+<div class="overlay" id="overlayPrivacy">
+  <div class="sheet">
+    <h2>سياسة الخصوصية</h2>
+    <p>تطبيق <b>Nexus Fit Coach</b> يحترم خصوصيتك بشكل كامل:</p>
+    <ul>
+      <li>جميع بياناتك (التمارين، الإحصائيات، القياسات) تُحفظ محلياً على جهازك فقط باستخدام التخزين المحلي للمتصفح.</li>
+      <li>لا يتم إرسال أي بيانات إلى أي خادم، ولا يوجد أي تتبع أو تحليلات خارجية.</li>
+      <li>لا نطلب أي أذونات للوصول إلى جهات الاتصال أو الموقع أو الكاميرا.</li>
+      <li>يمكنك حذف جميع بياناتك في أي وقت من صفحة الإعدادات عبر زر «حذف كل البيانات».</li>
+      <li>التطبيق يعمل بالكامل دون اتصال بالإنترنت.</li>
+    </ul>
+    <p>باستخدامك للتطبيق فأنت توافق على هذه السياسة. لأي استفسار يمكنك التواصل عبر صفحة «عن التطبيق».</p>
+    <button class="btn" id="btnClosePrivacy" style="margin-top:16px">إغلاق</button>
+  </div>
+</div>
 
-        function adjustFontSize(delta) {
-            currentFontSize += delta;
-            if(currentFontSize < 14) currentFontSize = 14;
-            if(currentFontSize > 60) currentFontSize = 60;
-            document.getElementById('read-content').style.fontSize = currentFontSize + 'px';
-            document.getElementById('font-size-indicator').innerText = currentFontSize;
-            localStorage.setItem('atheer_font_size', currentFontSize);
-        }
+<div class="overlay" id="overlayAbout">
+  <div class="sheet">
+    <h2>عن التطبيق</h2>
+    <p><b>Nexus Fit Coach</b> — مدرب اللياقة الذكي: خطط تمارين، مكتبة تمارين متحركة، مؤقت جلسات حي، تتبع للتقدم والإنجازات، كل ذلك بتصميم زجاجي أنيق يعمل دون إنترنت.</p>
+    <div class="badge-row">
+      <div class="badge">التقييم: General / 3+</div>
+      <div class="badge">التصنيف: Productivity / Education</div>
+      <div class="badge">الإصدار: 1.0</div>
+    </div>
+    <p class="sig" style="margin-top:18px;text-align:center;font-weight:800;color:var(--accent2)">تم تصميم بواسطه Rahamtallh</p>
+    <button class="btn" id="btnCloseAbout" style="margin-top:16px">إغلاق</button>
+  </div>
+</div>
 
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('atheer_theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-        }
+<footer class="app-foot">
+  Nexus Fit Coach — رفيقك اليومي نحو لياقة أفضل<br>
+  <span class="sig">تم تصميم بواسطه Rahamtallh</span>
+</footer>
 
-        function toggleSepia() {
-            document.getElementById('reader-canvas').classList.toggle('sepia-mode');
-        }
+<nav class="tabs" id="bottomNav">
+  <button class="tab active" data-screen="home" id="nav-home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+    الرئيسية
+  </button>
+  <button class="tab" data-screen="exercises" id="nav-exercises">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/></svg>
+    التمارين
+  </button>
+  <button class="tab" data-screen="workout" id="nav-workout">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z" fill="currentColor"/></svg>
+    التمرين
+  </button>
+  <button class="tab" data-screen="stats" id="nav-stats">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>
+    الإحصائيات
+  </button>
+  <button class="tab" data-screen="settings" id="nav-settings">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.07-.4.1-.8.1-1.2z"/></svg>
+    الإعدادات
+  </button>
+</nav>
 
-        function searchLibrary(val) {
-            const term = val.toLowerCase();
-            const filtered = novelsDatabase.filter(n => 
-                n.title.toLowerCase().includes(term) || n.author.toLowerCase().includes(term) || n.cat.toLowerCase().includes(term)
-            );
-            renderItems(filtered, 'full-encyclopedia-grid');
-            document.getElementById('stats-label').innerText = `تم العثور على ${filtered.length} عمل أدبي`;
-        }
+<script>
+"use strict";
+/* ================================================================
+   Nexus Fit Coach — application logic (offline, vanilla JS)
+   ================================================================ */
 
-        function renderEncyclopedia(cat) {
-            const filtered = cat === 'الكل' ? novelsDatabase : novelsDatabase.filter(n => n.cat === cat);
-            renderItems(filtered, 'full-encyclopedia-grid');
-            document.getElementById('stats-label').innerText = `${filtered.length} رواية في تصنيف ${cat}`;
-        }
+/* ---------- animated SVG demo icons per muscle group (SMIL) ---------- */
+var FIG = "fill=\"currentColor\"";
+var ICONS = {
+  chest:
+    '<svg viewBox="0 0 64 64">' +
+    '<circle cx="20" cy="30" r="6" ' + FIG + '/>' +
+    '<g><animateTransform attributeName="transform" type="translate" values="0 0; 14 0; 0 0" dur="1.8s" repeatCount="indefinite"/>' +
+    '<rect x="28" y="25" width="22" height="9" rx="4.5" ' + FIG + '/>' +
+    '<rect x="28" y="34" width="14" height="7" rx="3.5" ' + FIG + '/>' +
+    '<rect x="44" y="34" width="6" height="18" rx="3" ' + FIG + '/>' +
+    '</g><rect x="6" y="50" width="52" height="4" rx="2" fill="rgba(127,127,127,.4)"/></svg>',
+  back:
+    '<svg viewBox="0 0 64 64">' +
+    '<rect x="14" y="8" width="36" height="5" rx="2.5" fill="rgba(127,127,127,.5)"/>' +
+    '<g><animateTransform attributeName="transform" type="translate" values="0 8; 0 -4; 0 8" dur="2s" repeatCount="indefinite"/>' +
+    '<circle cx="32" cy="22" r="6" ' + FIG + '/>' +
+    '<rect x="27" y="30" width="10" height="14" rx="5" ' + FIG + '/>' +
+    '<rect x="22" y="16" width="5" height="14" rx="2.5" ' + FIG + '/>' +
+    '<rect x="37" y="16" width="5" height="14" rx="2.5" ' + FIG + '/>' +
+    '</g></svg>',
+  legs:
+    '<svg viewBox="0 0 64 64">' +
+    '<g><animateTransform attributeName="transform" type="translate" values="0 0; 0 9; 0 0" dur="1.8s" repeatCount="indefinite"/>' +
+    '<circle cx="32" cy="12" r="6" ' + FIG + '/>' +
+    '<rect x="27" y="20" width="10" height="14" rx="5" ' + FIG + '/>' +
+    '<rect x="24" y="34" width="6" height="16" rx="3" ' + FIG + '/>' +
+    '<rect x="34" y="34" width="6" height="16" rx="3" ' + FIG + '/>' +
+    '</g><rect x="12" y="54" width="40" height="4" rx="2" fill="rgba(127,127,127,.4)"/></svg>',
+  shoulders:
+    '<svg viewBox="0 0 64 64">' +
+    '<circle cx="32" cy="36" r="6" ' + FIG + '/>' +
+    '<rect x="27" y="42" width="10" height="12" rx="5" ' + FIG + '/>' +
+    '<g><animateTransform attributeName="transform" type="rotate" values="-25 32 36; 25 32 36; -25 32 36" dur="2.2s" repeatCount="indefinite"/>' +
+    '<rect x="8" y="30" width="18" height="7" rx="3.5" ' + FIG + '/>' +
+    '<rect x="38" y="30" width="18" height="7" rx="3.5" ' + FIG + '/>' +
+    '<circle cx="10" cy="33" r="5" ' + FIG + '/>' +
+    '<circle cx="54" cy="33" r="5" ' + FIG + '/>' +
+    '</g></svg>',
+  arms:
+    '<svg viewBox="0 0 64 64">' +
+    '<circle cx="20" cy="14" r="6" ' + FIG + '/>' +
+    '<rect x="15" y="22" width="10" height="20" rx="5" ' + FIG + '/>' +
+    '<g><animateTransform attributeName="transform" type="rotate" values="0 30 34; -55 30 34; 0 30 34" dur="1.8s" repeatCount="indefinite"/>' +
+    '<rect x="25" y="30" width="16" height="8" rx="4" ' + FIG + '/>' +
+    '<circle cx="44" cy="34" r="6" ' + FIG + '/>' +
+    '</g></svg>',
+  abs:
+    '<svg viewBox="0 0 64 64">' +
+    '<g><animateTransform attributeName="transform" type="scale" values="1 1; 1.06 .94; 1 1" dur="1.6s" repeatCount="indefinite" additive="sum"/>' +
+    '<circle cx="32" cy="14" r="6" ' + FIG + '/>' +
+    '<rect x="24" y="22" width="16" height="20" rx="7" ' + FIG + '/>' +
+    '<rect x="27" y="30" width="10" height="3" rx="1.5" fill="rgba(0,0,0,.25)"/>' +
+    '<rect x="27" y="36" width="10" height="3" rx="1.5" fill="rgba(0,0,0,.25)"/>' +
+    '</g><rect x="14" y="48" width="36" height="4" rx="2" fill="rgba(127,127,127,.4)"/></svg>',
+  cardio:
+    '<svg viewBox="0 0 64 64">' +
+    '<g><animateTransform attributeName="transform" type="translate" values="0 3; 0 -4; 0 3" dur="0.9s" repeatCount="indefinite"/>' +
+    '<circle cx="32" cy="10" r="6" ' + FIG + '/>' +
+    '<rect x="27" y="18" width="10" height="14" rx="5" ' + FIG + '/>' +
+    '<g><animateTransform attributeName="transform" type="rotate" values="-30 32 22; 30 32 22; -30 32 22" dur="0.9s" repeatCount="indefinite"/>' +
+    '<rect x="14" y="18" width="12" height="6" rx="3" ' + FIG + '/>' +
+    '<rect x="38" y="18" width="12" height="6" rx="3" ' + FIG + '/>' +
+    '</g>' +
+    '<g><animateTransform attributeName="transform" type="rotate" values="25 32 32; -25 32 32; 25 32 32" dur="0.9s" repeatCount="indefinite"/>' +
+    '<rect x="25" y="32" width="6" height="18" rx="3" ' + FIG + '/>' +
+    '<rect x="33" y="32" width="6" height="18" rx="3" ' + FIG + '/>' +
+    '</g></g></svg>'
+};
 
-        // Initialization
-        window.onload = () => {
-            // Theme restore
-            if (localStorage.getItem('atheer_theme') === 'light') {
-                document.documentElement.classList.remove('dark');
-            }
-            
-            // Font size restore
-            if (localStorage.getItem('atheer_font_size')) {
-                currentFontSize = parseInt(localStorage.getItem('atheer_font_size'));
-                document.getElementById('font-size-indicator').innerText = currentFontSize;
-            }
+/* ---------- exercise database: 24 real exercises ---------- */
+/* fields: id, name, muscle, sets, reps, rest(seconds), work(seconds), diff(1-3), cal(per set) */
+var EXERCISES = [
+  {id:"pushup",   name:"تمرين الضغط",        muscle:"صدر",   sets:3, reps:15, rest:60, work:45, diff:2, cal:22},
+  {id:"incline",  name:"الضغط المائل",        muscle:"صدر",   sets:3, reps:12, rest:60, work:40, diff:1, cal:16},
+  {id:"dip",      name:"الغطس للصدر",         muscle:"صدر",   sets:3, reps:10, rest:75, work:40, diff:3, cal:20},
+  {id:"pullup",   name:"تمرين العقلة",        muscle:"ظهر",   sets:3, reps:8,  rest:90, work:40, diff:3, cal:24},
+  {id:"row",      name:"التجديف بالدمبل",     muscle:"ظهر",   sets:3, reps:12, rest:60, work:45, diff:2, cal:18},
+  {id:"superman", name:"سوبر مان",            muscle:"ظهر",   sets:3, reps:15, rest:45, work:40, diff:1, cal:12},
+  {id:"squat",    name:"القرفصاء",            muscle:"أرجل",  sets:4, reps:15, rest:60, work:50, diff:2, cal:26},
+  {id:"lunges",   name:"الطعنات",             muscle:"أرجل",  sets:3, reps:12, rest:60, work:50, diff:2, cal:22},
+  {id:"calfraise",name:"رفع الساقين",         muscle:"أرجل",  sets:3, reps:20, rest:45, work:40, diff:1, cal:10},
+  {id:"wallsit",  name:"الجلوس على الحائط",   muscle:"أرجل",  sets:3, reps:45, rest:60, work:45, diff:1, cal:14, unit:"ثانية"},
+  {id:"shpress",  name:"الضغط فوق الرأس",     muscle:"أكتاف", sets:3, reps:12, rest:60, work:45, diff:2, cal:18},
+  {id:"lateral",  name:"الرفع الجانبي",       muscle:"أكتاف", sets:3, reps:15, rest:45, work:40, diff:1, cal:12},
+  {id:"frontraise",name:"الرفع الأمامي",      muscle:"أكتاف", sets:3, reps:12, rest:45, work:40, diff:1, cal:12},
+  {id:"curl",     name:"ثني الذراع",          muscle:"ذراعان",sets:3, reps:12, rest:45, work:40, diff:2, cal:12},
+  {id:"tridip",   name:"غطس الترايسبس",       muscle:"ذراعان",sets:3, reps:12, rest:60, work:40, diff:2, cal:16},
+  {id:"hammer",   name:"ثني المطرقة",         muscle:"ذراعان",sets:3, reps:12, rest:45, work:40, diff:2, cal:12},
+  {id:"crunch",   name:"تمرين المعدة",        muscle:"بطن",   sets:3, reps:20, rest:45, work:45, diff:1, cal:14},
+  {id:"plank",    name:"البلانك",             muscle:"بطن",   sets:3, reps:60, rest:60, work:60, diff:2, cal:16, unit:"ثانية"},
+  {id:"legraise", name:"رفع الأرجل",          muscle:"بطن",   sets:3, reps:15, rest:60, work:45, diff:2, cal:16},
+  {id:"jjacks",   name:"قفز جاك",             muscle:"كارديو",sets:3, reps:45, rest:45, work:45, diff:1, cal:20, unit:"ثانية"},
+  {id:"burpee",   name:"بيربي",               muscle:"كارديو",sets:3, reps:10, rest:75, work:50, diff:3, cal:30},
+  {id:"highknee", name:"رفع الركب",           muscle:"كارديو",sets:3, reps:45, rest:45, work:45, diff:2, cal:24, unit:"ثانية"},
+  {id:"mtclimb",  name:"تسلق الجبال",         muscle:"كارديو",sets:3, reps:40, rest:45, work:45, diff:2, cal:24, unit:"ثانية"},
+  {id:"shadowbox",name:"ملاكمة الظل",         muscle:"كارديو",sets:3, reps:60, rest:45, work:60, diff:1, cal:26, unit:"ثانية"}
+];
+var MUSCLES = ["الكل","صدر","ظهر","أرجل","أكتاف","ذراعان","بطن","كارديو"];
+var MUSCLE_ICON = {"صدر":"chest","ظهر":"back","أرجل":"legs","أكتاف":"shoulders","ذراعان":"arms","بطن":"abs","كارديو":"cardio"};
 
-            // Initial Renders
-            renderItems(novelsDatabase.slice(0, 12), 'featured-grid');
-            renderItems(novelsDatabase, 'full-encyclopedia-grid');
+var PLANS = [
+  {id:"full",  name:"الجسم الكامل", desc:"8 تمارين متوازنة", icon:"chest",     ex:["pushup","squat","pullup","plank","lunges","crunch","jjacks","shpress"]},
+  {id:"upper", name:"الجزء العلوي", desc:"صدر + ظهر + أكتاف + ذراعان", icon:"shoulders", ex:["pushup","pullup","shpress","curl","dip","row","lateral","tridip"]},
+  {id:"lower", name:"الجزء السفلي", desc:"أرجل + بطن", icon:"legs",      ex:["squat","lunges","wallsit","calfraise","crunch","plank","legraise"]},
+  {id:"hiit",  name:"هيت عالي الكثافة", desc:"كارديو مكثف", icon:"cardio",   ex:["burpee","jjacks","highknee","mtclimb","shadowbox","squat"]},
+  {id:"core",  name:"العضلات الأساسية", desc:"بطن + ظهر", icon:"abs",       ex:["plank","crunch","superman","legraise","row"]}
+];
 
-            // Splash sequence
-            setTimeout(() => {
-                const splash = document.getElementById('splash');
-                splash.style.opacity = '0';
-                splash.style.transform = 'scale(1.2)';
-                setTimeout(() => splash.style.display = 'none', 1000);
-            }, 2500);
-        };
-    </script>
+var TIPS = [
+  "الاستمرارية أهم من الشدة: تمرين قصير يومياً أفضل من تمرين طويل مرة أسبوعياً.",
+  "اشرب الماء قبل التمرين وأثناءه وبعده لتعويض السوائل المفقودة.",
+  "الإحماء لمدة 5 دقائق يقلل خطر الإصابة ويحسّن الأداء.",
+  "النوم الجيد جزء من التدريب: عضلاتك تنمو أثناء الراحة.",
+  "ركّز على التقنية الصحيحة قبل زيادة الأوزان أو التكرارات.",
+  "التنفس المنتظم أثناء التمرين يمنحك طاقة أكبر وقوة أفضل.",
+  "سجّل تقدمك: رؤية الأرقام تتحسن أقوى محفز للاستمرار.",
+  "لا تقارن بدايتك بذروة الآخرين، قارن نفسك بنفسك أمس.",
+  "وجبة غنية بالبروتين بعد التمرين تساعد على الاستشفاء العضلي.",
+  "خذ يوم راحة عند الشعور بالإجهاد الشديد — جسمك يشكرك.",
+  "ابدأ بتمارين وزن الجسم قبل الانتقال إلى الأوزان الحرة.",
+  "التمدد بعد التمرين يحافظ على مرونة العضلات ويخفف الشد."
+];
 
-    <!-- Master Developer Signature -->
-    <footer style="font-family: Tajawal, sans-serif; text-align:center; padding:40px; font-size:14px; font-weight:900; opacity:0.7; letter-spacing: 2px;">
-        <div style="margin-bottom: 8px;">THE NEXUS MASTER AI PROUDLY PRESENTS</div>
-        تم تصميم بواسطه Rahamtallh <script>document.write(new Date().getFullYear())</script>
-    </footer>
+var LEVELS = [
+  {xp:0,    name:"مبتدئ"},
+  {xp:300,  name:"نشيط"},
+  {xp:800,  name:"محترف"},
+  {xp:1500, name:"بطل"},
+  {xp:3000, name:"أسطورة"}
+];
 
+var ACHIEVEMENTS = [
+  {id:"first",  icon:"🎯", name:"أول تمرين",   desc:"أكمل أول جلسة تمرين",        check:function(s){return s.history.length>=1;}},
+  {id:"ten",    icon:"💪", name:"10 تمارين",   desc:"أكمل 10 جلسات تمرين",        check:function(s){return s.history.length>=10;}},
+  {id:"streak7",icon:"🔥", name:"سلسلة 7 أيام",desc:"تمرّن 7 أيام متتالية",       check:function(s){return calcStreak(s)>=7;}},
+  {id:"xp1000", icon:"⚡", name:"1000 نقطة",   desc:"اجمع 1000 نقطة خبرة",        check:function(s){return s.xp>=1000;}},
+  {id:"min500", icon:"⏱", name:"500 دقيقة",   desc:"تمرّن 500 دقيقة إجمالاً",    check:function(s){return totalMinutes(s)>=500;}},
+  {id:"water7", icon:"💧", name:"ترطيب مثالي", desc:"اشرب 2 لتر ماء في يوم واحد", check:function(s){return s.waterBest>=2000;}}
+];
+
+/* ---------- state ---------- */
+var LS = {
+  get:function(k,d){try{var v=localStorage.getItem("nfc_"+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
+  set:function(k,v){try{localStorage.setItem("nfc_"+k,JSON.stringify(v));}catch(e){}}
+};
+var S = {
+  xp:0, gems:0, history:[], favorites:[], prs:{},
+  water:{date:"",ml:0}, waterBest:0,
+  quests:{date:"",awarded:[]},
+  settings:{theme:"dark",sound:true},
+  height:0, weight:0
+};
+function loadState(){
+  S.xp        = LS.get("xp",0);
+  S.gems      = LS.get("gems",0);
+  S.history   = LS.get("history",[]);
+  S.favorites = LS.get("favorites",[]);
+  S.prs       = LS.get("prs",{});
+  S.water     = LS.get("water",{date:"",ml:0});
+  S.waterBest = LS.get("waterBest",0);
+  S.quests    = LS.get("quests",{date:"",awarded:[]});
+  S.settings  = LS.get("settings",{theme:"dark",sound:true});
+  S.height    = LS.get("height",0);
+  S.weight    = LS.get("weight",0);
+}
+function saveState(){
+  LS.set("xp",S.xp); LS.set("gems",S.gems); LS.set("history",S.history);
+  LS.set("favorites",S.favorites); LS.set("prs",S.prs);
+  LS.set("water",S.water); LS.set("waterBest",S.waterBest);
+  LS.set("quests",S.quests); LS.set("settings",S.settings);
+  LS.set("height",S.height); LS.set("weight",S.weight);
+}
+function dateKey(d){d=d||new Date();return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
+function exById(id){for(var i=0;i<EXERCISES.length;i++)if(EXERCISES[i].id===id)return EXERCISES[i];return null;}
+function fmtTime(sec){var m=Math.floor(sec/60),s=sec%60;return ("0"+m).slice(-2)+":"+("0"+s).slice(-2);}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+/* ---------- audio beeps (Web Audio API) ---------- */
+var AC = null;
+function beep(freq,dur,when){
+  if(!S.settings.sound) return;
+  try{
+    if(!AC){ var Ctx = window.AudioContext||window.webkitAudioContext; AC = new Ctx(); }
+    if(AC.state==="suspended") AC.resume();
+    var t = AC.currentTime + (when||0);
+    var o = AC.createOscillator(), g = AC.createGain();
+    o.type="sine"; o.frequency.value=freq;
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(0.5,t+0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.connect(g); g.connect(AC.destination);
+    o.start(t); o.stop(t+dur+0.05);
+  }catch(e){}
+}
+function sndCountdown(){ beep(660,0.15,0); beep(660,0.15,0.25); beep(660,0.15,0.5); }
+function sndGo(){ beep(880,0.4,0); beep(1175,0.5,0.15); }
+function sndRestEnd(){ beep(880,0.25,0); beep(880,0.25,0.3); beep(1319,0.5,0.6); }
+function sndTick(){ beep(520,0.08,0); }
+
+/* ---------- navigation ---------- */
+var CUR_SCREEN = "home";
+function showScreen(name){
+  CUR_SCREEN = name;
+  var secs = document.querySelectorAll(".screen");
+  for(var i=0;i<secs.length;i++) secs[i].classList.remove("active");
+  document.getElementById("screen-"+name).classList.add("active");
+  var tabs = document.querySelectorAll(".tab");
+  for(var j=0;j<tabs.length;j++) tabs[j].classList.toggle("active", tabs[j].getAttribute("data-screen")===name);
+  window.scrollTo(0,0);
+  if(name==="home") renderHome();
+  if(name==="exercises") renderExercises();
+  if(name==="stats") renderStats();
+}
+function bindNav(){
+  var tabs = document.querySelectorAll(".tab");
+  for(var i=0;i<tabs.length;i++){
+    tabs[i].addEventListener("click",function(){ showScreen(this.getAttribute("data-screen")); });
+  }
+}
+
+/* ---------- gamification helpers ---------- */
+function levelOf(xp){
+  var L = LEVELS[0], next = null;
+  for(var i=0;i<LEVELS.length;i++){
+    if(xp>=LEVELS[i].xp){ L = LEVELS[i]; next = LEVELS[i+1]||null; }
+  }
+  return {cur:L,next:next};
+}
+function addXp(n){
+  var before = levelOf(S.xp).cur.name;
+  S.xp += n;
+  var after = levelOf(S.xp).cur.name;
+  saveState(); renderHeader(); renderHome();
+  if(before!==after) setTimeout(function(){ alert("🎉 مستوى جديد: "+after+"!"); },300);
+}
+function historyOn(dateStr){
+  var out=[];
+  for(var i=0;i<S.history.length;i++) if(S.history[i].date===dateStr) out.push(S.history[i]);
+  return out;
+}
+function minutesOn(dateStr){
+  var h=historyOn(dateStr), m=0;
+  for(var i=0;i<h.length;i++) m+=h[i].minutes;
+  return m;
+}
+function totalMinutes(s){ var m=0; for(var i=0;i<s.history.length;i++) m+=s.history[i].minutes; return m; }
+function calcStreak(s){
+  var streak=0, d=new Date();
+  if(historyOn(dateKey(d)).length===0) d.setDate(d.getDate()-1);
+  while(historyOn(dateKey(d)).length>0){ streak++; d.setDate(d.getDate()-1); }
+  return streak;
+}
+function longestStreak(s){
+  var days={}, max=0;
+  for(var i=0;i<s.history.length;i++) days[s.history[i].date]=true;
+  var keys=Object.keys(days).sort(), cur=0, prev=null;
+  for(var k=0;k<keys.length;k++){
+    var dt=new Date(keys[k]+"T12:00:00");
+    if(prev){ var diff=Math.round((dt-prev)/86400000); cur = (diff===1)?cur+1:1; }
+    else cur=1;
+    if(cur>max) max=cur; prev=dt;
+  }
+  return max;
+}
+
+/* ---------- header ---------- */
+function renderHeader(){
+  document.getElementById("gemCount").textContent = S.gems;
+  document.getElementById("hdrThemeBtn").textContent = (S.settings.theme==="dark")?"🌙":"☀️";
+}
+
+/* ---------- home ---------- */
+var RING_C = 238.7;
+function setRing(id,valId,frac,text){
+  var el=document.getElementById(id);
+  el.style.strokeDashoffset = String(RING_C*(1-Math.min(1,Math.max(0,frac))));
+  document.getElementById(valId).textContent = text;
+}
+function renderHome(){
+  var h=new Date().getHours();
+  var g = h<12?"صباح الخير":(h<18?"مساء الخير":"مساء النور");
+  document.getElementById("greetUser").textContent = g+" 💪";
+  var lv = levelOf(S.xp);
+  document.getElementById("levelBadge").textContent = lv.cur.name;
+  var pct = lv.next ? Math.round((S.xp-lv.cur.xp)/(lv.next.xp-lv.cur.xp)*100) : 100;
+  document.getElementById("xpFill").style.width = pct+"%";
+  document.getElementById("xpNum").textContent = S.xp+" XP";
+  document.getElementById("streakNum").textContent = calcStreak(S);
+
+  var tk = dateKey();
+  var wToday = historyOn(tk).length;
+  var mToday = minutesOn(tk);
+  if(S.water.date!==tk){ S.water={date:tk,ml:0}; saveState(); }
+  setRing("ringW","ringWVal", wToday/1, wToday+"/1");
+  setRing("ringM","ringMVal", mToday/30, mToday+"/30");
+  setRing("ringH","ringHVal", S.water.ml/2000, (S.water.ml/1000).toFixed(1)+" لتر");
+
+  document.getElementById("waterMl").textContent = S.water.ml+" مل";
+  document.getElementById("waterFill").style.width = Math.min(100,S.water.ml/2000*100)+"%";
+
+  renderQuests();
+  var dayIdx = Math.floor(Date.now()/86400000);
+  document.getElementById("tipText").textContent = "💡 "+TIPS[dayIdx%TIPS.length];
+}
+function questDefs(){
+  var tk=dateKey();
+  return [
+    {id:"q1", name:"أكمل جلسة تمرين واحدة", sub:"أي خطة تختارها تحتسب", xp:20, done:historyOn(tk).length>=1},
+    {id:"q2", name:"اشرب 1 لتر من الماء",  sub:"4 أكواب عبر زر الماء",   xp:15, done:S.water.ml>=1000},
+    {id:"q3", name:"تمرّن 30 دقيقة",        sub:"مجموع دقائق اليوم",      xp:25, done:minutesOn(tk)>=30}
+  ];
+}
+function renderQuests(){
+  var tk=dateKey();
+  if(S.quests.date!==tk){ S.quests={date:tk,awarded:[]}; saveState(); }
+  var qs=questDefs(), html="";
+  for(var i=0;i<qs.length;i++){
+    var q=qs[i], awarded=S.quests.awarded.indexOf(q.id)>=0;
+    if(q.done && !awarded){ S.quests.awarded.push(q.id); S.xp+=q.xp; saveState(); renderHeader();
+      setTimeout((function(n){return function(){ alert("⭐ مهمة مكتملة! +"+n+" XP"); };})(q.xp),400); }
+    html += '<div class="quest'+(q.done?" done":"")+'">'+
+      '<div class="q-check">'+(q.done?"✔":"○")+'</div>'+
+      '<div class="q-body"><b>'+esc(q.name)+'</b><span>'+esc(q.sub)+'</span></div>'+
+      '<div class="q-xp">+'+q.xp+' XP</div></div>';
+  }
+  document.getElementById("questList").innerHTML = html;
+}
+function addWater(){
+  var tk=dateKey();
+  if(S.water.date!==tk) S.water={date:tk,ml:0};
+  S.water.ml+=250;
+  if(S.water.ml>S.waterBest) S.waterBest=S.water.ml;
+  saveState(); renderHome(); renderHeader();
+  beep(740,0.12,0);
+}
+
+/* ---------- exercise library ---------- */
+var exFilter = {muscle:"الكل", q:""};
+function stars(n){ var s=""; for(var i=0;i<3;i++) s += i<n?"★":"☆"; return s; }
+function renderExercises(){
+  var cr=document.getElementById("chipRow"), html="";
+  for(var m=0;m<MUSCLES.length;m++){
+    html += '<button class="chip'+(exFilter.muscle===MUSCLES[m]?" active":"")+'" data-m="'+esc(MUSCLES[m])+'">'+esc(MUSCLES[m])+"</button>";
+  }
+  cr.innerHTML=html;
+  var chips=cr.querySelectorAll(".chip");
+  for(var c=0;c<chips.length;c++){
+    chips[c].addEventListener("click",function(){ exFilter.muscle=this.getAttribute("data-m"); renderExercises(); });
+  }
+  var list=document.getElementById("exList"), out="";
+  var q=exFilter.q.trim();
+  var shown=0;
+  for(var i=0;i<EXERCISES.length;i++){
+    var e=EXERCISES[i];
+    if(exFilter.muscle!=="الكل" && e.muscle!==exFilter.muscle) continue;
+    if(q && e.name.indexOf(q)<0) continue;
+    shown++;
+    var fav=S.favorites.indexOf(e.id)>=0;
+    var unit=e.unit||"تكرار";
+    out += '<div class="glass ex-card">'+
+      '<div class="ex-icon" style="color:var(--accent)">'+ICONS[MUSCLE_ICON[e.muscle]]+'</div>'+
+      '<div class="ex-body"><h3>'+esc(e.name)+'</h3>'+
+      '<div class="ex-meta"><span class="muscle-tag">'+esc(e.muscle)+'</span>'+
+      '<span>'+e.sets+" × "+e.reps+" "+unit+'</span>'+
+      '<span>راحة '+e.rest+' ث</span>'+
+      '<span class="stars">'+stars(e.diff)+'</span></div></div>'+
+      '<button class="fav-btn'+(fav?" on":"")+'" data-id="'+e.id+'" aria-label="مفضل">⭐</button>'+
+      "</div>";
+  }
+  if(shown===0) out='<div class="ex-empty">لا توجد تمارين مطابقة لبحثك.</div>';
+  list.innerHTML=out;
+  var fbs=list.querySelectorAll(".fav-btn");
+  for(var f=0;f<fbs.length;f++){
+    fbs[f].addEventListener("click",function(){
+      var id=this.getAttribute("data-id"), ix=S.favorites.indexOf(id);
+      if(ix>=0) S.favorites.splice(ix,1); else S.favorites.push(id);
+      saveState(); renderExercises(); beep(900,0.1,0);
+    });
+  }
+}
+
+/* ---------- workout plans ---------- */
+function renderPlans(){
+  var g=document.getElementById("planGrid"), html="";
+  for(var i=0;i<PLANS.length;i++){
+    var p=PLANS[i];
+    var cls = p.id==="full" ? "plan-card full" : "plan-card";
+    html += '<button class="'+cls+'" data-plan="'+p.id+'">'+
+      '<span style="color:var(--accent)">'+ICONS[p.icon].replace("<svg",'<svg width="44" height="44"')+"</span>"+
+      "<div><b>"+esc(p.name)+"</b><br><span>"+esc(p.desc)+" • "+p.ex.length+" تمارين</span></div></button>";
+  }
+  g.innerHTML=html;
+  var cards=g.querySelectorAll(".plan-card");
+  for(var c=0;c<cards.length;c++){
+    cards[c].addEventListener("click",function(){ startPlan(this.getAttribute("data-plan")); });
+  }
+}
+
+/* ---------- live session engine ---------- */
+var SES = null;
+function startPlan(planId){
+  var plan=null;
+  for(var i=0;i<PLANS.length;i++) if(PLANS[i].id===planId) plan=PLANS[i];
+  if(!plan) return;
+  var seq=[];
+  for(var j=0;j<plan.ex.length;j++){
+    var e=exById(plan.ex[j]);
+    if(e) seq.push(e);
+  }
+  if(seq.length===0) return;
+  SES = {
+    plan:plan, seq:seq, exIdx:0, setIdx:0,
+    phase:"work", remaining:seq[0].work, running:false, paused:false,
+    timerId:null, startEpoch:Date.now(), doneSets:0,
+    totalSets:0, totalCal:0, finished:false
+  };
+  var t=0; for(var k=0;k<seq.length;k++) t+=seq[k].sets;
+  SES.totalSets=t;
+  document.getElementById("planView").style.display="none";
+  document.getElementById("summaryView").style.display="none";
+  document.getElementById("sessionView").style.display="block";
+  renderSession(); startTick();
+  sndGo();
+}
+function curEx(){ return SES.seq[SES.exIdx]; }
+function renderSession(){
+  if(!SES) return;
+  var e=curEx();
+  document.getElementById("sessionExercise").textContent=e.name;
+  document.getElementById("sessionIcon").innerHTML=ICONS[MUSCLE_ICON[e.muscle]];
+  document.getElementById("sessionIcon").style.color = SES.phase==="rest" ? "var(--accent3)" : "var(--accent)";
+  document.getElementById("sessionPhase").textContent =
+    SES.phase==="work" ? "💪 اعمل — "+e.sets+" × "+e.reps+" "+(e.unit||"تكرار") : "😮‍💨 راحة — تنفس بعمق";
+  document.getElementById("sessionSet").textContent =
+    "التمرين "+(SES.exIdx+1)+" من "+SES.seq.length+" • المجموعة "+(SES.setIdx+1)+" من "+e.sets;
+  document.getElementById("sessionTimer").textContent=fmtTime(SES.remaining);
+  document.getElementById("sessionFill").style.width=Math.round(SES.doneSets/SES.totalSets*100)+"%";
+  document.getElementById("btnSkipRest").style.display = SES.phase==="rest" ? "" : "none";
+  document.getElementById("btnDoneSet").style.display = SES.phase==="work" ? "" : "none";
+  document.getElementById("btnPause").textContent = SES.paused ? "▶ استئناف" : "⏸ إيقاف مؤقت";
+}
+function startTick(){
+  stopTick();
+  SES.running=true; SES.paused=false;
+  SES.timerId=setInterval(onTick,1000);
+  renderSession();
+}
+function stopTick(){ if(SES&&SES.timerId){clearInterval(SES.timerId);SES.timerId=null;} SES.running=false; }
+function onTick(){
+  if(!SES||SES.paused||SES.finished) return;
+  SES.remaining--;
+  if(SES.remaining<=3&&SES.remaining>0) sndTick();
+  if(SES.remaining<=0){ advancePhase(); return; }
+  document.getElementById("sessionTimer").textContent=fmtTime(SES.remaining);
+}
+function advancePhase(){
+  var e=curEx();
+  if(SES.phase==="work"){
+    SES.doneSets++; SES.totalCal+=e.cal;
+    if(!S.prs[e.id]||e.reps>S.prs[e.id]) S.prs[e.id]=e.reps;
+    saveState();
+    if(SES.setIdx<e.sets-1){
+      SES.phase="rest"; SES.remaining=e.rest; sndCountdown();
+    }else{
+      if(SES.exIdx<SES.seq.length-1){
+        SES.exIdx++; SES.setIdx=0;
+        SES.phase="rest"; SES.remaining=30; sndCountdown();
+      }else{ finishSession(); return; }
+    }
+  }else{
+    SES.phase="work"; SES.remaining=curEx().work; sndGo();
+  }
+  renderSession();
+}
+function togglePause(){
+  if(!SES||SES.finished) return;
+  SES.paused=!SES.paused; renderSession();
+}
+function skipRest(){ if(SES&&SES.phase==="rest"&&!SES.finished){ SES.phase="work"; SES.remaining=curEx().work; sndGo(); renderSession(); } }
+function doneSetEarly(){ if(SES&&SES.phase==="work"&&!SES.finished){ SES.remaining=0; advancePhase(); } }
+function endSessionEarly(){
+  if(!SES||SES.finished) return;
+  if(SES.doneSets===0){ cancelSession(); return; }
+  if(confirm("إنهاء التمرين الآن وحفظ ما تم إنجازه؟")) finishSession();
+}
+function cancelSession(){
+  stopTick(); SES=null;
+  document.getElementById("sessionView").style.display="none";
+  document.getElementById("summaryView").style.display="none";
+  document.getElementById("planView").style.display="block";
+}
+function finishSession(){
+  stopTick(); SES.finished=true;
+  var minutes=Math.max(1,Math.round((Date.now()-SES.startEpoch)/60000));
+  var xpGain=20+SES.doneSets*5;
+  var gemsGain=2;
+  SES.result={minutes:minutes,cal:SES.totalCal,xp:xpGain,gems:gemsGain,exCount:SES.seq.length};
+  document.getElementById("sumMinutes").textContent=minutes;
+  document.getElementById("sumCalories").textContent=SES.totalCal;
+  document.getElementById("sumXp").textContent="+"+xpGain;
+  document.getElementById("sumGems").textContent="+"+gemsGain;
+  document.getElementById("sessionView").style.display="none";
+  document.getElementById("summaryView").style.display="block";
+  sndRestEnd();
+  window.scrollTo(0,0);
+}
+function saveWorkout(){
+  if(!SES||!SES.result) return;
+  var r=SES.result;
+  S.history.push({date:dateKey(),minutes:r.minutes,cal:r.cal,xp:r.xp,plan:SES.plan.name,ex:r.exCount});
+  S.gems+=r.gems;
+  saveState();
+  addXp(r.xp);
+  SES=null;
+  document.getElementById("summaryView").style.display="none";
+  document.getElementById("planView").style.display="block";
+  showScreen("home");
+}
+
+/* ---------- stats ---------- */
+var DAY_AR=["أحد","اثنين","ثلاثاء","أربعاء","خميس","جمعة","سبت"];
+function last14(){
+  var out=[];
+  for(var i=13;i>=0;i--){
+    var d=new Date(); d.setDate(d.getDate()-i);
+    var k=dateKey(d);
+    out.push({label:DAY_AR[d.getDay()],minutes:minutesOn(k),workouts:historyOn(k).length,xp:0});
+    for(var h=0;h<S.history.length;h++) if(S.history[h].date===k) out[out.length-1].xp+=S.history[h].xp;
+  }
+  return out;
+}
+function barChart(data,maxV,color){
+  var W=560,H=200,pad=30,bw=(W-pad*2)/data.length;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%">';
+  for(var g=0;g<=4;g++){
+    var y=pad+(H-pad*2)*g/4;
+    s+='<line x1="'+pad+'" y1="'+y+'" x2="'+(W-pad)+'" y2="'+y+'" stroke="rgba(127,127,127,.25)" stroke-width="1"/>';
+  }
+  for(var i=0;i<data.length;i++){
+    var v=data[i].minutes, bh=maxV>0?(H-pad*2)*(v/maxV):0;
+    var x=pad+i*bw+bw*0.2, w=bw*0.6, y=H-pad-bh;
+    s+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+bh.toFixed(1)+
+       '" rx="5" fill="'+(v>0?color:"rgba(127,127,127,.2)")+'"/>';
+    if(i%2===0) s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(H-8)+'" font-size="10" text-anchor="middle" fill="var(--muted)">'+data[i].label+'</text>';
+    if(v>0) s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(y-6).toFixed(1)+'" font-size="10" text-anchor="middle" fill="var(--text)" font-weight="bold">'+v+'</text>';
+  }
+  return s+"</svg>";
+}
+function weekXpChart(){
+  var days=[];
+  for(var i=6;i>=0;i--){ var d=new Date(); d.setDate(d.getDate()-i); days.push(d); }
+  var W=560,H=170,pad=30,bw=(W-pad*2)/7;
+  var vals=days.map(function(d){var k=dateKey(d),x=0;for(var h=0;h<S.history.length;h++)if(S.history[h].date===k)x+=S.history[h].xp;return {label:DAY_AR[d.getDay()],xp:x};});
+  var maxV=1; for(var v=0;v<vals.length;v++) if(vals[v].xp>maxV) maxV=vals[v].xp;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%">';
+  for(var i=0;i<7;i++){
+    var bh=(H-pad*2)*(vals[i].xp/maxV), x=pad+i*bw+bw*0.2, w=bw*0.6, y=H-pad-bh;
+    s+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+bh.toFixed(1)+
+       '" rx="5" fill="url(#xpg)"/>';
+    s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(H-8)+'" font-size="10" text-anchor="middle" fill="var(--muted)">'+vals[i].label+'</text>';
+    if(vals[i].xp>0) s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(y-6).toFixed(1)+'" font-size="10" text-anchor="middle" fill="var(--text)" font-weight="bold">'+vals[i].xp+'</text>';
+  }
+  s+='<defs><linearGradient id="xpg" x1="0" y1="0" x2="0" y2="1">'+
+     '<stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs></svg>';
+  return s;
+}
+function renderStats(){
+  document.getElementById("statWorkouts").textContent=S.history.length;
+  document.getElementById("statMinutes").textContent=totalMinutes(S);
+  document.getElementById("statStreak").textContent=longestStreak(S);
+  document.getElementById("statGems").textContent=S.gems;
+  var d14=last14(), maxV=1;
+  for(var i=0;i<d14.length;i++) if(d14[i].minutes>maxV) maxV=d14[i].minutes;
+  document.getElementById("chart14").innerHTML=barChart(d14,maxV,"#38bdf8");
+  document.getElementById("chartWeekXp").innerHTML=weekXpChart();
+  var ag=document.getElementById("achGrid"), html="";
+  for(var a=0;a<ACHIEVEMENTS.length;a++){
+    var ac=ACHIEVEMENTS[a], got=false;
+    try{ got=!!ac.check(S); }catch(e){ got=false; }
+    html+='<div class="ach'+(got?" got":"")+'"><div class="a-ico">'+ac.icon+'</div><b>'+esc(ac.name)+'</b><span>'+esc(ac.desc)+'</span></div>';
+  }
+  ag.innerHTML=html;
+  var pl=document.getElementById("prList"), keys=Object.keys(S.prs), ph="";
+  if(keys.length===0) ph='<div class="ex-empty">لا توجد أرقام قياسية بعد — أكمل تمريناً لتسجيلها.</div>';
+  for(var k=0;k<keys.length;k++){
+    var e=exById(keys[k]); if(!e) continue;
+    ph+='<div class="pr-row"><span>'+esc(e.name)+'</span><b>'+S.prs[keys[k]]+" "+(e.unit||"تكرار")+'</b></div>';
+  }
+  pl.innerHTML=ph;
+}
+
+/* ---------- settings ---------- */
+function applyTheme(){
+  document.body.classList.toggle("light", S.settings.theme==="light");
+  document.getElementById("themeToggle").checked = S.settings.theme==="dark";
+  document.getElementById("hdrThemeBtn").textContent = S.settings.theme==="dark"?"🌙":"☀️";
+  document.querySelector('meta[name="theme-color"]').setAttribute("content", S.settings.theme==="dark"?"#0f172a":"#e0f2fe");
+}
+function toggleTheme(){
+  S.settings.theme = S.settings.theme==="dark"?"light":"dark";
+  saveState(); applyTheme();
+}
+function calcBmi(){
+  var h=parseFloat(document.getElementById("heightInput").value);
+  var w=parseFloat(document.getElementById("weightInput").value);
+  var box=document.getElementById("bmiResult");
+  if(!h||!w||h<50||h>250||w<20||w>400){ alert("يرجى إدخال طول ووزن صحيحين."); box.style.display="none"; return; }
+  S.height=h; S.weight=w; saveState();
+  var bmi=w/Math.pow(h/100,2);
+  var cat = bmi<18.5?"نحافة":(bmi<25?"وزن طبيعي":(bmi<30?"زيادة في الوزن":"سمنة"));
+  document.getElementById("bmiValue").textContent=bmi.toFixed(1);
+  document.getElementById("bmiCat").textContent="التصنيف: "+cat;
+  box.style.display="block";
+  beep(880,0.15,0);
+}
+function resetAll(){
+  if(!confirm("هل أنت متأكد؟ سيتم حذف جميع بياناتك نهائياً ولا يمكن التراجع.")) return;
+  if(!confirm("تأكيد أخير: حذف كل شيء والبدء من جديد؟")) return;
+  var keep={theme:S.settings.theme,sound:S.settings.sound};
+  var keys=["nfc_xp","nfc_gems","nfc_history","nfc_favorites","nfc_prs","nfc_water","nfc_waterBest","nfc_quests","nfc_height","nfc_weight"];
+  for(var i=0;i<keys.length;i++){ try{localStorage.removeItem(keys[i]);}catch(e){} }
+  loadState(); S.settings.theme=keep.theme; S.settings.sound=keep.sound; saveState();
+  document.getElementById("heightInput").value=""; document.getElementById("weightInput").value="";
+  document.getElementById("bmiResult").style.display="none";
+  applyTheme(); renderHeader(); renderHome();
+  alert("تم حذف جميع البيانات بنجاح.");
+}
+
+/* ---------- overlays ---------- */
+function openOverlay(id){ document.getElementById(id).classList.add("open"); }
+function closeOverlay(id){ document.getElementById(id).classList.remove("open"); }
+
+/* ---------- init ---------- */
+function init(){
+  loadState();
+  applyTheme();
+  renderHeader();
+  bindNav();
+  renderPlans();
+  renderHome();
+
+  document.getElementById("hdrThemeBtn").addEventListener("click",toggleTheme);
+  document.getElementById("btnWater250").addEventListener("click",addWater);
+  document.getElementById("btnTip").addEventListener("click",function(){
+    var t=TIPS[Math.floor(Math.random()*TIPS.length)];
+    document.getElementById("tipText").textContent="💡 "+t;
+  });
+  document.getElementById("btnQuickStart").addEventListener("click",function(){ showScreen("workout"); });
+  document.getElementById("searchInput").addEventListener("input",function(){ exFilter.q=this.value; renderExercises(); });
+
+  document.getElementById("btnPause").addEventListener("click",togglePause);
+  document.getElementById("btnSkipRest").addEventListener("click",skipRest);
+  document.getElementById("btnDoneSet").addEventListener("click",doneSetEarly);
+  document.getElementById("btnEndSession").addEventListener("click",endSessionEarly);
+  document.getElementById("btnSaveWorkout").addEventListener("click",saveWorkout);
+
+  document.getElementById("themeToggle").addEventListener("change",toggleTheme);
+  document.getElementById("soundToggle").addEventListener("change",function(){
+    S.settings.sound=this.checked; saveState();
+  });
+  document.getElementById("soundToggle").checked=S.settings.sound;
+  if(S.height) document.getElementById("heightInput").value=S.height;
+  if(S.weight) document.getElementById("weightInput").value=S.weight;
+  document.getElementById("btnBmi").addEventListener("click",calcBmi);
+  document.getElementById("btnReset").addEventListener("click",resetAll);
+  document.getElementById("btnPrivacy").addEventListener("click",function(){openOverlay("overlayPrivacy");});
+  document.getElementById("btnAbout").addEventListener("click",function(){openOverlay("overlayAbout");});
+  document.getElementById("btnClosePrivacy").addEventListener("click",function(){closeOverlay("overlayPrivacy");});
+  document.getElementById("btnCloseAbout").addEventListener("click",function(){closeOverlay("overlayAbout");});
+  var ovs=document.querySelectorAll(".overlay");
+  for(var i=0;i<ovs.length;i++){
+    ovs[i].addEventListener("click",function(e){ if(e.target===this) this.classList.remove("open"); });
+  }
+  showScreen("home");
+}
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init);
+else init();
+</script>
 </body>
 </html>

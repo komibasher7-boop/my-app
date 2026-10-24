@@ -1,4 +1,4 @@
-# Minhag
+# Hig
 
 مشروع Android Studio مولّد بواسطة HTML2APK Studio.
 

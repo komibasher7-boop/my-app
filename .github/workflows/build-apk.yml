@@ -2,7 +2,7 @@ name: Build APK and AAB
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "master" ]
   workflow_dispatch:
 
 jobs:
@@ -20,6 +20,8 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
 
       - name: Build debug APK
         run: gradle :app:assembleDebug --stacktrace
@@ -44,11 +46,13 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
 
       - name: Create signing keystore when none is present
         run: |
-          if [ ! -f keystore.jks ]; then
-            keytool -genkeypair -v -keystore keystore.jks -alias upload -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=HTML2APK, OU=Mobile, O=HTML2APK, L=Paris, C=FR"
+          if [ ! -f app/keystore.jks ]; then
+            keytool -genkeypair -v -keystore app/keystore.jks -alias upload -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=HTML2APK, OU=Mobile, O=HTML2APK, L=Paris, C=FR"
           fi
 
       - name: Build release AAB
